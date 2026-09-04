@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI 学习助手 · 单文件版</title>
-<meta name="description" content="一个辅助人工智能学习的单文件网站：学习路径（含核心知识点与精选视频/文字资源）、知识库、练习测验与 AI 对话助手，零依赖，浏览器直接打开即用。">
+<title>学习助手 · 单文件版</title>
+<meta name="description" content="一个多学科学习助手单文件网站：AI 人工智能、数据结构与算法、概率论与数理统计并列推进，含学习路径、知识库、练习测验与 AI 答疑助手，另附南京大学「智科全家桶」外站接口；零依赖，浏览器直接打开即用。">
 <style>
 /* ============================================================
    全局样式
@@ -46,7 +46,7 @@ a { color: var(--primary); text-decoration: none; }
 a:hover { text-decoration: underline; }
 img { max-width: 100%; }
 
-.container { width: min(1080px, 92%); margin: 0 auto; }
+.container { width: min(1360px, 94%); margin: 0 auto; }
 main { flex: 1; }
 
 /* ---------- 单文件路由视图 ---------- */
@@ -85,10 +85,10 @@ main { flex: 1; }
 }
 
 /* ---------- 首页 Hero ---------- */
-.hero { padding: 64px 0 48px; background: linear-gradient(135deg, var(--primary-light) 0%, #f0f9ff 60%, var(--bg) 100%); }
+.hero { padding: 72px 0 52px; background: linear-gradient(135deg, var(--primary-light) 0%, #f0f9ff 60%, var(--bg) 100%); }
 .hero h1 { font-size: clamp(28px, 5vw, 40px); line-height: 1.25; }
 .hero h1 .hl { color: var(--primary); }
-.hero p.sub { margin: 14px 0 26px; color: var(--text-secondary); font-size: 17px; max-width: 620px; }
+.hero p.sub { margin: 14px 0 26px; color: var(--text-secondary); font-size: 17px; max-width: 760px; }
 .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
 
 .btn { display: inline-block; padding: 10px 22px; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; border: 1px solid transparent; transition: all .15s ease; }
@@ -111,7 +111,7 @@ main { flex: 1; }
 .section-desc { color: var(--text-secondary); margin-bottom: 22px; font-size: 15px; }
 
 /* ---------- 卡片网格 ---------- */
-.grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
+.grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
 .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow); transition: all .18s ease; }
 .card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
 .module-card { display: block; color: inherit; }
@@ -160,8 +160,15 @@ main { flex: 1; }
 .page-head h1 { font-size: 26px; }
 .page-head p { opacity: .85; margin-top: 6px; font-size: 15px; }
 
+/* ---------- 外站接口卡片 ---------- */
+.ext-card { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; background: linear-gradient(120deg, #eef2ff 0%, #f0f9ff 100%); border: 1px solid var(--border); border-radius: var(--radius); padding: 26px 30px; box-shadow: var(--shadow); }
+.ext-card h3 { font-size: 18px; margin-bottom: 6px; }
+.ext-card p { color: var(--text-secondary); font-size: 14px; max-width: 720px; }
+.ext-links { display: flex; gap: 10px; flex-wrap: wrap; }
+.ext-links a { white-space: nowrap; }
+
 /* ---------- 知识库 ---------- */
-.kb-layout { display: grid; grid-template-columns: 300px 1fr; gap: 24px; align-items: start; }
+.kb-layout { display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: 24px; align-items: start; }
 .kb-list { display: flex; flex-direction: column; gap: 10px; }
 .kb-item { width: 100%; text-align: left; background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; cursor: pointer; font: inherit; color: inherit; transition: all .15s ease; }
 .kb-item:hover { border-color: var(--primary); }
@@ -311,13 +318,95 @@ pre code .tok-pre { color: #569cd6; }
   .msg { max-width: 92%; }
   .modal-card { padding: 24px 20px; }
 }
+
+/* ---------- 编程实战（浏览器判题） ---------- */
+/* 依赖站点已有 CSS 变量：--primary #4f46e5、--bg #f8fafc、--card-bg #fff、
+   --border #e2e8f0、--text #1e293b、--text-secondary #64748b、
+   --primary-light #eef2ff、--green(-light)、--red(-light)、--radius 12px、--shadow */
+.codelab { margin-top: 40px; background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 26px 28px; box-shadow: var(--shadow); }
+.cl-head h2 { margin: 0 0 8px; font-size: 21px; color: var(--text); }
+.cl-head p { margin: 0; color: var(--text-secondary); font-size: 14px; line-height: 1.7; }
+.cl-note { margin-top: 14px; background: #fffbeb; border: 1px solid #fde68a; color: #92400e; padding: 10px 14px; border-radius: 10px; font-size: 13.5px; line-height: 1.7; }
+
+.cl-body { display: grid; grid-template-columns: 260px 1fr; gap: 18px; align-items: start; margin-top: 18px; }
+.cl-list { min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+.cl-main { min-width: 0; }
+
+/* 左侧题目按钮列 */
+.cl-prob { display: flex; flex-direction: column; gap: 5px; width: 100%; text-align: left; font: inherit; color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; cursor: pointer; transition: border-color .15s ease, background .15s ease, box-shadow .15s ease; }
+.cl-prob:hover { border-color: var(--primary); }
+.cl-prob.active { border-color: var(--primary); background: var(--primary-light); box-shadow: inset 0 0 0 1px var(--primary); }
+.cl-prob-top { display: flex; align-items: center; gap: 8px; }
+.cl-prob-top .badge { flex-shrink: 0; }
+.cl-prob-idx { font-weight: 700; font-size: 13px; color: var(--primary); }
+.cl-done { margin-left: auto; font-size: 12px; font-weight: 600; color: var(--green); }
+.cl-prob-title { font-size: 14px; font-weight: 600; line-height: 1.4; }
+.cl-prob-tags { font-size: 12px; color: var(--text-secondary); }
+
+/* 标题行 + 题面 */
+.cl-title-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+.cl-title-row h3 { margin: 0; font-size: 18px; color: var(--text); }
+.cl-desc { font-size: 14px; line-height: 1.8; color: var(--text); }
+.cl-desc h4 { margin: 16px 0 6px; font-size: 14.5px; color: var(--text); }
+.cl-desc p { margin: 6px 0; }
+.cl-desc a { color: var(--primary); text-decoration: none; font-weight: 600; }
+.cl-desc a:hover { text-decoration: underline; }
+.cl-desc code { background: #f1f5f9; padding: 2px 6px; border-radius: 5px; font-size: 13px; font-family: Consolas, "Courier New", monospace; }
+/* 题面 / 参考答案里的代码块：与站点一致的深色风格 */
+.cl-desc pre, .cl-sol pre { background: #0f172a; color: #e2e8f0; padding: 14px 16px; border-radius: 10px; overflow-x: auto; font-size: 13px; line-height: 1.65; margin: 0 0 6px; font-family: Consolas, "Courier New", monospace; }
+.cl-desc pre code, .cl-sol pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+
+/* 代码编辑器 */
+.cl-editor-wrap { margin-top: 14px; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; transition: box-shadow .15s ease, border-color .15s ease; }
+.cl-editor-wrap:focus-within { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(79, 70, 229, .18); }
+.cl-editor-bar { display: flex; align-items: center; justify-content: space-between; gap: 10px; background: #0f172a; color: #e2e8f0; padding: 7px 12px; font-size: 12.5px; font-family: Consolas, "Courier New", monospace; }
+.cl-editor-bar .btn-ghost { color: #cbd5e1; border-color: #334155; background: transparent; }
+.cl-editor-bar .btn-ghost:hover { color: #fff; background: #1e293b; }
+#clEditor { display: block; width: 100%; box-sizing: border-box; min-height: 240px; resize: vertical; background: #0f172a; color: #e2e8f0; border: 0; outline: none; padding: 12px 14px; font-family: Consolas, "Courier New", monospace; font-size: 13.5px; line-height: 1.65; tab-size: 2; }
+
+/* 操作行 + 状态 + 参考答案 */
+.cl-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 14px; }
+.cl-status { font-size: 14px; font-weight: 700; color: var(--text-secondary); }
+.cl-status.ok { color: #16a34a; }
+.cl-status.no { color: #dc2626; }
+.cl-sol { margin-top: 14px; border: 1px dashed var(--border); border-radius: 10px; background: var(--bg); }
+.cl-sol summary { cursor: pointer; user-select: none; padding: 10px 14px; font-size: 13.5px; font-weight: 600; color: var(--text); }
+.cl-sol[open] summary { border-bottom: 1px dashed var(--border); }
+.cl-sol > div { padding: 12px 14px; }
+
+/* 判题结果 */
+.cl-results { display: flex; flex-direction: column; gap: 6px; margin-top: 14px; }
+.cl-summary { font-size: 13.5px; font-weight: 600; color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; }
+.cl-row { display: grid; grid-template-columns: 28px 1fr 1fr 1fr 72px 28px; gap: 8px; align-items: center; background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 6px 10px; font-size: 12.5px; font-family: Consolas, "Courier New", monospace; }
+.cl-idx { color: var(--text-secondary); font-weight: 700; text-align: center; }
+.cl-cell { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--text); }
+.cl-ms { text-align: right; color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+.cl-mark { text-align: center; font-weight: 700; }
+.cl-row.pass { border-color: #bbf7d0; background: var(--green-light); }
+.cl-row.pass .cl-mark { color: var(--green); }
+.cl-row.fail { border-color: #fecaca; background: var(--red-light); }
+.cl-row.fail .cl-mark { color: var(--red); }
+
+/* 响应式 */
+@media (max-width: 860px) {
+  .cl-body { grid-template-columns: 1fr; }
+  .codelab { padding: 20px 18px; }
+}
+@media (max-width: 640px) {
+  .cl-row { grid-template-columns: 24px 1fr 1fr 1fr 24px; }
+  .cl-ms { display: none; }
+}
+@media (max-width: 480px) {
+  .cl-row { grid-template-columns: 24px 1fr 1fr 24px; }
+  .cl-expect { display: none; }
+}
 </style>
 </head>
 <body data-page="home">
 
 <header class="site-header">
   <div class="container nav">
-    <a class="brand" href="#/home"><span class="logo">🤖</span>AI 学习<span class="brand-sub">助手</span></a>
+    <a class="brand" href="#/home"><span class="logo">📖</span>学习<span class="brand-sub">助手</span></a>
     <button class="nav-toggle" aria-label="菜单" id="navToggle">☰</button>
     <ul class="nav-links" id="navLinks">
       <li><a href="#/home" data-route="home" class="active">首页</a></li>
@@ -327,6 +416,7 @@ pre code .tok-pre { color: #569cd6; }
       <li><a href="#/prob" data-route="prob">概率统计</a></li>
       <li><a href="#/quiz" data-route="quiz">练习测验</a></li>
       <li><a href="#/chat" data-route="chat">AI 助手</a></li>
+      <li><a href="https://njuis-students.github.io/" target="_blank" rel="noopener noreferrer" title="南京大学智能科学与技术学院 · 智科全家桶（外站，新窗口打开）">🎓 智科全家桶 ↗</a></li>
     </ul>
   </div>
 </header>
@@ -337,13 +427,15 @@ pre code .tok-pre { color: #569cd6; }
   <section class="view active" id="view-home">
     <div class="hero">
       <div class="container">
-        <h1>人工智能学习，<span class="hl">从这里起步</span></h1>
-        <p class="sub">清晰的学习路径、精炼的知识笔记、即学即测的练习题，还有随时答疑的 AI 学习助手——四合一，陪你从零走向会用。</p>
+        <h1>多学科学习，<span class="hl">一站式起步</span></h1>
+        <p class="sub">AI 人工智能、数据结构与算法、概率论与数理统计三大板块并列开放：清晰的学习路径、精炼的知识笔记、即学即测的练习题，还有随时答疑的 AI 小助手，陪你从零走向会用。</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="#/courses">🚀 开始学习路径</a>
-          <a class="btn btn-outline" href="#/chat">💬 问 AI 助手</a>
+          <a class="btn btn-outline" href="#/knowledge">📚 翻阅知识库</a>
+          <a class="btn btn-ghost" href="#/chat">💬 问 AI 小助手</a>
         </div>
         <div class="stats-row">
+          <div class="stat"><div class="num">3</div><div class="label">大学科板块</div></div>
           <div class="stat"><div class="num" id="statCourses">–</div><div class="label">门课程</div></div>
           <div class="stat"><div class="num" id="statArticles">–</div><div class="label">篇知识笔记</div></div>
           <div class="stat"><div class="num" id="statDs">–</div><div class="label">篇数据结构教程</div></div>
@@ -354,8 +446,34 @@ pre code .tok-pre { color: #569cd6; }
     </div>
     <section class="section">
       <div class="container">
-        <h2 class="section-title">六大模块</h2>
-        <p class="section-desc">学（路径）→ 查（知识库）→ 练（测验）→ 问（助手），外加数据结构（C++）与概率统计两大基础板块。</p>
+        <h2 class="section-title">学科板块</h2>
+        <p class="section-desc">三大基础学科并列推进，各自成体系、也彼此相连；按兴趣自由进入，不必从 AI 开始。</p>
+        <div class="grid">
+          <a class="card module-card" href="#/courses">
+            <div class="icon">🤖</div>
+            <h3>AI 人工智能</h3>
+            <p>从入门概念到大模型应用：四阶段学习路径 + 15 篇知识笔记与代码实战。</p>
+            <div class="go">进入板块 →</div>
+          </a>
+          <a class="card module-card" href="#/ds">
+            <div class="icon">🧬</div>
+            <h3>数据结构与算法</h3>
+            <p>20 篇 C++ 分章教程：手写实现 + STL 对照，每章配典型例题与解答。</p>
+            <div class="go">进入板块 →</div>
+          </a>
+          <a class="card module-card" href="#/prob">
+            <div class="icon">🎲</div>
+            <h3>概率论与数理统计</h3>
+            <p>14 篇系列教程：贝叶斯、常见分布、CLT、MLE 与蒙特卡洛，Python 模拟可跑。</p>
+            <div class="go">进入板块 →</div>
+          </a>
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">学习工具</h2>
+        <p class="section-desc">学（路径）→ 查（知识库）→ 练（测验）→ 问（助手），四个工具配合各学科板块使用。</p>
         <div class="grid">
           <a class="card module-card" href="#/courses">
             <div class="icon">🗺️</div>
@@ -369,22 +487,10 @@ pre code .tok-pre { color: #569cd6; }
             <p>15 篇概念笔记 + 代码实战：核心知识点、推荐资源与可复制代码一站直达。</p>
             <div class="go">翻阅笔记 →</div>
           </a>
-          <a class="card module-card" href="#/ds">
-            <div class="icon">🧬</div>
-            <h3>数据结构与算法</h3>
-            <p>20 篇 C++ 教程：手写实现 + STL 对照，每章配典型例题与解答。</p>
-            <div class="go">开始学习 →</div>
-          </a>
-          <a class="card module-card" href="#/prob">
-            <div class="icon">🎲</div>
-            <h3>概率论与数理统计</h3>
-            <p>14 篇：贝叶斯、常见分布、CLT、MLE 与蒙特卡洛，Python 模拟可跑。</p>
-            <div class="go">开始学习 →</div>
-          </a>
           <a class="card module-card" href="#/quiz">
             <div class="icon">✏️</div>
             <h3>练习测验</h3>
-            <p>31 题分入门 / 进阶 / 挑战三级，含代码阅读题，即时判分并给出解析。</p>
+            <p>60 题覆盖 AI / 数据结构 / 概率统计；编程实战支持浏览器内判题、计时与内存统计。</p>
             <div class="go">开始自测 →</div>
           </a>
           <a class="card module-card" href="#/chat">
@@ -401,6 +507,24 @@ pre code .tok-pre { color: #569cd6; }
         <h2 class="section-title">新手推荐</h2>
         <p class="section-desc">零基础？从这三门开始，先建立直觉再谈深入。点击卡片查看知识点与学习资源。</p>
         <div class="grid" id="featuredCourses"></div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">外站接口</h2>
+        <p class="section-desc">延伸阅读：南京大学智能科学与技术学院学生维护的学院 Wiki，含学院介绍、师资百科、课程攻略与升学/就业经验。</p>
+        <div class="ext-card">
+          <div>
+            <h3>🎓 智科全家桶 · NJU Intelligence Science &amp; Technology</h3>
+            <p>学院介绍与师资百科、培养方案与课程攻略、保研 / 考研 / 留学经验、科研方向导航、实习就业经验，以及 LLM、扩散模型、具身智能等前沿技术专栏。</p>
+          </div>
+          <div class="ext-links">
+            <a class="btn btn-primary btn-sm" href="https://njuis-students.github.io/" target="_blank" rel="noopener noreferrer">🏠 打开主站</a>
+            <a class="btn btn-outline btn-sm" href="https://njuis-students.github.io/2-%E5%AD%A6%E4%B9%A0%E7%AF%87/1-%E5%9F%B9%E5%85%BB%E6%96%B9%E6%A1%88/1-%E5%9F%B9%E5%85%BB%E6%96%B9%E6%A1%88.html" target="_blank" rel="noopener noreferrer">📚 学习攻略</a>
+            <a class="btn btn-outline btn-sm" href="https://njuis-students.github.io/3-%E7%A7%91%E7%A0%94%E7%AF%87/1-%E7%A7%91%E7%A0%94%E6%A6%82%E8%A7%88/1-%E7%A7%91%E7%A0%94%E6%A6%82%E8%A7%88.html" target="_blank" rel="noopener noreferrer">🔬 科研攻略</a>
+            <a class="btn btn-outline btn-sm" href="https://njuis-students.github.io/4-%E8%81%8C%E5%9C%BA%E7%AF%87/2-%E5%B0%B1%E4%B8%9A%E6%8C%87%E5%8D%97/1-%E5%BC%95%E8%A8%80.html" target="_blank" rel="noopener noreferrer">💼 职场攻略</a>
+          </div>
+        </div>
       </div>
     </section>
   </section>
@@ -469,12 +593,12 @@ pre code .tok-pre { color: #569cd6; }
     <div class="page-head">
       <div class="container">
         <h1>✏️ 练习测验</h1>
-        <p>三级难度分级闯关，含代码阅读题。用筛选按钮按难度练习，全部完成后查看各级得分。</p>
+        <p>覆盖 AI、数据结构、概率统计三大板块。「全部」按题号顺序练习，也可按难度筛选；页面下方还有浏览器判题的编程实战。</p>
       </div>
     </div>
     <div class="container">
       <div class="toolbar">
-        <div><strong>AI 分级测验</strong>　<span class="badge gray" id="quizTotal">共 – 题</span></div>
+        <div><strong>综合分级测验</strong>　<span class="badge gray" id="quizTotal">共 – 题</span></div>
         <div class="tier-filters" id="quizFilters">
           <button class="chip active" data-f="all" type="button">全部</button>
           <button class="chip" data-f="入门" type="button">🟢 入门</button>
@@ -492,6 +616,31 @@ pre code .tok-pre { color: #569cd6; }
         <button class="btn btn-primary js-restart" type="button">↺ 再做一遍</button>
         <a class="btn btn-outline" href="#/knowledge">去知识库复习</a>
       </div>
+      <!-- 编程实战（浏览器判题） -->
+      <div class="codelab" id="codelab">
+        <div class="cl-head">
+          <h2>💻 编程实战 · 浏览器判题</h2>
+          <p>代码在你的浏览器本地执行（Worker 沙箱），逐测试点判定对错并记录耗时与内存，无需后端。语言为 JavaScript——算法思路与 C++ / Python 完全通用，学会套路即可平移。</p>
+        </div>
+        <div class="cl-note" id="clNote" hidden>⚠ 当前环境不支持沙箱 Worker，已切换为主线程执行：正常代码不受影响，但死循环会卡住页面；建议用 Chrome/Edge 或经本地服务器访问。</div>
+        <div class="cl-body">
+          <aside class="cl-list" id="clList" aria-label="题目列表"></aside>
+          <div class="cl-main">
+            <div class="cl-title-row"><h3 id="clTitle"></h3><span id="clMeta"></span></div>
+            <div class="cl-desc" id="clDesc"></div>
+            <div class="cl-editor-wrap">
+              <div class="cl-editor-bar"><span>main.js</span><button class="btn btn-ghost btn-sm" id="clReset" type="button">↺ 重置代码</button></div>
+              <textarea id="clEditor" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea>
+            </div>
+            <div class="cl-actions">
+              <button class="btn btn-primary" id="clRun" type="button">▶ 运行并判题</button>
+              <span class="cl-status" id="clStatus"></span>
+              <details class="cl-sol" id="clSol"><summary>📖 查看参考答案</summary><div id="clSolBody"></div></details>
+            </div>
+            <div class="cl-results" id="clResults"></div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -503,7 +652,7 @@ pre code .tok-pre { color: #569cd6; }
           <div class="who">
             <div class="avatar">🤖</div>
             <div>
-              <div>AI 学习助手</div>
+              <div>AI 答疑助手</div>
               <div class="st-text"><span class="status-dot"></span>在线 · 当前为本地模拟回复（本文件底部 CONFIG 可接入真实 API）</div>
             </div>
           </div>
@@ -528,7 +677,8 @@ pre code .tok-pre { color: #569cd6; }
 </main>
 
 <footer class="site-footer">
-  <div class="container">AI 学习助手 · 单文件框架演示版 ｜ 零依赖，一个 HTML 文件即整站<br>
+  <div class="container">学习助手 · 单文件框架演示版 ｜ 零依赖，一个 HTML 文件即整站<br>
+  学科板块：AI 人工智能 · 数据结构与算法 · 概率论与数理统计 ｜ 外站接口：<a href="https://njuis-students.github.io/" target="_blank" rel="noopener noreferrer">智科全家桶（南大智科学生 Wiki）</a><br>
   内容数据集中在本文件 <code>APP_DATA</code> 区段，欢迎补充自己的课程、笔记与题目。</div>
 </footer>
 
@@ -4052,11 +4202,47 @@ int main() {
       explain: '机器学习的本质是从数据中学习模式与规律，而不是靠人工穷举规则。'
     },
     {
+      q: '神经网络中激活函数（如 ReLU）的核心作用是？',
+      level: '入门', cat: '深度学习',
+      options: [
+        '防止内存溢出',
+        '引入非线性，否则多层网络等价于一层线性变换',
+        '让梯度变大，加速收敛',
+        '减少模型参数量'
+      ],
+      answer: 1,
+      explain: '线性变换无论叠加多少层，结果仍是线性变换；只有加入非线性激活，多层网络才具备拟合复杂函数的能力，"深度"才有意义。'
+    },
+    {
       q: '识别垃圾邮件（是/否垃圾）属于什么任务？',
       level: '入门', cat: 'ML 基础',
       options: ['回归', '聚类', '分类', '降维'],
       answer: 2,
       explain: '输出是离散标签（垃圾 / 正常），这是典型的二分类问题。预测连续数值才是回归。'
+    },
+    {
+      q: '需要频繁地「按下标随机访问第 i 个元素」，应优先选择哪种结构？',
+      level: '入门', cat: '线性结构',
+      options: [
+        '单链表：从头顺着数就行',
+        '数组：连续内存，可直接按地址计算定位',
+        '两者一样快',
+        '栈：后进先出天然适合'
+      ],
+      answer: 1,
+      explain: '数组元素连续存放，第 i 个元素地址 = 首地址 + i × 元素大小，O(1) 直达；链表结点分散在内存各处，只能从头沿指针逐个数，O(n)。详见站内章节《数组与动态数组》与《单链表》。'
+    },
+    {
+      q: '编辑器的「撤销（Ctrl+Z）」功能，最适合用哪种数据结构实现？',
+      level: '入门', cat: '栈与队列',
+      options: [
+        '队列（先进先出）',
+        '栈（后进先出）',
+        '二叉树',
+        '哈希表'
+      ],
+      answer: 1,
+      explain: '撤销总是撤销「最近一次」操作，正是后进先出（LIFO）的栈：操作依次入栈，撤销即弹栈。同类应用还有括号匹配与函数调用栈。详见站内章节《栈》。'
     },
     {
       q: '关于"过拟合"，下列说法正确的是？',
@@ -4081,6 +4267,18 @@ int main() {
       ],
       answer: 1,
       explain: 'LLM 预训练是自监督的下一词预测任务；直接回答提问的能力是指令微调阶段学来的。'
+    },
+    {
+      q: '图的广度优先搜索（BFS）应借助哪种数据结构管理「待访问」结点？',
+      level: '入门', cat: '栈与队列',
+      options: [
+        '栈',
+        '队列',
+        '堆',
+        '并查集'
+      ],
+      answer: 1,
+      explain: 'BFS 按「离起点由近到远」逐层扩展，需要先进先出（FIFO）的队列；栈对应的是深度优先搜索（DFS）。详见站内章节《队列与循环队列》与《图》。'
     },
     {
       q: 'Transformer 架构最核心的机制是？',
@@ -4109,6 +4307,30 @@ int main() {
       explain: '梯度指示损失增大最快的方向，参数沿梯度反方向更新即可逐步降低损失。'
     },
     {
+      q: '同时掷两枚均匀骰子，点数之和的期望是？',
+      level: '入门', cat: '数字特征',
+      options: [
+        '6',
+        '7',
+        '7.5',
+        '12'
+      ],
+      answer: 1,
+      explain: '期望具有线性性：E(X+Y) = E(X) + E(Y)，与两者是否独立无关。单枚骰子期望 (1+2+…+6)/6 = 3.5，故和的期望 = 3.5 + 3.5 = 7。详见站内章节《期望、方差与协方差》。'
+    },
+    {
+      q: '同时抛两枚均匀硬币，恰好「一正一反」的概率是？',
+      level: '入门', cat: '随机事件',
+      options: [
+        '1/4',
+        '1/3',
+        '1/2',
+        '3/4'
+      ],
+      answer: 2,
+      explain: '样本空间共 4 个等可能结果：正正、正反、反正、反反，其中一正一反占 2 个，P = 2/4 = 1/2。注意不是「3 种结果各 1/3」——它们并不等可能。详见站内章节《随机性与样本空间》。'
+    },
+    {
       q: '关于 Prompt 设计，下列做法不推荐的是？',
       level: '入门', cat: '提示词',
       options: [
@@ -4119,6 +4341,18 @@ int main() {
       ],
       answer: 2,
       explain: '含糊的指令会导致不稳定、跑题的输出。好 Prompt 的关键恰恰是明确任务、格式与边界。'
+    },
+    {
+      q: '对一个含 n 个元素的序列做二分查找，前提条件是？',
+      level: '入门', cat: '查找与排序',
+      options: [
+        '元素个数必须是 2 的幂',
+        '序列必须有序，且支持随机访问（如数组）',
+        '元素必须都是整数',
+        '序列必须用链表存储'
+      ],
+      answer: 1,
+      explain: '二分依赖「看中间元素就能丢弃一半」，因此需要有序 + O(1) 随机访问；无序序列要先排序，链表不支持下标直达。详见站内章节《查找：线性与二分》。'
     },
     {
       q: '在类别严重不平衡的数据集上，哪个指标最容易产生误导？',
@@ -4147,6 +4381,18 @@ int main() {
       explain: '卷积核滑窗共享权重，用少量参数捕捉局部模式且天然支持平移不变，这是 CNN 统治视觉领域的根基。'
     },
     {
+      q: '反向传播（backpropagation）在数学上本质是？',
+      level: '进阶', cat: '深度学习',
+      options: [
+        '对每层权重随机微调',
+        '链式法则沿计算图逐层求损失对各参数的梯度',
+        '把前向计算倒着再算一遍取平均',
+        '一种防止过拟合的正则化技术'
+      ],
+      answer: 1,
+      explain: '损失是嵌套的复合函数，反向传播按链式法则从输出层向输入层逐层传递局部梯度，一次反向就能得到所有参数的梯度，远快于逐参数数值求导。'
+    },
+    {
       q: 'Prompt / RAG / 微调的选型经验法则是？',
       level: '进阶', cat: 'LLM 应用',
       options: [
@@ -4159,12 +4405,48 @@ int main() {
       explain: '按成本从低到高逐层升级：Prompt 几乎免费；RAG 补知识；微调补能力与风格。多数问题第一步就能解决。'
     },
     {
+      q: '两个不同的键被哈希函数映射到同一个槽位（冲突），下列哪项不是常见的解决思路？',
+      level: '进阶', cat: '哈希表',
+      options: [
+        '链地址法：同一槽位用链表串起来',
+        '开放寻址法：冲突就探测下一个空位',
+        '把哈希表整体改用链表实现',
+        '装填因子过大时扩容并重新哈希'
+      ],
+      answer: 2,
+      explain: '链地址法、开放寻址（线性/平方探测）与扩容再哈希都是标准手段；把哈希表改成链表查找会退化成 O(n)，就失去了哈希的意义。详见站内章节《哈希表》。'
+    },
+    {
+      q: '对一棵合法的二叉搜索树（BST）做中序遍历，得到的序列是？',
+      level: '进阶', cat: '树与BST',
+      options: [
+        '按层从左到右排列',
+        '升序排列',
+        '降序排列',
+        '顺序随机但可复原'
+      ],
+      answer: 1,
+      explain: 'BST 满足「左 < 根 < 右」，中序遍历恰按 左→根→右 访问，结果必然升序——这也是验证 BST 合法性、求第 k 小元素的标准做法。详见站内章节《二叉搜索树 BST》。'
+    },
+    {
       q: '上面的代码输出什么？',
       code: 'x = [1, 2, 3]\ny = [i * 2 for i in x]\nprint(sum(y))',
       level: '入门', cat: 'Python 代码',
       options: ['6', '12', '9', '24'],
       answer: 1,
       explain: '列表推导把每个元素翻倍得到 [2, 4, 6]，再求和得 12。'
+    },
+    {
+      q: '两枚均匀硬币先后抛掷（互不影响），两枚都是正面的概率是？',
+      level: '入门', cat: '随机事件',
+      options: [
+        '1/2',
+        '1/3',
+        '1/4',
+        '1/8'
+      ],
+      answer: 2,
+      explain: '事件独立时 P(AB) = P(A)·P(B) = 1/2 × 1/2 = 1/4。独立意味着第二枚的结果不随第一枚改变。详见站内章节《条件概率与贝叶斯》。'
     },
     {
       q: '上面的代码输出什么？',
@@ -4180,6 +4462,18 @@ int main() {
       options: ['把文本的语义映射成稠密向量', '把文本压缩成 zip', '给文本加密', '把文本转成拼音'],
       answer: 0,
       explain: '嵌入让"意思相近"变成"向量距离相近"，是语义检索与 RAG 的地基。'
+    },
+    {
+      q: '在无权图上求「从起点到各点的最少边数」，最合适的算法是？',
+      level: '进阶', cat: '图',
+      options: [
+        'DFS（深度优先）',
+        'BFS（广度优先）',
+        'Dijkstra 算法',
+        '拓扑排序'
+      ],
+      answer: 1,
+      explain: 'BFS 逐层扩展，第一次到达某点时经过的边数一定最少，天然解决无权最短路；Dijkstra 是它向带（非负）权图的推广。详见站内章节《图》。'
     },
     {
       q: '上面的代码输出什么？',
@@ -4204,12 +4498,48 @@ int main() {
       explain: 'token 可以是词、子词或字符片段；计费与上下文长度都按 token 算。'
     },
     {
+      q: '抛 10 次均匀硬币，正面次数 X 服从二项分布 B(10, 1/2)，E(X) = ？',
+      level: '进阶', cat: '常见分布',
+      options: [
+        '2.5',
+        '5',
+        '√10 / 2',
+        '10'
+      ],
+      answer: 1,
+      explain: '二项分布 B(n, p) 的期望 E(X) = np = 10 × 1/2 = 5。用期望线性性看，就是 10 次「单次期望 0.5」相加。详见站内章节《随机变量与常见分布》。'
+    },
+    {
+      q: '随机变量 X 服从正态分布 N(μ, σ²)，X 落在 [μ-2σ, μ+2σ] 内的概率约为？',
+      level: '进阶', cat: '常见分布',
+      options: [
+        '68%',
+        '80%',
+        '95%',
+        '99.7%'
+      ],
+      answer: 2,
+      explain: '正态分布 3σ 原则：±1σ ≈ 68%，±2σ ≈ 95%，±3σ ≈ 99.7%。质检与异常检测里「超出 2σ 就报警」用的就是它。详见站内章节《随机变量与常见分布》。'
+    },
+    {
       q: '一段标准训练循环中，??? 处应填？',
       code: 'for epoch in range(10):\n    pred = model(X)\n    loss = loss_fn(pred, y)\n    ???\n    loss.backward()\n    opt.step()',
       level: '进阶', cat: '训练流程',
       options: ['opt.zero_grad()', 'model.eval()', 'opt.step()', 'torch.no_grad()'],
       answer: 0,
       explain: 'backward 前必须清空上一轮梯度，否则梯度会错误累积。详见站内笔记《最小 PyTorch 训练循环》。'
+    },
+    {
+      q: '朴素递归斐波那契 fib(n) 的时间复杂度高达 O(2^n)，主要原因是？',
+      level: '进阶', cat: '递归与分治',
+      options: [
+        '递归调用本身有固定开销',
+        '大量重叠子问题被反复计算',
+        '函数调用栈太深导致溢出',
+        '返回值太大发生数值溢出'
+      ],
+      answer: 1,
+      explain: '递归展开成树后 fib(k) 被重复计算成千上万次；加一个数组缓存结果（记忆化）即可降到 O(n)——典型的空间换时间。详见站内章节《递归与分治》。'
     },
     {
       q: '分类任务使用 CrossEntropyLoss 时，模型输出应为？',
@@ -4219,11 +4549,35 @@ int main() {
       explain: 'CrossEntropyLoss 内部已含 LogSoftmax，再手动 softmax 是重复计算且损害数值稳定性。'
     },
     {
+      q: '关于 KL 散度与交叉熵，下列说法正确的是？',
+      level: '进阶', cat: '信息论',
+      options: [
+        'KL(p‖q) = KL(q‖p)，方向无所谓',
+        '固定真实分布 p 时，最小化交叉熵 H(p,q) 与最小化 KL(p‖q) 等价',
+        '交叉熵永远等于熵 H(p)',
+        'KL 散度可以取负值'
+      ],
+      answer: 1,
+      explain: 'H(p, q) = H(p) + KL(p‖q)：p 固定时 H(p) 是常数，所以训练分类器最小化交叉熵就是在最小化 KL 散度。另外 KL(p‖q) ≠ KL(q‖p)（不对称），且恒有 KL ≥ 0。详见站内章节《交叉熵、KL 散度与生成模型》。'
+    },
+    {
       q: 'LoRA 微调的核心思想是？',
       level: '进阶', cat: '微调',
       options: ['解冻全部参数重训', '冻结原权重，只训练一对小的低秩矩阵', '删掉多余的层', '把模型量化到 4-bit'],
       answer: 1,
       explain: '低秩适配把可训练参数量降到原模型的千分之几，单卡也能微调大模型。'
+    },
+    {
+      q: '向含 n 个元素的二叉堆中插入一个元素，时间复杂度是？',
+      level: '进阶', cat: '堆与优先队列',
+      options: [
+        'O(1)',
+        'O(log n)',
+        'O(n)',
+        'O(n log n)'
+      ],
+      answer: 1,
+      explain: '插入先放到末尾再「上浮」，至多交换树高次，即 O(log n)；取堆顶 O(1)，弹出（下沉）同样 O(log n)。详见站内章节《堆与优先队列》。'
     },
     {
       q: '上面的代码输出什么？',
@@ -4234,11 +4588,35 @@ int main() {
       explain: '广播：b 的每一列加到 a 的 3 列上，结果保持 (2, 3)。'
     },
     {
+      q: '两个随机变量的协方差为 0，可以得出的结论是？',
+      level: '进阶', cat: '数字特征',
+      options: [
+        '两者一定相互独立',
+        '两者没有线性相关关系，但不一定独立',
+        '两者一定正相关',
+        '两者的方差都为 0'
+      ],
+      answer: 1,
+      explain: '协方差只刻画「线性」关联。例如 X 取值 [-1,1] 时，X 与 X² 的协方差为 0 却明显不独立。只有联合分布为正态时，「不相关」才等价于「独立」。详见站内章节《期望、方差与协方差》。'
+    },
+    {
       q: 'RAG 系统检索质量差会拉低回答，下列哪项不能改善检索？',
       level: '进阶', cat: 'LLM 应用',
       options: ['查询改写', '更换更强的嵌入模型', '加一步重排序（rerank）', '调高生成温度'],
       answer: 3,
       explain: '温度只影响生成采样，与召回哪几段文档无关。'
+    },
+    {
+      q: '下列排序算法中，属于「稳定排序」的是？',
+      level: '进阶', cat: '查找与排序',
+      options: [
+        '快速排序',
+        '堆排序',
+        '归并排序',
+        '选择排序'
+      ],
+      answer: 2,
+      explain: '稳定性 = 相等元素排序后保持原有先后顺序。归并排序合并时优先取左半，故稳定；快排、堆排、选择排序的跨距离交换都会破坏稳定性。详见站内章节《排序算法》。'
     },
     {
       q: '序列长度为 n 的自注意力，其注意力矩阵的计算复杂度约为？',
@@ -4248,11 +4626,35 @@ int main() {
       explain: '每个位置都要与其他所有位置算相关性，n×n 的注意力矩阵正是长上下文成本高的根源。'
     },
     {
+      q: '某病发病率 1%。检测灵敏度 99%（患者 99% 呈阳性），健康人 5% 误报。某人检测呈阳性，他真正患病的概率约为？',
+      level: '进阶', cat: '贝叶斯',
+      options: [
+        '99%',
+        '95%',
+        '约 50%',
+        '约 16.7%'
+      ],
+      answer: 3,
+      explain: '贝叶斯公式：P(病|阳) = 0.01×0.99 / (0.01×0.99 + 0.99×0.05) ≈ 0.0099 / 0.0594 ≈ 16.7%。先验（发病率）很低时，阳性结果里假阳性占大头——这正是贝叶斯思维的威力。详见站内章节《条件概率与贝叶斯》。'
+    },
+    {
       q: '推理时的 KV Cache 是用什么换什么？',
       level: '挑战', cat: '推理优化',
       options: ['用显存换计算：缓存历史 token 的 K/V 避免重复计算', '用磁盘换内存', '用延迟换带宽', '用量化换精度'],
       answer: 0,
       explain: '自回归生成中历史 token 的 Key/Value 不变，缓存后每步只需算新 token，代价是显存占用随上下文增长。'
+    },
+    {
+      q: '中心极限定理（CLT）说的是？',
+      level: '进阶', cat: '极限定理',
+      options: [
+        '样本量够大时，样本本身服从原分布',
+        '大量独立同分布随机变量之和（或均值）近似服从正态分布，与原分布形态无关',
+        '样本均值一定等于总体均值',
+        '大样本条件下方差趋于 0'
+      ],
+      answer: 1,
+      explain: '无论总体是均匀、指数还是二项，只要独立同分布、方差有限，n 足够大时其均值的分布就近似正态——这是假设检验与置信区间能「正态化处理」的根基。详见站内章节《大数定律与中心极限》。'
     },
     {
       q: '这段训练代码的问题在哪？',
@@ -4263,11 +4665,35 @@ int main() {
       explain: '正确顺序：zero_grad → 前向 → backward → step。把 zero_grad 放在 backward 之后会抹掉本轮梯度。对应站内笔记《PyTorch 常见报错调试清单》。'
     },
     {
+      q: '用快慢指针判断链表是否有环：慢指针每次走 1 步、快指针每次走 2 步。链表有环时它们必然相遇，是因为？',
+      level: '挑战', cat: '链表',
+      options: [
+        '两者速度相同，迟早撞上',
+        '进入环后两者相对速度为 1，距离每步缩短 1，迟早追上',
+        '快指针会主动停下来等慢指针',
+        '环的长度必为偶数'
+      ],
+      answer: 1,
+      explain: '进环后可视为「快在环上以速度差 1 追慢」，两者距离每步减 1，最多绕环一圈必然相遇——这正是算法正确性的核心。详见站内章节《单链表》。'
+    },
+    {
       q: '困惑度（Perplexity）的常见定义与解读是？',
       level: '挑战', cat: '评估指标',
       options: ['平均交叉熵损失取 exp，越小越好', '损失之和，越小越差', '准确率的平方', '生成速度，越小越快'],
       answer: 0,
       explain: 'PPL = exp(平均 token 级交叉熵)，直觉是"模型平均在多少个词里犹豫"，越低语言建模越好。'
+    },
+    {
+      q: '实现 get / put 都是 O(1) 的 LRU 缓存，标准做法是组合哪两种结构？',
+      level: '挑战', cat: '哈希表',
+      options: [
+        '数组 + 二分查找',
+        '哈希表 + 双向链表',
+        '堆 + 队列',
+        '红黑树 + 栈'
+      ],
+      answer: 1,
+      explain: '哈希表 O(1) 定位结点，双向链表 O(1) 维护「最近使用」顺序：命中/写入移到头部，淘汰删尾部。单向链表不够用——删除尾结点需要前驱。详见站内章节《哈希表》。'
     },
     {
       q: '大模型的 BPE 分词主要解决什么问题？',
@@ -4277,11 +4703,35 @@ int main() {
       explain: 'BPE 从字符出发按频率合并子词，词表有限但能表示任意文本——这也是很多"怪异输出"的源头。'
     },
     {
+      q: '用单位正方形内随机撒点的方法估计 π，若想把精度提高一位小数（误差缩小 10 倍），样本量大约需要？',
+      level: '挑战', cat: '蒙特卡洛',
+      options: [
+        '扩大 10 倍',
+        '扩大约 100 倍',
+        '扩大约 1000 倍',
+        '不变，多测几次取平均即可'
+      ],
+      answer: 1,
+      explain: '蒙特卡洛误差按 O(1/√N) 收敛：误差缩小 10 倍，N 需要扩大 10² = 100 倍。收敛慢是蒙特卡洛方法的主要短板。详见站内章节《蒙特卡洛方法》。'
+    },
+    {
       q: '梯度累积（gradient accumulation）的主要用途是？',
       level: '挑战', cat: '训练流程',
       options: ['显存不够时模拟更大的 batch', '加速单批计算', '减少模型参数', '替代学习率调度'],
       answer: 0,
       explain: '多个小批的梯度累加后再 step，等效大 batch 训练，代价是步数变慢。'
+    },
+    {
+      q: '从 10 亿个元素中找出最大的 100 个（内存只够装 100 个），最合适的方法是？',
+      level: '挑战', cat: '堆与优先队列',
+      options: [
+        '全部读入排序后取前 100',
+        '维护大小为 100 的最小堆，元素逐个流入',
+        '维护大小为 100 的最大堆',
+        '先哈希分桶再逐桶排序'
+      ],
+      answer: 1,
+      explain: '最小堆保住「当前最大 100 个」：新元素比堆顶大就替换并下沉。时间 O(n log k)、空间 O(k)，可单趟流式处理；全排序 O(n log n) 且内存放不下。详见站内章节《堆与优先队列》。'
     },
     {
       q: 'Chinchilla 规模法则（Scaling Law）的核心启示是？',
@@ -4291,14 +4741,379 @@ int main() {
       explain: '给定算力预算，"小而饿数据"不如"配得开"——盲目堆参数而数据不足是浪费。'
     },
     {
+      q: '关于假设检验中的 p 值，理解正确的是？',
+      level: '挑战', cat: '假设检验',
+      options: [
+        'p 值是 H0 为真的概率',
+        'p 值是在 H0 成立的前提下，出现当前或更极端观测结果的概率',
+        'p 值越小，效应量越大',
+        'p = 0.05 意味着实验有 95% 的机会可复现'
+      ],
+      answer: 1,
+      explain: 'p 值描述「数据在 H0 下的极端程度」，而不是 H0 为真的概率——H0 真假是客观事实，不随样本变化。这是统计学最常见的误读之一。详见站内章节《极大似然与假设检验》。'
+    },
+    {
       q: '把 LLM 的采样温度设为 0，效果是？',
       level: '挑战', cat: '应用开发',
       options: ['模型不再输出', '输出更接近贪心解码、更确定保守，但仍不保证事实正确', '上下文窗口变长', '一定更快'],
       answer: 1,
       explain: '温度 0 让每步偏向概率最高的词，降低随机性；但"稳定地错"依然是错，幻觉不受温度控制。'
+    },
+    {
+      q: '用回溯法生成 n 个数的所有排列，时间复杂度是？',
+      level: '挑战', cat: '回溯',
+      options: [
+        'O(n²)',
+        'O(n log n)',
+        'O(n · n!)',
+        'O(2ⁿ)'
+      ],
+      answer: 2,
+      explain: '排列树共有 n! 个解，每个解需 O(n) 复制输出，故为 O(n·n!)；子集型回溯则是 O(n·2ⁿ)。解的数量决定了下限，所以剪枝对回溯至关重要。详见站内章节《算法设计思想：贪心 / DP / 回溯》。'
+    },
+    {
+      q: '求滑动窗口最大值（窗口大小 k、数组长 n），使用单调队列能达到的最优时间复杂度是？',
+      level: '挑战', cat: '栈与队列',
+      options: [
+        'O(n log k)',
+        'O(n)',
+        'O(nk)',
+        'O(n²)'
+      ],
+      answer: 1,
+      explain: '单调队列维持队头为当前窗口最大：新元素入队前把更小的队尾弹出（它们不可能再成为最大值）。每个元素至多入队、出队各一次，整体 O(n)，优于堆解法 O(n log k)。'
+    },
+    {
+      q: '监督学习中，「最小化交叉熵损失」与下列哪个统计概念等价？',
+      level: '挑战', cat: '极大似然',
+      options: [
+        '最小二乘估计',
+        '极大似然估计（MLE）',
+        '矩估计',
+        '最大后验估计（MAP）'
+      ],
+      answer: 1,
+      explain: '把模型输出看作概率分布，交叉熵恰是负对数似然：最小化 CE ⇔ 最大化观测标签出现的似然。这为损失函数提供了统计学解释。详见站内章节《极大似然与假设检验》与《交叉熵、KL 散度与生成模型》。'
     }
   ]
 };
+</script>
+
+<script>
+/* =====================================================================
+   编程实战（浏览器判题）· 题目数据
+   挂载到 window.APP_DATA.codeLab（数组，共 6 道题）。
+   说明：
+   - 本文件允许用反引号模板字符串书写多行代码片段；
+     但所有字符串内容中不得出现反引号与 ${（集成硬约束）。
+   - 所有测试点均确定性、无随机、输入规模小，判题为毫秒级。
+   - 每题的 tests 与 solution 严格自洽（见 _patch/verify_tests.mjs 自检）。
+   ===================================================================== */
+window.APP_DATA = window.APP_DATA || {};
+window.APP_DATA.codeLab = [
+
+  /* ---------- 1. 两数之和 ---------- */
+  {
+    id: 'cl-two-sum',
+    title: '两数之和',
+    level: '入门',
+    tags: ['哈希表', '数组'],
+    related: '#/ds/ds14',
+    fn: 'twoSum',
+    starter: `/**
+ * 两数之和
+ * @param {number[]} nums 整数数组
+ * @param {number} target 目标和
+ * @returns {number[]} 和为 target 的两个下标 [i, j]（i < j）；
+ *                     不存在时返回 [-1, -1]。
+ *                     题目保证答案下标对唯一，且同一元素不能使用两次。
+ */
+function twoSum(nums, target) {
+  // 在这里写你的实现
+}
+`,
+    desc: `<p>给定一个整数数组 <code>nums</code> 和一个整数目标值 <code>target</code>，请找出数组中<strong>和为目标值</strong>的那两个整数，返回它们的数组下标 <code>[i, j]</code>（保证 i &lt; j）。</p>
+<p>约定：每个输入<strong>恰好只有一组答案</strong>，同一个元素不能使用两次；如果不存在这样的两个数，返回 <code>[-1, -1]</code>。</p>
+<h4>示例</h4>
+<pre><code>输入：nums = [2, 7, 11, 15], target = 9
+输出：[0, 1]
+解释：nums[0] + nums[1] = 2 + 7 = 9</code></pre>
+<pre><code>输入：nums = [3, 2, 4], target = 6
+输出：[1, 2]
+解释：2 + 4 = 6（3 + 3 不行，同一个元素只能用一次）</code></pre>
+<h4>提示 / 数据范围</h4>
+<p>2 &lt;= nums.length &lt;= 100，-100 &lt;= nums[i], target &lt;= 100。暴力双循环是 O(n^2)；用哈希表记录「值 -&gt; 下标」，一次遍历即可 O(n)。</p>`,
+    tests: [
+      { args: [[2, 7, 11, 15], 9], expect: [0, 1] },
+      { args: [[3, 2, 4], 6], expect: [1, 2] },
+      { args: [[5, 1, 2, 3, 8], 13], expect: [0, 4] },
+      { args: [[-3, 4, 3, 90], 0], expect: [0, 2] },
+      { args: [[3, 3], 6], expect: [0, 1] },
+      { args: [[1, 3, 3, 4], 6], expect: [1, 2] },
+      { args: [[1, 2, 3], 100], expect: [-1, -1] }
+    ],
+    solution: `function twoSum(nums, target) {
+  var seen = {};                     // 哈希表：值 -> 出现过的下标
+  for (var i = 0; i < nums.length; i++) {
+    var need = target - nums[i];     // 还差的那个数
+    if (seen[need] !== undefined) {
+      return [seen[need], i];        // 一次遍历：边查边存
+    }
+    seen[nums[i]] = i;
+  }
+  return [-1, -1];                   // 题面约定：无解返回 [-1, -1]
+}`
+  },
+
+  /* ---------- 2. 有效的括号 ---------- */
+  {
+    id: 'cl-valid-paren',
+    title: '有效的括号',
+    level: '入门',
+    tags: ['栈'],
+    related: '#/ds/ds08',
+    fn: 'isValid',
+    starter: `/**
+ * 有效的括号
+ * @param {string} s 仅含 ()[]{} 的字符串
+ * @returns {boolean} 括号能按正确顺序闭合时返回 true，否则 false
+ */
+function isValid(s) {
+  // 在这里写你的实现
+}
+`,
+    desc: `<p>给定一个只包含 <code>'('</code>、<code>')'</code>、<code>'['</code>、<code>']'</code>、<code>'{'</code>、<code>'}'</code> 的字符串 <code>s</code>，判断字符串是否<strong>有效</strong>。有效需满足：左括号必须用相同类型的右括号闭合，且必须以正确的顺序闭合。</p>
+<h4>示例</h4>
+<pre><code>输入：s = "{[()]}"
+输出：true</code></pre>
+<pre><code>输入：s = "([)]"
+输出：false
+解释：括号交叉了，顺序不合法</code></pre>
+<h4>提示 / 数据范围</h4>
+<p>0 &lt;= s.length &lt;= 10^4。经典栈应用：遇到左括号入栈；遇到右括号时，栈顶必须是与它配对的左括号；最后栈还必须为空。</p>`,
+    tests: [
+      { args: [''], expect: true },
+      { args: ['()'], expect: true },
+      { args: ['()[]{}'], expect: true },
+      { args: ['{[()]}'], expect: true },
+      { args: ['([)]'], expect: false },
+      { args: ['(('], expect: false },
+      { args: [']'], expect: false }
+    ],
+    solution: `function isValid(s) {
+  var pair = { ')': '(', ']': '[', '}': '{' };  // 右括号 -> 对应左括号
+  var stack = [];
+  for (var i = 0; i < s.length; i++) {
+    var c = s.charAt(i);
+    if (c === '(' || c === '[' || c === '{') {
+      stack.push(c);                 // 左括号入栈
+    } else if (stack.pop() !== pair[c]) {
+      return false;                  // 右括号必须匹配栈顶（空栈弹出 undefined 也会失败）
+    }
+  }
+  return stack.length === 0;         // 全部闭合，栈才为空
+}`
+  },
+
+  /* ---------- 3. 二分查找 ---------- */
+  {
+    id: 'cl-binary-search',
+    title: '二分查找',
+    level: '入门',
+    tags: ['二分查找', '数组'],
+    related: '#/ds/ds16',
+    fn: 'search',
+    starter: `/**
+ * 二分查找
+ * @param {number[]} nums 升序、无重复元素的整数数组
+ * @param {number} target 目标值
+ * @returns {number} target 的下标；不存在返回 -1
+ */
+function search(nums, target) {
+  // 在这里写你的实现
+}
+`,
+    desc: `<p>给定一个<strong>升序、无重复元素</strong>的整数数组 <code>nums</code> 和一个目标值 <code>target</code>，返回 target 在数组中的下标；不存在则返回 <code>-1</code>。要求使用时间复杂度 O(log n) 的算法。</p>
+<h4>示例</h4>
+<pre><code>输入：nums = [-1, 0, 3, 5, 9, 12], target = 9
+输出：4</code></pre>
+<pre><code>输入：nums = [-1, 0, 3, 5, 9, 12], target = 2
+输出：-1</code></pre>
+<h4>提示 / 数据范围</h4>
+<p>注意边界：空数组、单元素数组、target 比所有元素都小或都大。循环条件与 lo / hi 的更新要配套（lo &lt;= hi 搭配 mid ± 1，才不会漏掉区间端点）。</p>`,
+    tests: [
+      { args: [[-1, 0, 3, 5, 9, 12], 9], expect: 4 },
+      { args: [[-1, 0, 3, 5, 9, 12], -1], expect: 0 },
+      { args: [[1, 3, 5, 7, 9, 11, 13], 7], expect: 3 },
+      { args: [[-1, 0, 3, 5, 9, 12], 2], expect: -1 },
+      { args: [[5], 5], expect: 0 },
+      { args: [[5], 2], expect: -1 },
+      { args: [[], 3], expect: -1 }
+    ],
+    solution: `function search(nums, target) {
+  var lo = 0, hi = nums.length - 1;  // 闭区间 [lo, hi]
+  while (lo <= hi) {
+    var mid = (lo + hi) >> 1;        // 中点；防溢出可写 lo + ((hi - lo) >> 1)
+    if (nums[mid] === target) return mid;
+    if (nums[mid] < target) lo = mid + 1;   // 目标在右半段
+    else hi = mid - 1;                       // 目标在左半段
+  }
+  return -1;                         // 区间缩空，不存在
+}`
+  },
+
+  /* ---------- 4. 最大子数组和 ---------- */
+  {
+    id: 'cl-max-subarray',
+    title: '最大子数组和',
+    level: '进阶',
+    tags: ['动态规划', '贪心'],
+    related: '#/ds/ds19',
+    fn: 'maxSubArray',
+    starter: `/**
+ * 最大子数组和
+ * @param {number[]} nums 整数数组（至少包含一个元素）
+ * @returns {number} 和最大的连续子数组之和
+ */
+function maxSubArray(nums) {
+  // 在这里写你的实现
+}
+`,
+    desc: `<p>给定一个整数数组 <code>nums</code>，找到<strong>和最大的连续子数组</strong>（子数组至少包含一个元素），返回其最大和。</p>
+<h4>示例</h4>
+<pre><code>输入：nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+输出：6
+解释：连续子数组 [4, -1, 2, 1] 的和最大，为 6</code></pre>
+<pre><code>输入：nums = [-3, -1, -2]
+输出：-1
+解释：全为负数时，最大子数组就是其中最大的单个元素</code></pre>
+<h4>提示 / 数据范围</h4>
+<p>1 &lt;= nums.length &lt;= 100，-100 &lt;= nums[i] &lt;= 100。Kadane 算法：cur 表示「以当前元素结尾的最大和」，每一步要么延续前面的子数组，要么从当前元素另起炉灶，二者取较大者。</p>`,
+    tests: [
+      { args: [[-2, 1, -3, 4, -1, 2, 1, -5, 4]], expect: 6 },
+      { args: [[-3, -1, -2]], expect: -1 },
+      { args: [[-1]], expect: -1 },
+      { args: [[5]], expect: 5 },
+      { args: [[1, 2, 3, 4]], expect: 10 },
+      { args: [[8, -19, 5, -4, 20]], expect: 21 },
+      { args: [[-2, -3, 4, -1, -2, 1, 5, -3]], expect: 7 }
+    ],
+    solution: `function maxSubArray(nums) {
+  var best = nums[0];                // 全局最大和
+  var cur = nums[0];                 // 以当前元素结尾的最大和
+  for (var i = 1; i < nums.length; i++) {
+    cur = Math.max(nums[i], cur + nums[i]);  // 另起炉灶 or 延续前面的子数组
+    best = Math.max(best, cur);
+  }
+  return best;
+}`
+  },
+
+  /* ---------- 5. 零钱兑换 ---------- */
+  {
+    id: 'cl-coin-change',
+    title: '零钱兑换',
+    level: '挑战',
+    tags: ['动态规划'],
+    related: '#/ds/ds19',
+    fn: 'coinChange',
+    starter: `/**
+ * 零钱兑换
+ * @param {number[]} coins 硬币面额数组（每种面额数量无限）
+ * @param {number} amount 目标金额
+ * @returns {number} 凑出 amount 的最少硬币数；凑不出返回 -1
+ */
+function coinChange(coins, amount) {
+  // 在这里写你的实现
+}
+`,
+    desc: `<p>给定不同面额的硬币数组 <code>coins</code> 和一个总金额 <code>amount</code>，计算凑成总金额所需的<strong>最少硬币个数</strong>。每种硬币数量无限；如果没有任何一种组合能凑出总金额，返回 <code>-1</code>。</p>
+<h4>示例</h4>
+<pre><code>输入：coins = [1, 2, 5], amount = 11
+输出：3
+解释：11 = 5 + 5 + 1</code></pre>
+<pre><code>输入：coins = [2], amount = 3
+输出：-1
+解释：只用面额 2 无法凑出 3</code></pre>
+<h4>提示 / 数据范围</h4>
+<p>0 &lt;= amount &lt;= 100。经典完全背包：dp[a] 表示凑出金额 a 的最少硬币数，dp[0] = 0，dp[a] = min(dp[a - coin]) + 1；凑不出时用一个哨兵值（如 amount + 1）标记，最后再判断。</p>`,
+    tests: [
+      { args: [[1, 2, 5], 11], expect: 3 },
+      { args: [[2], 3], expect: -1 },
+      { args: [[1, 2, 5], 0], expect: 0 },
+      { args: [[1, 5, 6, 9], 11], expect: 2 },
+      { args: [[2, 5, 10, 1], 27], expect: 4 },
+      { args: [[5, 10], 3], expect: -1 },
+      { args: [[1, 3, 4], 6], expect: 2 }
+    ],
+    solution: `function coinChange(coins, amount) {
+  var INF = amount + 1;              // 哨兵：表示「凑不出」
+  var dp = [];
+  for (var i = 0; i <= amount; i++) dp[i] = INF;
+  dp[0] = 0;                         // 凑出 0 需要 0 枚硬币
+  for (var a = 1; a <= amount; a++) {
+    for (var j = 0; j < coins.length; j++) {
+      if (coins[j] <= a && dp[a - coins[j]] + 1 < dp[a]) {
+        dp[a] = dp[a - coins[j]] + 1;
+      }
+    }
+  }
+  return dp[amount] > amount ? -1 : dp[amount];
+}`
+  },
+
+  /* ---------- 6. 无重复字符的最长子串 ---------- */
+  {
+    id: 'cl-window',
+    title: '无重复字符的最长子串',
+    level: '挑战',
+    tags: ['滑动窗口', '哈希'],
+    related: '#/ds/ds14',
+    fn: 'lengthOfLongestSubstring',
+    starter: `/**
+ * 无重复字符的最长子串
+ * @param {string} s 输入字符串（可包含中文、空格等任意字符）
+ * @returns {number} 无重复字符的最长子串长度（子串必须连续）
+ */
+function lengthOfLongestSubstring(s) {
+  // 在这里写你的实现
+}
+`,
+    desc: `<p>给定一个字符串 <code>s</code>（可能包含中文、空格、符号），找出<strong>不含有重复字符</strong>的最长子串的长度。注意子串必须连续（区别于子序列）。</p>
+<h4>示例</h4>
+<pre><code>输入：s = "abcabcbb"
+输出：3
+解释：最长无重复子串是 "abc"</code></pre>
+<pre><code>输入：s = "pwwkew"
+输出：3
+解释：最长无重复子串是 "wke"（pwke 是子序列，不是子串）</code></pre>
+<h4>提示 / 数据范围</h4>
+<p>0 &lt;= s.length &lt;= 1000。滑动窗口 + 哈希：右端扩张；遇到重复字符时，左端直接跳到「该字符上一次出现位置 + 1」，一次遍历 O(n)。</p>`,
+    tests: [
+      { args: ['abcabcbb'], expect: 3 },
+      { args: ['bbbbb'], expect: 1 },
+      { args: ['pwwkew'], expect: 3 },
+      { args: [''], expect: 0 },
+      { args: ['au'], expect: 2 },
+      { args: ['ab c d'], expect: 4 },
+      { args: ['中文abc中文a'], expect: 5 }
+    ],
+    solution: `function lengthOfLongestSubstring(s) {
+  var last = {};                     // 哈希：字符 -> 最近一次出现的下标
+  var start = 0, best = 0;           // start：窗口左端
+  for (var i = 0; i < s.length; i++) {
+    var c = s.charAt(i);
+    if (last[c] !== undefined && last[c] >= start) {
+      start = last[c] + 1;           // 左端直接跳过上一次出现位置的右边
+    }
+    last[c] = i;
+    if (i - start + 1 > best) best = i - start + 1;
+  }
+  return best;
+}`
+  }
+
+];
 </script>
 
 <!-- ============================================================
@@ -4790,8 +5605,8 @@ int main() {
 
   /* ---------------- 测验 ---------------- */
   var QUIZ_TIERS = [
-    { name: "入门", cls: "green", dot: "t-easy", desc: "概念、Python 与工具，先建立正确直觉" },
-    { name: "进阶", cls: "orange", dot: "t-mid", desc: "训练流程、架构与应用选型，理解原理" },
+    { name: "入门", cls: "green", dot: "t-easy", desc: "概念、代码与工具题，先建立正确直觉" },
+    { name: "进阶", cls: "orange", dot: "t-mid", desc: "原理、流程与算法应用，深入理解机制" },
     { name: "挑战", cls: "red", dot: "t-hard", desc: "机制、性能与调试深坑，面试级挑战" }
   ];
 
@@ -4814,41 +5629,50 @@ int main() {
       return n;
     }
 
-    $("#quizTotal").textContent = "共 " + quiz.length + " 题 · 三个难度";
+    $("#quizTotal").textContent = "共 " + quiz.length + " 题 · AI / 数据结构 / 概率统计";
 
-    QUIZ_TIERS.forEach(function (t) {
-      var items = [];
-      quiz.forEach(function (item, qi) { if (tierOf(item) === t.name) items.push({ item: item, qi: qi }); });
-      if (!items.length) return;
-      var sec = document.createElement("section");
-      sec.className = "quiz-sec";
-      sec.dataset.tier = t.name;
-      sec.innerHTML =
-        '<div class="tier-head"><span class="tier-dot ' + t.dot + '"></span><h2>' + t.name + "</h2>" +
-        "<p>" + t.desc + "（" + items.length + " 题）</p></div>" +
-        items.map(function (p) {
-          var item = p.item;
-          return (
-            '<div class="q-card" data-q="' + p.qi + '" data-level="' + t.name + '">' +
-            '<div class="q-badges"><span class="q-num">' + (p.qi + 1) + ".</span>" +
-            '<span class="badge ' + t.cls + '">' + t.name + "</span>" +
-            (item.cat ? '<span class="badge gray">' + esc(item.cat) + "</span>" : "") +
-            "</div>" +
-            '<div class="q-title">' + esc(item.q) + "</div>" +
-            (item.code ? "<pre><code>" + esc(item.code) + "</code></pre>" : "") +
-            item.options
-              .map(function (opt, oi) {
-                return (
-                  '<button class="opt" data-q="' + p.qi + '" data-o="' + oi + '">' +
-                  '<span class="letter">' + "ABCD"[oi] + "</span><span>" + esc(opt) + "</span></button>"
-                );
-              })
-              .join("") +
-            '<div class="explain"></div></div>'
-          );
-        }).join("");
-      wrap.appendChild(sec);
-    });
+    /* 扁平渲染：「全部」栏目按题号（数据顺序）排列；难度筛选只做显隐，答题状态不丢失 */
+    var LEVEL_CLS = { "入门": "green", "进阶": "orange", "挑战": "red" };
+    wrap.innerHTML = quiz.map(function (item, qi) {
+      var lv = tierOf(item);
+      return (
+        '<div class="q-card" data-q="' + qi + '" data-level="' + lv + '">' +
+        '<div class="q-badges"><span class="q-num">' + (qi + 1) + ".</span>" +
+        '<span class="badge ' + (LEVEL_CLS[lv] || "") + '">' + lv + "</span>" +
+        (item.cat ? '<span class="badge gray">' + esc(item.cat) + "</span>" : "") +
+        "</div>" +
+        '<div class="q-title">' + esc(item.q) + "</div>" +
+        (item.code ? "<pre><code>" + esc(item.code) + "</code></pre>" : "") +
+        item.options
+          .map(function (opt, oi) {
+            return (
+              '<button class="opt" data-q="' + qi + '" data-o="' + oi + '">' +
+              '<span class="letter">' + "ABCD"[oi] + "</span><span>" + esc(opt) + "</span></button>"
+            );
+          })
+          .join("") +
+        '<div class="explain"></div></div>'
+      );
+    }).join("");
+
+    /* 当前筛选的汇总标题行 */
+    var secHead = document.createElement("div");
+    secHead.className = "tier-head";
+    wrap.insertBefore(secHead, wrap.firstChild);
+
+    function applyFilter(f) {
+      var count = 0;
+      wrap.querySelectorAll(".q-card").forEach(function (card) {
+        var show = f === "all" || card.dataset.level === f;
+        card.style.display = show ? "" : "none";
+        if (show) count++;
+      });
+      var t = QUIZ_TIERS.filter(function (x) { return x.name === f; })[0];
+      secHead.innerHTML = t
+        ? '<span class="tier-dot ' + t.dot + '"></span><h2>' + t.name + "</h2><p>" + t.desc + "（" + count + " 题）</p>"
+        : '<span class="tier-dot" style="background: var(--primary);"></span><h2>全部题目</h2><p>按题号顺序排列 · 共 ' + count + " 题，覆盖 AI、数据结构与概率统计三大板块</p>";
+    }
+    applyFilter("all");
 
     function updateProgress() {
       progressEl.style.width = (state.answered / quiz.length) * 100 + "%";
@@ -4873,10 +5697,7 @@ int main() {
       var btn = e.target.closest("button[data-f]");
       if (!btn) return;
       fWrap.querySelectorAll("button").forEach(function (b) { b.classList.toggle("active", b === btn); });
-      var f = btn.dataset.f;
-      wrap.querySelectorAll(".quiz-sec").forEach(function (sec) {
-        sec.style.display = (f === "all" || sec.dataset.tier === f) ? "" : "none";
-      });
+      applyFilter(btn.dataset.f);
     });
 
     wrap.addEventListener("click", function (e) {
@@ -4922,7 +5743,407 @@ int main() {
         window.scrollTo({ top: 0, behavior: "smooth" });
       });
     });
+
+    if (DATA.codeLab) initCodelab();   // 编程实战（浏览器判题）
   }
+
+/* =====================================================================
+   编程实战（浏览器判题）· 前端逻辑
+   本文件是一个完整的 ES5 函数定义 initCodelab()，集成时会被放进主脚本
+   IIFE，并在测验视图初始化时调用。作用域内可直接使用闭包内已有工具：
+   $（querySelector 封装）、esc（HTML 转义）、enhanceCode（对容器内
+   pre>code 做高亮+复制按钮）、DATA（= window.APP_DATA）。
+   题目数据从 DATA.codeLab 读取（见 _patch/codelab_data.js）。
+   ===================================================================== */
+function initCodelab() {
+  var root = $('#codelab');
+  if (!root || root.getAttribute('data-cl-init') === '1') return;   // 防重复初始化
+  var problems = (DATA && DATA.codeLab) ? DATA.codeLab : [];
+  if (!problems.length) { root.style.display = 'none'; return; }    // 无数据 → 整体隐藏
+  root.setAttribute('data-cl-init', '1');
+
+  /* ---------- 元素引用 ---------- */
+  var listEl = $('#clList'), titleEl = $('#clTitle'), metaEl = $('#clMeta'),
+      descEl = $('#clDesc'), editor = $('#clEditor'), resetBtn = $('#clReset'),
+      runBtn = $('#clRun'), statusEl = $('#clStatus'), solEl = $('#clSol'),
+      solBody = $('#clSolBody'), resultsEl = $('#clResults'), noteEl = $('#clNote');
+  if (!listEl || !titleEl || !descEl || !editor || !runBtn || !statusEl || !resultsEl) return;
+
+  /* ---------- 内部状态 ---------- */
+  var drafts = {};    // 题目 id -> 编辑器草稿（内存对象）
+  var curIdx = -1;    // 当前题目下标
+  var LEVEL_BADGE = { '入门': 'green', '进阶': 'orange', '挑战': 'red' }; // 复用站点 .badge
+  var STORE_KEY = 'learning-codelab-v1';
+
+  /* ---------- 主线程兜底用小工具（与 Worker 内同源逻辑的副本） ---------- */
+  function deepEq(a, b) {
+    if (a === b) return true;
+    if (typeof a === 'number' && typeof b === 'number') return Math.abs(a - b) < 1e-9;
+    if (a === null || b === null || typeof a !== 'object' || typeof b !== 'object') return false;
+    if (Array.isArray(a) !== Array.isArray(b)) return false;
+    if (Array.isArray(a)) {
+      if (a.length !== b.length) return false;
+      for (var i = 0; i < a.length; i++) { if (!deepEq(a[i], b[i])) return false; }
+      return true;
+    }
+    var ka = Object.keys(a), kb = Object.keys(b);
+    if (ka.length !== kb.length) return false;
+    for (var k = 0; k < ka.length; k++) { if (!deepEq(a[ka[k]], b[ka[k]])) return false; }
+    return true;
+  }
+  function fmtVal(v) {
+    try { var s = JSON.stringify(v); return s === undefined ? String(v) : s; }
+    catch (e) { return String(v); }
+  }
+  function now() {
+    return (window.performance && performance.now) ? performance.now() : (new Date()).getTime();
+  }
+  function fmtMs2(ms) { return ms < 1 ? ms.toFixed(3) : ms.toFixed(2); }   // 汇总行用时
+  function fmtBytes(n) {
+    if (n == null) return '—（内存统计需 Chrome/Edge）';
+    if (n < 1048576) return (n / 1024).toFixed(1) + ' KB';
+    return (n / 1048576).toFixed(2) + ' MB';
+  }
+  function trunc46(s) { s = String(s); return s.length > 46 ? s.slice(0, 46) + '…' : s; }
+
+  /* ---------- 通关记录（localStorage，读写均 try/catch） ---------- */
+  function loadRecords() {
+    try {
+      var raw = localStorage.getItem(STORE_KEY);
+      var o = raw ? JSON.parse(raw) : {};
+      return (o && typeof o === 'object' && !Array.isArray(o)) ? o : {};
+    } catch (e) { return {}; }
+  }
+  function saveRecords() {
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(records)); } catch (e) { /* 忽略 */ }
+  }
+  var records = loadRecords();
+  function ensureRec(id) {
+    if (!records[id] || typeof records[id] !== 'object') {
+      records[id] = { bestMs: null, bestMem: null, attempts: 0, solved: 0 };
+    }
+    return records[id];
+  }
+  function isSolved(p) { var r = records[p.id]; return !!(r && r.solved); }
+  function metaBadgeHtml() {
+    var p = problems[curIdx];
+    if (!p) return '';
+    var r = records[p.id];
+    if (!r || !r.solved) return '<span class="badge gray">尚未通过</span>';
+    var ms = (r.bestMs == null) ? '—' : fmtMs2(r.bestMs);
+    var mem = (r.bestMem == null) ? '' : ' · ' + (r.bestMem / 1024).toFixed(1) + ' KB';
+    return '<span class="badge green">个人最佳 ' + ms + ' ms' + mem + '</span>';
+  }
+
+  /* ---------- 渲染 ---------- */
+  function setStatus(text, cls) {
+    statusEl.innerHTML = text ? esc(text) : '';
+    statusEl.className = 'cl-status' + (cls ? ' ' + cls : '');
+  }
+  function renderList() {
+    var html = '';
+    for (var i = 0; i < problems.length; i++) {
+      var p = problems[i];
+      var lv = LEVEL_BADGE[p.level] || 'gray';
+      html += '<button type="button" class="cl-prob' + (i === curIdx ? ' active' : '') + '" data-id="' + esc(p.id) + '">'
+        + '<span class="cl-prob-top">'
+        + '<span class="cl-prob-idx">' + (i + 1) + '.</span>'
+        + '<span class="badge ' + lv + '">' + esc(p.level) + '</span>'
+        + (isSolved(p) ? '<span class="cl-done">已通过 ✓</span>' : '')
+        + '</span>'
+        + '<span class="cl-prob-title">' + esc(p.title) + '</span>'
+        + '<span class="cl-prob-tags">' + esc((p.tags || []).join(' · ')) + '</span>'
+        + '</button>';
+    }
+    listEl.innerHTML = html;
+  }
+  function selectProblem(idx) {
+    if (curIdx >= 0 && problems[curIdx]) {
+      drafts[problems[curIdx].id] = editor.value;   // 切题前保存当前草稿
+    }
+    curIdx = idx;
+    var p = problems[idx];
+    titleEl.innerHTML = esc((idx + 1) + '. ' + p.title);
+    descEl.innerHTML = p.desc
+      + (p.related ? '<p><a href="' + p.related + '">📚 复习站内章节</a></p>' : '');
+    enhanceCode(descEl);                             // 题面 pre>code 高亮 + 复制按钮
+    editor.value = drafts[p.id] || p.starter;
+    if (solBody) solBody.innerHTML = '';
+    if (solEl && solEl.open) solEl.open = false;
+    resultsEl.innerHTML = '';
+    setStatus('', '');
+    if (metaEl) metaEl.innerHTML = metaBadgeHtml();
+    renderList();
+  }
+
+  /* ---------- 左侧列表点击（事件委托） ---------- */
+  listEl.addEventListener('click', function (e) {
+    var t = e.target;
+    while (t && t !== listEl) {
+      if (t.nodeType === 1 && (' ' + t.className + ' ').indexOf(' cl-prob ') >= 0) break;
+      t = t.parentNode;
+    }
+    if (!t || t === listEl) return;
+    var id = t.getAttribute('data-id');
+    for (var i = 0; i < problems.length; i++) {
+      if (problems[i].id === id) { selectProblem(i); return; }
+    }
+  });
+
+  /* ---------- 重置代码 ---------- */
+  resetBtn.addEventListener('click', function () {
+    var p = problems[curIdx];
+    if (!p) return;
+    editor.value = p.starter;
+    delete drafts[p.id];
+    setStatus('已恢复为初始代码', '');
+  });
+
+  /* ---------- 编辑器：Tab 键插入两个空格 ---------- */
+  editor.addEventListener('keydown', function (e) {
+    if (e.key === 'Tab' || e.keyCode === 9) {
+      if (e.preventDefault) e.preventDefault(); else e.returnValue = false;
+      var s = editor.selectionStart, epos = editor.selectionEnd;
+      editor.value = editor.value.slice(0, s) + '  ' + editor.value.slice(epos);
+      editor.selectionStart = editor.selectionEnd = s + 2;
+    }
+  });
+
+  /* ---------- 运行判题 ---------- */
+  runBtn.addEventListener('click', function () {
+    var p = problems[curIdx];
+    if (!p || runBtn.disabled) return;
+    runBtn.disabled = true;
+    runBtn.innerHTML = '⏳ 判题中…';
+    setStatus('', '');
+    resultsEl.innerHTML = '';
+    var code = editor.value;
+    drafts[p.id] = code;
+    var rec = ensureRec(p.id);
+    rec.attempts++;                                  // 每次运行 attempts+1
+    saveRecords();
+    clRunInWorker(code, p, function (data) { handleDone(data, code, p); });
+  });
+
+  /* onDone 统一入口：Worker 失败降级主线程，其余交给结果渲染 */
+  function handleDone(data, code, p) {
+    if (data && data.fallback) {
+      if (noteEl) {
+        noteEl.textContent = '⚠ 当前环境不支持沙箱 Worker，已切换为主线程执行：正常代码不受影响，但死循环会卡住页面；建议用 Chrome/Edge 或经本地服务器访问。';
+        noteEl.hidden = false;
+      }
+      clRunOnMainThread(code, p, function (d2) { handleDone(d2, code, p); });
+      return;
+    }
+    renderResults(data, p);
+  }
+
+  /* ---------- 结果呈现 ---------- */
+  function renderResults(data, p) {
+    runBtn.disabled = false;
+    runBtn.innerHTML = '▶ 运行并判题';
+    if (!data) { setStatus('✘ 运行出错：未知错误', 'no'); setHookTitle(0, 0, null); return; }
+    if (data.timeout) {
+      setStatus('⏱ 超时（4 秒上限）：可能存在死循环或计算规模过大', 'no');
+      resultsEl.innerHTML = '';
+      setHookTitle(0, 0, null);
+      return;
+    }
+    if (data.compileError) {
+      setStatus('✘ 编译错误：' + data.compileError, 'no');
+      resultsEl.innerHTML = '';
+      setHookTitle(0, 0, null);
+      return;
+    }
+    if (data.noFn) {
+      setStatus('✘ 未找到函数 ' + data.noFn + '(...)：请检查函数名与签名是否与题目要求一致', 'no');
+      resultsEl.innerHTML = '';
+      setHookTitle(0, 0, null);
+      return;
+    }
+    if (data.error) {
+      setStatus('✘ 运行出错：' + data.error, 'no');
+      resultsEl.innerHTML = '';
+      setHookTitle(0, 0, null);
+      return;
+    }
+    if (!data.results || !data.results.length) {
+      setStatus('✘ 运行出错：判题结果为空', 'no');
+      setHookTitle(0, 0, null);
+      return;
+    }
+
+    var rows = data.results, total = rows.length, passed = 0;
+    for (var i = 0; i < total; i++) { if (rows[i].pass) passed++; }
+
+    /* 汇总行 */
+    var html = '<div class="cl-summary">通过 ' + passed + '/' + total
+      + ' ｜ 总耗时 ' + fmtMs2(data.totalMs || 0) + ' ms ｜ 内存 ≈ ' + fmtBytes(data.memBytes) + '</div>';
+    /* 逐测试行：序号 / 输入 / 期望 / 实际 / 耗时 / 对错 */
+    for (var j = 0; j < total; j++) {
+      var r = rows[j];
+      var input = String(r.args == null ? '' : r.args);
+      html += '<div class="cl-row ' + (r.pass ? 'pass' : 'fail') + '">'
+        + '<span class="cl-idx">' + (j + 1) + '</span>'
+        + '<span class="cl-cell" title="' + esc(input) + '">' + esc(trunc46(input)) + '</span>'
+        + '<span class="cl-cell cl-expect" title="' + esc('期望 ' + r.expect) + '">' + esc(trunc46(r.expect)) + '</span>'
+        + '<span class="cl-cell" title="' + esc('实际 ' + r.got) + '">' + esc(trunc46(r.got)) + '</span>'
+        + '<span class="cl-ms">' + (r.ms == null ? 0 : r.ms).toFixed(3) + '</span>'
+        + '<span class="cl-mark">' + (r.pass ? '✔' : '✘') + '</span>'
+        + '</div>';
+    }
+    resultsEl.innerHTML = html;
+
+    if (passed === total) setStatus('✔ 全部通过 ' + passed + '/' + total + '！', 'ok');
+    else setStatus('✘ 通过 ' + passed + '/' + total + '，未通过的测试点见下方', 'no');
+
+    /* 通关记录 */
+    var rec = ensureRec(p.id);
+    if (passed === total) {
+      rec.solved = 1;
+      var tm = data.totalMs || 0;
+      rec.bestMs = (rec.bestMs == null) ? tm : Math.min(rec.bestMs, tm);
+      if (data.memBytes != null) {
+        rec.bestMem = (rec.bestMem == null) ? data.memBytes : Math.min(rec.bestMem, data.memBytes);
+      }
+    }
+    saveRecords();
+    if (metaEl) metaEl.innerHTML = metaBadgeHtml();
+    renderList();
+    setHookTitle(passed, total, data.memBytes);
+  }
+
+  /* 无头自动验证钩子（生产无影响） */
+  function setHookTitle(passed, total, memBytes) {
+    document.title = 'CLDONE:' + passed + '/' + total + ':'
+      + (memBytes == null ? 'null' : Math.round(memBytes));
+  }
+
+  /* ---------- Worker 沙箱执行（4 秒超时保护） ---------- */
+  function clRunInWorker(code, problem, cb) {
+    var worker = null, url = null, timer = null, settled = false;
+    function finish(after) {
+      if (settled) return;
+      settled = true;
+      if (timer) { clearTimeout(timer); timer = null; }
+      if (worker) { try { worker.terminate(); } catch (e) { /* 忽略 */ } }
+      if (url) { try { URL.revokeObjectURL(url); } catch (e) { /* 忽略 */ } }
+      after();
+    }
+    try {
+      var src = '(' + clWorkerMain.toString() + ')();';
+      var blob = new Blob([src], { type: 'application/javascript' });
+      url = URL.createObjectURL(blob);
+      worker = new Worker(url);
+    } catch (err) {
+      finish(function () { cb({ fallback: true }); });   // Worker 创建失败 → 主线程兜底
+      return;
+    }
+    timer = setTimeout(function () {
+      finish(function () { cb({ timeout: true }); });
+    }, 4000);
+    worker.onmessage = function (e) {
+      var d = e.data;
+      finish(function () { cb(d); });
+    };
+    worker.onerror = function (e) {
+      var msg = (e && e.message) ? e.message : String(e);
+      finish(function () { cb({ error: msg }); });
+    };
+    try {
+      worker.postMessage({ code: code, fn: problem.fn, tests: problem.tests });
+    } catch (err2) {
+      finish(function () { cb({ fallback: true }); });
+    }
+  }
+
+  /* Worker 内主逻辑（序列化后在 Blob Worker 中执行） */
+  function clWorkerMain() {
+    function deepEq(a, b) {
+      if (a === b) return true;
+      if (typeof a === "number" && typeof b === "number") return Math.abs(a - b) < 1e-9;
+      if (a === null || b === null || typeof a !== "object" || typeof b !== "object") return false;
+      if (Array.isArray(a) !== Array.isArray(b)) return false;
+      if (Array.isArray(a)) {
+        if (a.length !== b.length) return false;
+        for (var i = 0; i < a.length; i++) { if (!deepEq(a[i], b[i])) return false; }
+        return true;
+      }
+      var ka = Object.keys(a), kb = Object.keys(b);
+      if (ka.length !== kb.length) return false;
+      for (var k = 0; k < ka.length; k++) { if (!deepEq(a[ka[k]], b[ka[k]])) return false; }
+      return true;
+    }
+    function fmt(v) { try { var s = JSON.stringify(v); return s === undefined ? String(v) : s; } catch (e) { return String(v); } }
+    self.onmessage = function (e) {
+      var d = e.data, fn;
+      try {
+        fn = new Function(d.code + "\n;return typeof " + d.fn + " !== 'undefined' ? " + d.fn + " : undefined;")();
+      } catch (err) { self.postMessage({ compileError: String((err && err.message) || err) }); return; }
+      if (typeof fn !== "function") { self.postMessage({ noFn: d.fn }); return; }
+      var hasMem = !!(self.performance && performance.memory && performance.memory.usedJSHeapSize);
+      var mem0 = hasMem ? performance.memory.usedJSHeapSize : 0;
+      var t0 = performance.now(), out = [];
+      d.tests.forEach(function (t) {
+        var s = performance.now(), got, err = null;
+        var args = JSON.parse(JSON.stringify(t.args));
+        try { got = fn.apply(null, args); } catch (ex) { err = String((ex && ex.message) || ex); }
+        out.push({ args: fmt(t.args), expect: fmt(t.expect), got: err ? ("⚠ 异常: " + err) : fmt(got), pass: !err && deepEq(got, t.expect), ms: performance.now() - s });
+      });
+      var total = performance.now() - t0;
+      var mem = hasMem ? Math.max(0, performance.memory.usedJSHeapSize - mem0) : null;
+      self.postMessage({ results: out, totalMs: total, memBytes: mem });
+    };
+  }
+
+  /* ---------- 主线程兜底执行（无死循环保护，可接受的降级） ---------- */
+  function clRunOnMainThread(code, problem, cb) {
+    setTimeout(function () {
+      var fn;
+      try {
+        fn = new Function(code + "\n;return typeof " + problem.fn + " !== 'undefined' ? " + problem.fn + " : undefined;")();
+      } catch (err) { cb({ compileError: String((err && err.message) || err) }); return; }
+      if (typeof fn !== 'function') { cb({ noFn: problem.fn }); return; }
+      var hasMem = !!(window.performance && performance.memory && performance.memory.usedJSHeapSize);
+      var mem0 = hasMem ? performance.memory.usedJSHeapSize : 0;
+      var t0 = now(), out = [];
+      for (var i = 0; i < problem.tests.length; i++) {
+        var t = problem.tests[i];
+        var s = now(), got, err = null;
+        var args = JSON.parse(JSON.stringify(t.args));
+        try { got = fn.apply(null, args); } catch (ex) { err = String((ex && ex.message) || ex); }
+        out.push({ args: fmtVal(t.args), expect: fmtVal(t.expect), got: err ? ('⚠ 异常: ' + err) : fmtVal(got), pass: !err && deepEq(got, t.expect), ms: now() - s });
+      }
+      var total = now() - t0;
+      var mem = hasMem ? Math.max(0, performance.memory.usedJSHeapSize - mem0) : null;
+      cb({ results: out, totalMs: total, memBytes: mem });
+    }, 30);
+  }
+
+  /* ---------- 参考答案：details 第一次展开时才注入 ---------- */
+  if (solEl && solBody) {
+    solEl.addEventListener('toggle', function () {
+      if (solEl.open && !solBody.innerHTML) {
+        var p = problems[curIdx];
+        if (!p) return;
+        solBody.innerHTML = '<pre><code>' + esc(p.solution) + '</code></pre>';
+        enhanceCode(solBody);
+      }
+    });
+  }
+
+  /* ---------- 初始化第一题 ---------- */
+  selectProblem(0);
+
+  /* ---------- 无头自动验证钩子（供无头浏览器验证，生产无影响） ---------- */
+  if (location.search.indexOf("codelab=auto") !== -1) {
+    setTimeout(function () {
+      editor.value = DATA.codeLab[0].solution;
+      runBtn.click();
+    }, 50);
+  }
+}
+
 
   /* ============================================================
      AI 对话助手（框架阶段：本地模拟回复）
@@ -5144,7 +6365,7 @@ int main() {
     if (!messages.length) {
       messages = [{
         role: "ai",
-        text: "你好！我是 AI 学习小助手 🤖（当前为本地模拟回复）\n\n关于 AI 学习与数据结构（C++）的问题都可以问我：入门路径、概念讲解、链表/二叉树/哈希、提示词技巧、推荐资源……\n\n点击下方快捷问题可以快速开始。",
+        text: "你好！我是 AI 答疑小助手 🤖（当前为本地模拟回复）\n\n关于 AI、数据结构（C++）、概率统计的学习问题都可以问我：入门路径、概念讲解、链表/二叉树/哈希、提示词技巧、推荐资源……\n\n点击下方快捷问题可以快速开始。",
         ts: Date.now()
       }];
     }
