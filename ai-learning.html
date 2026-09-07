@@ -3,6 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- PWA：添加到主屏幕后可全屏、离线运行（需经 HTTP(S) 访问；本地 file:// 双击打开自动跳过注册） -->
+<meta name="theme-color" content="#4f46e5">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="学习助手">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" href="icons/icon-192.png" type="image/png">
 <title>学习助手 · 单文件版</title>
 <meta name="description" content="一个多学科学习助手单文件网站：AI 人工智能、数据结构与算法、概率论与数理统计并列推进，含学习路径、知识库、练习测验与 AI 答疑助手，另附南京大学「智科全家桶」外站接口；零依赖，浏览器直接打开即用。">
 <style>
@@ -6440,6 +6449,11 @@ int main() {
      启动
      ============================================================ */
   document.addEventListener("DOMContentLoaded", function () {
+    // PWA：仅经 http(s) 访问时注册 Service Worker（离线缓存 + 可安装），file:// 双击打开自动跳过
+    if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) {
+      navigator.serviceWorker.register("./sw.js").catch(function () { /* 注册失败不影响使用 */ });
+    }
+
     $("#navToggle").addEventListener("click", function () {
       $("#navLinks").classList.toggle("open");
     });

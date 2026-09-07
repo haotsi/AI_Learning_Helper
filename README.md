@@ -10,9 +10,12 @@
 
 ```
 AI_Learning_Helper/
-├── ai-learning.html   # 整站唯一文件（约 371 KB）
-├── README.md          # 本说明
-└── CHANGELOG.md       # 更新记录
+├── ai-learning.html      # 整站唯一文件（约 371 KB）
+├── manifest.webmanifest  # PWA 清单（可安装为手机/桌面 App）
+├── sw.js                 # Service Worker（离线缓存）
+├── icons/                # 应用图标（192 / 512 / apple-touch 180）
+├── README.md             # 本说明
+└── CHANGELOG.md          # 更新记录
 ```
 
 ## 如何运行
@@ -57,6 +60,18 @@ AI_Learning_Helper/
 站内知识已自洽：概念、名词表、架构对比表、选型决策树、代码示例与调试清单都在页面内，外链仅作为"想更深入"时的补充。所有外部链接在收录时逐一核实过有效性（台大官网、d2l、Karpathy、斯坦福 CS231n/CS224n 官方播放列表、提示工程指南中文版、南瓜书、self-llm、arXiv 论文等）。全站代码块（C++ / Python 自动识别）带 VSCode Dark+ 风格语法高亮与一键复制。
 
 > 说明：曾评估在站内加入 C++ 在线判题（类 LeetCode），但纯前端单文件架构无法安全编译执行 C++（需自建后端判题机或加载约 30~80MB 的 WASM 编译器），故未纳入；算法练习建议配合数据结构章节末尾的典型例题与力扣等 OJ 平台。
+
+## 安装为手机 App（PWA）
+
+网站支持 **PWA**：经 HTTPS 部署后，手机上「添加到主屏幕」即可像原生 App 一样一键全屏打开（无地址栏），首次访问后**离线也能用**（整站仅一个 HTML，缓存极轻）。
+
+**部署**：仓库推送到 GitHub 后，Settings → Pages 选择分支即可获得 `https://<用户名>.github.io/<仓库名>/` 地址；手机浏览器访问该地址一次，之后无需联网。
+
+- **iOS（Safari）**：打开网站 → 底部分享按钮 → 「添加到主屏幕」
+- **Android（Chrome / Edge）**：打开网站 → 菜单 ⋮ → 「添加到主屏幕 / 安装应用」
+- **电脑 Chrome / Edge**：地址栏右侧出现安装图标，可安装为桌面应用
+
+说明：直接双击 `ai-learning.html`（file://）时自动跳过 Service Worker 注册，功能不受影响；全屏 + 离线等 App 能力需经 HTTP(S) 访问。站点更新后把 `sw.js` 里的 `CACHE` 版本号 +1 即可让所有客户端刷新缓存。
 
 ## 接入真实大模型
 

@@ -1,0 +1,58 @@
+/* ============================================================
+   学习助手 · Service Worker
+   整站只有一个 HTML（样式/数据/逻辑全内联），缓存策略极简：
+   - 安装时预缓存核心资源
+   - 读取采用「缓存优先，未命中回源并回填」
+   - 离线时兜底返回缓存的 ai-learning.html
+   升级版本：把 CACHE 版本号 +1 即可让旧缓存全部失效
+   ============================================================ */
+var CACHE = "learning-helper-v1";
+var ASSETS = [
+  "./",
+  "./ai-learning.html",
+  "./manifest.webmanifest",
+  "./icons/icon-192.png",
+  "./icons/icon-512.png",
+  "./icons/apple-touch-icon.png"
+];
+
+self.addEventListener("install", function (e) {
+  e.waitUntil(
+    caches.open(CACHE)
+      .then(function (c) { return c.addAll(ASSETS); })
+      .then(function () { return self.skipWaiting(); })
+  );
+});
+
+self.addEventListener("activate", function (e) {
+  e.waitUntil(
+    caches.keys()
+      .then(function (keys) {
+        return Promise.all(keys.filter(function (k) { return k !== CACHE; })
+          .map(function (k) { return caches.delete(k); }));
+      })
+      .then(function () { return self.clients.claim(); })
+  );
+});
+
+self.addEventListener("fetch", function (e) {
+  if (e.request.method !== "GET") return;
+  e.respondWith(
+    caches.match(e.request).then(function (hit) {
+      if (hit) return hit;
+      return fetch(e.request).then(function (res) {
+        if (res && res.ok && new URL(e.request.url).origin === self.location.origin) {
+          var copy = res.clone();
+          caches.open(CACHE).then(function (c) { c.put(e.request, copy); });
+        }
+        return res;
+      }).catch(function () {
+        /* 完全离线且未命中：兜底返回整站页面 */
+        if (e.request.mode === "navigate") {
+          return caches.match("./ai-learning.html");
+        }
+        return Response.error();
+      });
+    })
+  );
+});

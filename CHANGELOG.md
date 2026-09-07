@@ -1,5 +1,12 @@
 # 更新记录
 
+## v3.2 · 2026-09-04 PWA：一键安装为手机 App
+
+- **可安装为 App**：新增 Web App Manifest（名称/图标/主题色/standalone 显示模式），手机「添加到主屏幕」后一键全屏打开，无浏览器地址栏
+- **离线可用**：新增 Service Worker——预缓存核心资源、缓存优先回源回填、离线兜底返回整站页面；`sw.js` 的 `CACHE` 版本号 +1 即可让全部客户端刷新缓存
+- **应用图标**：GDI+ 生成 192 / 512（含 maskable）/ apple-touch-icon 180 三档，靛蓝渐变 + "学"字主视觉
+- 本地 file:// 双击打开自动跳过 Service Worker 注册，不影响既有用法；README 新增 iOS / Android / 桌面端安装步骤与 GitHub Pages 部署说明
+
 ## v3.1 · 2026-09-04 内容丰富化、搜索与 AI 增强
 
 **内容**

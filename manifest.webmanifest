@@ -1,0 +1,32 @@
+{
+  "name": "学习助手 · 多学科一站式学习",
+  "short_name": "学习助手",
+  "description": "AI 人工智能、数据结构与算法、概率论与数理统计三大板块并列推进：学习路径、知识库、练习测验、编程例题与 AI 答疑，零依赖单文件网站。",
+  "lang": "zh-CN",
+  "start_url": "./ai-learning.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f8fafc",
+  "theme_color": "#4f46e5",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
