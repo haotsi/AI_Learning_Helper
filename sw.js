@@ -3,13 +3,13 @@
    整站只有一个 HTML（样式/数据/逻辑全内联），缓存策略极简：
    - 安装时预缓存核心资源
    - 读取采用「缓存优先，未命中回源并回填」
-   - 离线时兜底返回缓存的 ai-learning.html
+   - 离线时兜底返回缓存的 index.html
    升级版本：把 CACHE 版本号 +1 即可让旧缓存全部失效
    ============================================================ */
-var CACHE = "learning-helper-v1";
+var CACHE = "learning-helper-v2";
 var ASSETS = [
   "./",
-  "./ai-learning.html",
+  "./index.html",
   "./manifest.webmanifest",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
@@ -49,7 +49,7 @@ self.addEventListener("fetch", function (e) {
       }).catch(function () {
         /* 完全离线且未命中：兜底返回整站页面 */
         if (e.request.mode === "navigate") {
-          return caches.match("./ai-learning.html");
+          return caches.match("./index.html");
         }
         return Response.error();
       });

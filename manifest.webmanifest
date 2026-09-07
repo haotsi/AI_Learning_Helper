@@ -3,7 +3,7 @@
   "short_name": "学习助手",
   "description": "AI 人工智能、数据结构与算法、概率论与数理统计三大板块并列推进：学习路径、知识库、练习测验、编程例题与 AI 答疑，零依赖单文件网站。",
   "lang": "zh-CN",
-  "start_url": "./ai-learning.html",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",

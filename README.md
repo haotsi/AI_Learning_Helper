@@ -4,26 +4,27 @@
 
 > **项目地址**：<https://github.com/haotsi/AI_Learning_Helper>
 
-> **主题说明**：站点已从「AI 学习助手」更名为「**学习助手**」——AI 人工智能、数据结构与算法、概率论与数理统计三大板块在首页**并列呈现**，AI 不再是唯一要素，而只是其中一个学科板块；原「AI 助手」对话模块保留，作为通用答疑工具。历史原因，主文件名仍保留 `ai-learning.html`，原有链接与收藏不受影响。
+> **主题说明**：站点已从「AI 学习助手」更名为「**学习助手**」——AI 人工智能、数据结构与算法、概率论与数理统计三大板块在首页**并列呈现**，AI 不再是唯一要素，而只是其中一个学科板块；原「AI 助手」对话模块保留，作为通用答疑工具。为适配 GitHub Pages，主文件已更名为 `index.html`（仓库根路径即可直接打开应用，不再显示 README）。
 
 ## 目录结构
 
 ```
 AI_Learning_Helper/
-├── ai-learning.html      # 整站唯一文件（约 371 KB）
-├── manifest.webmanifest  # PWA 清单（可安装为手机/桌面 App）
-├── sw.js                 # Service Worker（离线缓存）
-├── icons/                # 应用图标（192 / 512 / apple-touch 180）
-├── README.md             # 本说明
-└── CHANGELOG.md          # 更新记录
+├── index.html             # 整站唯一文件（约 371 KB），GitHub Pages 根路径直达
+├── manifest.webmanifest   # PWA 清单（可安装为手机/桌面 App）
+├── sw.js                  # Service Worker（离线缓存）
+├── icons/                 # 应用图标（192 / 512 / apple-touch 180）
+├── .nojekyll              # 关闭 GitHub Pages 的 Jekyll 处理
+├── README.md              # 本说明
+└── CHANGELOG.md           # 更新记录
 ```
 
 ## 如何运行
 
 任选其一：
 
-1. **直接打开**：双击 `ai-learning.html`
-2. **本地服务器**（与线上行为最一致）：`python -m http.server 8000`，访问 http://localhost:8000/ai-learning.html
+1. **直接打开**：双击 `index.html`
+2. **本地服务器**（与线上行为最一致，可测试 PWA）：`python -m http.server 8000`，访问 http://localhost:8000/
 
 ## 界面布局（v2 更新）
 
@@ -65,17 +66,17 @@ AI_Learning_Helper/
 
 网站支持 **PWA**：经 HTTPS 部署后，手机上「添加到主屏幕」即可像原生 App 一样一键全屏打开（无地址栏），首次访问后**离线也能用**（整站仅一个 HTML，缓存极轻）。
 
-**部署**：仓库推送到 GitHub 后，Settings → Pages 选择分支即可获得 `https://<用户名>.github.io/<仓库名>/` 地址；手机浏览器访问该地址一次，之后无需联网。
+**部署**：仓库推送到 GitHub 后，Settings → Pages 选择分支即可获得 `https://<用户名>.github.io/<仓库名>/` 地址——仓库根路径就是应用本体（已含 `index.html` 与 `.nojekyll`，不会再显示 README）；手机浏览器访问该地址一次，之后无需联网。
 
 - **iOS（Safari）**：打开网站 → 底部分享按钮 → 「添加到主屏幕」
 - **Android（Chrome / Edge）**：打开网站 → 菜单 ⋮ → 「添加到主屏幕 / 安装应用」
 - **电脑 Chrome / Edge**：地址栏右侧出现安装图标，可安装为桌面应用
 
-说明：直接双击 `ai-learning.html`（file://）时自动跳过 Service Worker 注册，功能不受影响；全屏 + 离线等 App 能力需经 HTTP(S) 访问。站点更新后把 `sw.js` 里的 `CACHE` 版本号 +1 即可让所有客户端刷新缓存。
+说明：直接双击 `index.html`（file://）时自动跳过 Service Worker 注册，功能不受影响；全屏 + 离线等 App 能力需经 HTTP(S) 访问。站点更新后把 `sw.js` 里的 `CACHE` 版本号 +1 即可让所有客户端刷新缓存。
 
 ## 接入真实大模型
 
-打开 `ai-learning.html`，在底部 ② 脚本区找到 `CONFIG`：
+打开 `index.html`，在底部 ② 脚本区找到 `CONFIG`：
 
 ```js
 var CONFIG = {
