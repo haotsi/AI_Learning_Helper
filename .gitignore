@@ -1,0 +1,5 @@
+# 拆分过程中的临时素材（题解分批草稿），合并进 question-notes.js 后可删除
+.notes/
+
+# 本地工具产物
+node_modules/

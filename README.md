@@ -1,106 +1,156 @@
-# 学习助手 · 单文件网站
+# 学习助手 · 模块化静态网站
 
-一个**零依赖**的多学科学习助手网站：整站（样式 + 数据 + 逻辑 + 视图）打包在一个 HTML 里，双击即用、方便分享。内置 hash 路由，浏览器前进 / 后退 / 刷新 / 文章直达链接均可用。
+一个**零依赖**的多学科学习助手网站：AI 人工智能、数据结构与算法、概率论与数理统计三大板块并列推进。前端按「数据 / 工具 / 状态 / 组件 / 页面 / 路由」分层拆分为多个文件，纯静态运行，可直接部署到 GitHub Pages；**双击 `index.html` 也能打开**（脚本采用有序普通脚本而非 ES Module，以兼容 `file://`）。
 
 > **项目地址**：<https://github.com/haotsi/AI_Learning_Helper>
-
-> **主题说明**：站点已从「AI 学习助手」更名为「**学习助手**」——AI 人工智能、数据结构与算法、概率论与数理统计三大板块在首页**并列呈现**，AI 不再是唯一要素，而只是其中一个学科板块；原「AI 助手」对话模块保留，作为通用答疑工具。为适配 GitHub Pages，主文件已更名为 `index.html`（仓库根路径即可直接打开应用，不再显示 README）。
 
 ## 目录结构
 
 ```
 AI_Learning_Helper/
-├── index.html             # 整站唯一文件（约 371 KB），GitHub Pages 根路径直达
-├── manifest.webmanifest   # PWA 清单（可安装为手机/桌面 App）
-├── sw.js                  # Service Worker（离线缓存）
-├── icons/                 # 应用图标（192 / 512 / apple-touch 180）
-├── .nojekyll              # 关闭 GitHub Pages 的 Jekyll 处理
-├── README.md              # 本说明
-└── CHANGELOG.md           # 更新记录
+├── index.html                  # 页面骨架（视图容器 + 弹窗 + 分层脚本引用）
+├── assets/
+│   ├── css/
+│   │   ├── variables.css       # 设计变量（主色 / 三学科主题色 / 圆角 / 阴影 / 间距）
+│   │   ├── reset.css           # 基础重置与无障碍焦点样式
+│   │   ├── layout.css          # 布局（导航 / 页脚 / Hero / 区块 / 双栏 / 聊天）
+│   │   ├── components.css      # 组件（按钮 / 卡片 / 弹窗 / 测验 / 代码块 / Toast…）
+│   │   └── responsive.css      # 移动端适配（最后加载）
+│   └── js/
+│       ├── data/               # ① 数据层（内容增改只动这里）
+│       │   ├── courses.js      #   APP_DATA.stages   学习路径 4 阶段 12 门课
+│       │   ├── knowledge.js    #   APP_DATA.articles AI 知识笔记 15 篇
+│       │   ├── ds.js           #   APP_DATA.ds / dsEx  数据结构 23 章 + 典型例题
+│       │   ├── prob.js         #   APP_DATA.prob     概率统计 14 章
+│       │   ├── questions.js    #   APP_DATA.quiz     题库 60 题
+│       │   ├── question-notes.js # APP_DATA.quizOptNotes 每题错误选项的「为什么不选」
+│       │   ├── meta.js         #   APP_META 学科归属 / 前置知识 / 学习成果等引导元数据
+│       │   ├── external-links.js # APP_DATA.externalLinks 外站接口（智科全家桶 / GitHub）
+│       │   ├── chat-rules.js   #   APP_DATA.chatRules AI 助手问答规则库
+│       │   └── chat-quick.js   #   APP_DATA.chatQuick AI 助手快捷问题（四类）
+│       ├── utils/              # ② 工具层
+│       │   ├── dom.js          #   选择器 / 转义 / 事件委托
+│       │   ├── storage.js      #   localStorage 安全封装（file:// 自动降级内存）
+│       │   ├── search.js       #   全站搜索索引与加权评分（含练习题）
+│       │   └── highlight.js    #   C++ / Python 语法高亮引擎
+│       ├── icons.js            #   统一 SVG 描边图标库
+│       ├── state.js            #   学习进度状态（localStorage 持久化）
+│       ├── components/         # ③ 组件层
+│       │   ├── cards.js        #   徽章 / 知识点块 / 资源列表 / 代码块增强 / 空状态
+│       │   ├── course-card.js  #   课程卡（前置知识 / 成果 / 开始·详情·练习按钮）
+│       │   ├── section-header.js # 区块标题
+│       │   ├── article-foot.js #   文章底部「上一条 / 下一条 / 相关内容」
+│       │   ├── modal.js        #   通用弹窗（Esc / 遮罩 / 焦点回归）
+│       │   ├── toast.js        #   轻提示
+│       │   ├── header.js       #   导航（外站入口按数据注入 + 移动端菜单）
+│       │   └── footer.js       #   页脚
+│       ├── pages/              # ④ 页面层（每个 hash 路由一个控制器）
+│       │   ├── home.js  courses.js  knowledge.js
+│       │   ├── data-structures.js  probability.js
+│       │   └── quiz.js  chat.js
+│       ├── router.js           # ⑤ hash 路由
+│       └── app.js              # ⑤ 启动入口
+├── icons/                      # PWA 应用图标
+├── manifest.webmanifest        # PWA 清单
+├── sw.js                       # Service Worker（离线缓存；资源列表需随文件增删维护）
+├── .nojekyll                   # 关闭 GitHub Pages 的 Jekyll 处理
+├── scripts/check.mjs           # 自动化冒烟测试（Node 无头 DOM）
+├── index.backup.html           # 拆分前的单文件备份（不参与页面运行）
+├── README.md                   # 本说明
+└── CHANGELOG.md                # 更新记录
 ```
+
+## 路由
+
+| Hash 路由 | 页面 |
+| ---- | ---- |
+| `#/home` | 首页（Hero / 我的学习进度 / 学科板块 / 学习工具 / 新手推荐 / 延伸阅读） |
+| `#/courses` `#/courses/<课程id>` | 学习路径（弹窗直达，如 `#/courses/c102`） |
+| `#/knowledge` `#/knowledge/<笔记id>` | 知识库（学科 / 难度 / 标签筛选 + 分组搜索） |
+| `#/ds` `#/ds/ds02b` | 数据结构与算法分章教程 |
+| `#/prob` `#/prob/p04` | 概率论与数理统计分章教程 |
+| `#/quiz` `#/quiz/入门` `#/quiz/sub-ds` `#/quiz/wrong` `#/quiz/all/q12` | 练习测验（难度 / 学科筛选 / 错题本 / 题目直达） |
+| `#/chat` | AI 助手（站内知识问答） |
 
 ## 如何运行
 
 任选其一：
 
-1. **直接打开**：双击 `index.html`
-2. **本地服务器**（与线上行为最一致，可测试 PWA）：`python -m http.server 8000`，访问 http://localhost:8000/
+1. **直接打开**：双击 `index.html`（file:// 下 Service Worker 自动跳过注册，localStorage 正常；个别浏览器隐私模式下降级为内存存储）
+2. **本地服务器**（与线上行为一致，推荐验证 PWA 时用）：`python -m http.server 8000`，访问 <http://localhost:8000/>
+3. **自动化冒烟测试**：`node scripts/check.mjs`（覆盖 30+ 断言：路由渲染、答题、错题本、进度持久化、AI 助手等，全部通过退出码为 0）
 
-## 界面布局（v2 更新）
+## 部署到 GitHub Pages
 
-- 页面主容器加宽至 **1360px**（原来 1080px），宽屏下左右留白显著减少，内容更舒展
-- 卡片网格改为 `auto-fit` 自适应：卡片数量少时自动拉伸铺满整行，不再留空列
-- 知识库 / 数据结构 / 概率统计的侧栏目录加宽至 320px，右侧正文区相应变宽
-- 首页重构为四段式：**Hero → 学科板块（三大并列）→ 学习工具（四件套）→ 新手推荐 → 外站接口**
+推送仓库 → Settings → Pages → 选择分支（根目录）即可得到 `https://<用户名>.github.io/<仓库名>/`。
 
-## 外站接口
+- 全站均为**相对路径**（`./assets/…`），子路径部署无碍；
+- 根路径直达 `index.html`（含 `.nojekyll`，不会显示 README）；
+- **更新内容后请同步 `sw.js`**：改动较大时把 `CACHE` 版本号 +1，新增/改名 assets 文件时维护 `ASSETS` 列表。
 
-站内已接入南京大学智能科学与技术学院学生 Wiki「**智科全家桶**」（https://njuis-students.github.io/），共三个入口：
+手机/桌面「添加到主屏幕」可安装为 PWA，一次访问后离线可用。
 
-| 位置 | 内容 |
-| ---- | ---- |
-| 顶部导航 | 「🎓 智科全家桶 ↗」，新窗口直达主站 |
-| 首页「外站接口」区块 | 主站 + 学习攻略 / 科研攻略 / 职场攻略分栏目直链 |
-| 页脚 | 文字链接 |
+## 验证清单（上线前逐项人工过一遍）
 
-其内容涵盖学院介绍与师资百科、培养方案与课程攻略、保研 / 考研 / 留学经验、科研方向导航、实习就业经验，以及 LLM、扩散模型、具身智能等前沿技术专栏。
+基础：
+- [ ] `node scripts/check.mjs` 全绿
+- [ ] 双击 index.html 可直接打开、无控制台报错
+- [ ] 本地服务器 + GitHub Pages 各访问一次，7 个 hash 路由可达
+- [ ] 浏览器前进 / 后退 / 刷新当前路由不报错
+- [ ] Network 面板无 404
 
-## 内容规模（站内为主，外链为辅）
+功能：
+- [ ] 顶栏导航高亮、移动端汉堡菜单、外站/GitHub 入口
+- [ ] `/` 或 `Ctrl+K` 呼出搜索：中文关键词（贝叶斯、蒲丰）命中、↑↓/Enter 键盘导航
+- [ ] 课程卡：开始学习 / 查看详情 / 关联练习三按钮；弹窗小节打勾、标记完成
+- [ ] 学习路径：阶段时长 / 完成数 / 当前推荐 / 主线链
+- [ ] 知识库：学科·难度·标签筛选；搜索分「课程 / 知识笔记 / 练习题」；空结果有提示
+- [ ] 文章底部：上一条 / 下一条 / 相关课程 / 配套练习
+- [ ] 测验：单题流与每页 5 题；即时批改 + 解析 + 为什么不选 + 相关知识点直达
+- [ ] 答题进度刷新不丢；错题自动进错题本；☆ 收藏；结果页能力分析
+- [ ] 代码块高亮与一键复制（知识库 / 数据结构 / 概率统计 / 题目）
+- [ ] AI 助手：四类快捷问题、输入发送、站内链接可点、无法回答时的兜底文案
+- [ ] 外部链接均 `target="_blank" rel="noopener noreferrer"`
 
-| 模块 | 路由 | 内容 |
-| ---- | ---- | ---- |
-| 🗺️ 学习路径 | `#/courses` | 4 阶段 **12 门课**，每门课附核心知识点、大纲与资源；课程卡可点开详情弹窗 |
-| 📚 知识库 | `#/knowledge`、`#/knowledge/a12` | **15 篇笔记**：每篇附「🎯 核心知识点」+ 推荐视频/阅读；其中 **5 篇「代码实战」**（Python 速查 / PyTorch 训练循环 / 调用大模型 API / 手写迷你 RAG / logits 与采样），代码块一键复制 |
-| 🧬 数据结构与算法 | `#/ds`、`#/ds/ds13` | **22 篇 C++ 分章教程**（章节体系仿经典 DSA 教程，含两篇前置：「C++ 基础语法速览」「C++ 面向对象入门：类 · 继承 · 多态 · 友元」）：概述/环境/语法速览/面向对象/复杂度 → 数组/链表/栈与表达式/队列 → 树/BST/堆 → 哈希/图 → 查找/排序/递归 → 贪心·DP·回溯 → 参考资料；每篇「概念 + 手写 C++ 实现 + STL 对照 + 复杂度分析」，16 个核心章节附 **25 道典型例题**（力扣真题、难度分级、点击展开思路/易错点/参考代码，**卡片右上角可一键跳转力扣原题**），《刷题路线》表中题号同样可点击直达 |
-| 🎲 概率论与数理统计 | `#/prob`、`#/prob/p04` | **14 篇分章教程**：随机性与样本空间 → 条件概率与贝叶斯 → 随机变量与常见分布 → 期望/方差/协方差 → 大数定律与 CLT → 极大似然与假设检验 → 蒙特卡洛 → 交叉熵/KL 与生成模型；每篇「直觉 + 公式速查 + 可运行 Python 模拟」，并补充**经典例子**（分赌本、蒲丰投针、女士品茶、高尔顿钉板、普鲁士骑兵等）、**经典公式速查表**与**直观解释/常见误区**，全系列对标**盛骤《概率论与数理统计》（浙大 · 第六版）** |
-| ✏️ 练习测验 | `#/quiz` | **60 题分级题库**：🟢 入门 18 / 🟠 进阶 26 / 🔴 挑战 16，覆盖 **AI / 数据结构 / 概率统计** 三大板块（数据结构 15 题、概率统计 12 题）；「全部」栏目按**题号顺序**排列，也可按难度筛选，完成后给出总分与各级得分 |
-| 💬 AI 助手 | `#/chat` | 对话式答疑（**本地智能**：意图评分匹配问答库；未命中时自动全文检索站内内容、给出直达链接；回复中的站内路由与网址可点击），预留真实大模型接口 |
-| 🔍 全站搜索 | 任意页面按 `/`、`Ctrl+K` 或点导航 🔍 | 检索**课程 / 知识库 / 数据结构 / 概率统计**标题与正文：加权评分排序、片段高亮、↑↓ Enter 键盘导航、课程支持 `#/courses/课程id` 直达弹窗；中文整词未命中时按字模糊匹配（停用字过滤 + 字频降权） |
-| 🎓 智科全家桶 | [njuis-students.github.io](https://njuis-students.github.io/) | **外站接口**：南大智科学生 Wiki（学院介绍 / 学习攻略 / 科研攻略 / 职场攻略 / 前沿技术专栏） |
+视觉：
+- [ ] 移动端（≤720px）首屏在短高度内完成标题 / 说明 / 主按钮
+- [ ] 键盘 Tab 可达所有交互元素，focus 环清晰
+- [ ] 三学科主题色（紫 / 蓝绿 / 橙）在各页面一致
 
-站内知识已自洽：概念、名词表、架构对比表、选型决策树、代码示例与调试清单都在页面内，外链仅作为"想更深入"时的补充。所有外部链接在收录时逐一核实过有效性（台大官网、d2l、Karpathy、斯坦福 CS231n/CS224n 官方播放列表、提示工程指南中文版、南瓜书、self-llm、arXiv 论文等）。全站代码块（C++ / Python 自动识别）带 VSCode Dark+ 风格语法高亮与一键复制。
+## 扩充内容（只动数据层）
 
-> 说明：曾评估在站内加入 C++ 在线判题（类 LeetCode），但纯前端单文件架构无法安全编译执行 C++（需自建后端判题机或加载约 30~80MB 的 WASM 编译器），故未纳入；算法练习建议配合数据结构章节末尾的典型例题与力扣等 OJ 平台。
+全部内容数据在 `assets/js/data/`：
 
-## 安装为手机 App（PWA）
+- **加课程**：`courses.js` 的 `stages[].courses[]` 追加对象；同步在 `meta.js` 的 `APP_META.courses` 补 `prereq` / `outcome`（缺失也能运行，只是卡片不显示引导行）
+- **加文章**：`knowledge.js` 的 `articles[]`；`content` 支持 HTML（`<pre><code>` 自动获得高亮与复制按钮）；同步 `meta.js.articles` 补难度与前置
+- **加题目**：`questions.js` 的 `quiz[]` 追加 `{q, code?, options, answer, explain, level, cat}`——`level` 必须是 `入门|进阶|挑战`；在 `meta.js.quizCatSubject` 给新 `cat` 归学科；在 `question-notes.js` 补错误选项注释（可缺省，界面自动降级）
+- **加数据结构 / 概率章节**：`ds.js` / `prob.js`；C++ 代码里的 `<` 必须写成 `&lt;`；新章节 id 记得在 `meta.js.dsLevel / probLevel` 补难度
+- **题库题型扩展**：题目对象已预留 `type` 字段（默认选择题）；新增代码阅读 / 计算 / 场景题时在 `pages/quiz.js` 的 `questionCard` 分支渲染
+- **主题**：只改 `assets/css/variables.css`
+- **外站接口**：`data/external-links.js`
 
-网站支持 **PWA**：经 HTTPS 部署后，手机上「添加到主屏幕」即可像原生 App 一样一键全屏打开（无地址栏），首次访问后**离线也能用**（整站仅一个 HTML，缓存极轻）。
+## AI 助手边界与真实 API 扩展点
 
-**部署**：仓库推送到 GitHub 后，Settings → Pages 选择分支即可获得 `https://<用户名>.github.io/<仓库名>/` 地址——仓库根路径就是应用本体（已含 `index.html` 与 `.nojekyll`，不会再显示 README）；手机浏览器访问该地址一次，之后无需联网。
+`#/chat` 当前为**本地规则匹配 + 站内全文检索**，界面已明示「暂不支持开放域对话」。接入真实大模型的扩展点在 `assets/js/pages/chat.js` 顶部的 `CONFIG`（`USE_MOCK` / `endpoint` / `apiKey` / `model`）与 `callRealAPI()` 骨架：取消注释、改为经**自建后端代理**转发。⚠ 真实密钥绝不能写进任何前端文件。
 
-- **iOS（Safari）**：打开网站 → 底部分享按钮 → 「添加到主屏幕」
-- **Android（Chrome / Edge）**：打开网站 → 菜单 ⋮ → 「添加到主屏幕 / 安装应用」
-- **电脑 Chrome / Edge**：地址栏右侧出现安装图标，可安装为桌面应用
+## 学习进度存储
 
-说明：直接双击 `index.html`（file://）时自动跳过 Service Worker 注册，功能不受影响；全屏 + 离线等 App 能力需经 HTTP(S) 访问。站点更新后把 `sw.js` 里的 `CACHE` 版本号 +1 即可让所有客户端刷新缓存。
-
-## 接入真实大模型
-
-打开 `index.html`，在底部 ② 脚本区找到 `CONFIG`：
+浏览器 `localStorage` 键 `ai-learning-progress-v1`：
 
 ```js
-var CONFIG = {
-  USE_MOCK: false,   // 1. 关闭模拟回复
-  endpoint: "https://.../chat/completions",  // 2. OpenAI 兼容接口
-  apiKey: "",        // 3. ⚠ 不要写真实密钥到前端，建议后端代理
-  model: "..."       // 4. 模型名
-};
+{
+  completedCourses: [],   // 已完成课程 id
+  completedLessons: [],   // 已完成小节 "courseId:序号"
+  quizProgress: {},       // { 题号: 所选选项下标 }
+  wrongQuestions: [],     // 错题本 [{ qid, source: "wrong"|"star", ts }]
+  lastVisitedRoute: ""    // 最近访问路由（首页「继续上次学习」）
+}
 ```
 
-再取消 `callRealAPI()` 中的注释。站内笔记《调用大模型 API》有可运行的参考实现。
-
-## 扩充内容（只动 APP_DATA）
-
-全部内容数据集中在文件顶部 `window.APP_DATA`：
-
-- **加课程**：在 `stages[].courses[]` 追加对象，`points` 写知识点、`resources.video/read` 放链接（`zh: 1` 标中文，站内链接用 `#/knowledge/xxx`）
-- **加文章**：`articles[]` 追加；`content` 支持 HTML（`<pre><code>` 代码块自动获得复制按钮），`points`、`res` 可选
-- **加题目**：`quiz[]` 追加 `{q, code?, options, answer, explain, level, cat}`——`level` 必须是 `入门|进阶|挑战`，`code` 为可选代码片段，`cat` 为题目分类
-- **加数据结构章节**：`ds[]` 追加 `{id, cat, title, readTime, points, content}`；`content` 中的 C++ 代码必须把 `<` 写成 `&lt;`（如 `vector&lt;int&gt;`），否则会被当成 HTML 标签
-- **加外站接口**：参考首页「外站接口」区块与导航栏「🎓 智科全家桶 ↗」的写法，外链一律加 `target="_blank" rel="noopener noreferrer"`
-- 主题色在 `<style>` 顶部 CSS 变量中统一调整；页面宽度改 `.container` 的 `min(1360px, 94%)`
+聊天记录单独存 `ai-learning-chat-v1`。全部逻辑封装在 `assets/js/state.js`。
 
 ## 安全与协作提醒
 
 - 真实 API Key 必须经自建后端代理，不要写进任何前端文件
-- 单文件形态适合分享；若继续长大，可把 APP_DATA 拆成 JSON、用任意静态托管部署
+- `index.backup.html` 是拆分前的单文件备份，确认新版本稳定后可删除（并从 sw 缓存列表与部署中排除）
+- 提交前跑 `node scripts/check.mjs`

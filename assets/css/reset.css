@@ -1,0 +1,52 @@
+/* ============================================================
+   基础重置 · 全站统一盒模型 / 排版基调 / 无障碍焦点样式
+   ============================================================ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background: var(--color-bg);
+  font-size: var(--fs-body);
+  line-height: 1.7;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--color-primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+img, svg { max-width: 100%; }
+svg { display: inline-block; vertical-align: -0.18em; }
+button { font: inherit; }
+ul { list-style: none; }
+
+/* 键盘可达性：统一 focus-visible 外环 */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* 跳转正文的无障碍链接（Tab 可见） */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 999;
+  background: var(--color-surface);
+  color: var(--color-primary);
+  padding: 10px 18px;
+  border-radius: 0 0 var(--radius-md) 0;
+  border: 1px solid var(--color-border);
+  font-weight: 600;
+}
+.skip-link:focus { left: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}

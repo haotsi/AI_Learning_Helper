@@ -1,0 +1,79 @@
+/* ============================================================
+   设计变量 · 全站统一 token
+   改主题只改这里；组件禁止写死颜色 / 圆角 / 阴影。
+   ============================================================ */
+:root {
+  /* 品牌色：蓝紫主色（渐变仅用于主按钮与重点数字等少量强调） */
+  --color-primary: #4f46e5;
+  --color-primary-strong: #4338ca;
+  --color-primary-deep: #3730a3;
+  --color-primary-light: #eef2ff;
+  --color-primary-ring: rgba(79, 70, 229, .18);
+  --grad-primary: linear-gradient(135deg, #6366f1 0%, #4f46e5 55%, #4338ca 100%);
+  --grad-number: linear-gradient(135deg, #4f46e5, #7c3aed);
+
+  /* 三大学科主题色（协调但区分明显） */
+  --color-ai: #7c3aed;        /* AI 人工智能 · 紫 */
+  --color-ai-light: #f5f3ff;
+  --color-ai-deep: #5b21b6;
+  --color-ds: #0d9488;        /* 数据结构与算法 · 蓝绿 */
+  --color-ds-light: #f0fdfa;
+  --color-ds-deep: #0f766e;
+  --color-prob: #ea580c;      /* 概率论与数理统计 · 橙 */
+  --color-prob-light: #fff7ed;
+  --color-prob-deep: #c2410c;
+
+  /* 中性色 */
+  --color-text: #172033;
+  --color-text-body: #334155;
+  --color-muted: #64748b;
+  --color-border: #e2e8f0;
+  --color-border-strong: #cbd5e1;
+  --color-surface: #ffffff;
+  --color-bg: #f6f8fc;
+  --color-bg-soft: #f1f5f9;
+
+  /* 语义色 */
+  --color-green: #16a34a;
+  --color-green-light: #f0fdf4;
+  --color-green-deep: #166534;
+  --color-red: #dc2626;
+  --color-red-light: #fef2f2;
+  --color-red-deep: #991b1b;
+  --color-blue: #0284c7;
+  --color-blue-light: #f0f9ff;
+  --color-yellow-bg: #fef08a;
+
+  /* 字体与层级 */
+  --font-sans: "PingFang SC", "Microsoft YaHei", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: Consolas, "JetBrains Mono", "Courier New", monospace;
+  --fs-display: clamp(26px, 4.6vw, 38px);
+  --fs-h1: 26px;
+  --fs-h2: 21px;
+  --fs-h3: 16.5px;
+  --fs-body: 15px;
+  --fs-sm: 13.5px;
+  --fs-xs: 12px;
+
+  /* 圆角 / 阴影（整体收敛，阴影更轻） */
+  --radius-card: 18px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --radius-pill: 999px;
+  --shadow-card: 0 8px 24px rgba(15, 23, 42, .06);
+  --shadow-soft: 0 1px 2px rgba(15, 23, 42, .05);
+  --shadow-pop: 0 16px 40px rgba(15, 23, 42, .16);
+
+  /* 间距节奏 */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --gap-card: 22px;
+
+  --header-h: 60px;
+}
