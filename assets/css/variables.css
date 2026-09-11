@@ -33,6 +33,10 @@
   --color-bg: #f6f8fc;
   --color-bg-soft: #f1f5f9;
 
+  /* 数学公式（KaTeX，样式见 css/math.css） */
+  --formula-bg: #f8faff;
+  --formula-border: #e4e8f5;
+
   /* 语义色 */
   --color-green: #16a34a;
   --color-green-light: #f0fdf4;

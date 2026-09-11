@@ -18,6 +18,8 @@
     document.body.style.overflow = "hidden";
     var f = focusSel ? m.querySelector(focusSel) : null;
     if (f) setTimeout(function () { try { f.focus(); } catch (e) { /* noop */ } }, 30);
+    /* 弹窗内容多为动态注入：打开时补一次公式渲染（无公式时空跑，不影响性能） */
+    if (window.App.math) window.App.math.typeset(m);
   }
 
   function hide() {

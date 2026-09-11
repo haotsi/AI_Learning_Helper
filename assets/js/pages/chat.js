@@ -114,6 +114,7 @@
   }
   function renderChat() {
     chatBody.innerHTML = messages.map(msgHTML).join("");
+    if (window.App.math) window.App.math.typeset(chatBody);   /* 动态消息渲染后补公式 */
     chatBody.scrollTop = chatBody.scrollHeight;
   }
   function showTyping() {

@@ -15,7 +15,10 @@ AI_Learning_Helper/
 │   │   ├── reset.css           # 基础重置与无障碍焦点样式
 │   │   ├── layout.css          # 布局（导航 / 页脚 / Hero / 区块 / 双栏 / 聊天）
 │   │   ├── components.css      # 组件（按钮 / 卡片 / 弹窗 / 测验 / 代码块 / Toast…）
-│   │   └── responsive.css      # 移动端适配（最后加载）
+│   │   ├── responsive.css      # 移动端适配
+│   │   └── math.css            # 数学公式样式（KaTeX 输出美化，最后加载）
+│   ├── vendor/
+│   │   └── katex/              # KaTeX 本地内置（katex.min.css/js + auto-render + 20 个 woff2 字体，零外部请求）
 │   └── js/
 │       ├── data/               # ① 数据层（内容增改只动这里）
 │       │   ├── courses.js      #   APP_DATA.stages   学习路径 4 阶段 12 门课
@@ -32,7 +35,8 @@ AI_Learning_Helper/
 │       │   ├── dom.js          #   选择器 / 转义 / 事件委托
 │       │   ├── storage.js      #   localStorage 安全封装（file:// 自动降级内存）
 │       │   ├── search.js       #   全站搜索索引与加权评分（含练习题）
-│       │   └── highlight.js    #   C++ / Python 语法高亮引擎
+│       │   ├── highlight.js    #   C++ / Python 语法高亮引擎
+│       │   └── math.js         #   KaTeX 公式排版（自动渲染 + 失败降级 + LaTeX→纯文本）
 │       ├── icons.js            #   统一 SVG 描边图标库
 │       ├── state.js            #   学习进度状态（localStorage 持久化）
 │       ├── components/         # ③ 组件层
@@ -55,7 +59,6 @@ AI_Learning_Helper/
 ├── sw.js                       # Service Worker（离线缓存；资源列表需随文件增删维护）
 ├── .nojekyll                   # 关闭 GitHub Pages 的 Jekyll 处理
 ├── scripts/check.mjs           # 自动化冒烟测试（Node 无头 DOM）
-├── index.backup.html           # 拆分前的单文件备份（不参与页面运行）
 ├── README.md                   # 本说明
 └── CHANGELOG.md                # 更新记录
 ```
@@ -68,7 +71,7 @@ AI_Learning_Helper/
 | `#/courses` `#/courses/<课程id>` | 学习路径（弹窗直达，如 `#/courses/c102`） |
 | `#/knowledge` `#/knowledge/<笔记id>` | 知识库（学科 / 难度 / 标签筛选 + 分组搜索） |
 | `#/ds` `#/ds/ds02b` | 数据结构与算法分章教程 |
-| `#/prob` `#/prob/p04` | 概率论与数理统计分章教程 |
+| `#/prob` `#/prob/p04` | 概率论与数理统计分章教程（公式由内置 KaTeX 渲染） |
 | `#/quiz` `#/quiz/入门` `#/quiz/sub-ds` `#/quiz/wrong` `#/quiz/all/q12` | 练习测验（难度 / 学科筛选 / 错题本 / 题目直达） |
 | `#/chat` | AI 助手（站内知识问答） |
 
@@ -78,7 +81,7 @@ AI_Learning_Helper/
 
 1. **直接打开**：双击 `index.html`（file:// 下 Service Worker 自动跳过注册，localStorage 正常；个别浏览器隐私模式下降级为内存存储）
 2. **本地服务器**（与线上行为一致，推荐验证 PWA 时用）：`python -m http.server 8000`，访问 <http://localhost:8000/>
-3. **自动化冒烟测试**：`node scripts/check.mjs`（覆盖 30+ 断言：路由渲染、答题、错题本、进度持久化、AI 助手等，全部通过退出码为 0）
+3. **自动化冒烟测试**：`node scripts/check.mjs`（覆盖 80 断言：路由渲染、公式渲染、答题、错题本、进度持久化、AI 助手等，全部通过退出码为 0）
 
 ## 部署到 GitHub Pages
 
@@ -107,6 +110,7 @@ AI_Learning_Helper/
 - [ ] 知识库：学科·难度·标签筛选；搜索分「课程 / 知识笔记 / 练习题」；空结果有提示
 - [ ] 文章底部：上一条 / 下一条 / 相关课程 / 配套练习
 - [ ] 测验：单题流与每页 5 题；即时批改 + 解析 + 为什么不选 + 相关知识点直达
+- [ ] 概率统计页：公式以 KaTeX 渲染（分数/根号/求和/积分/上下标）；长公式在手机上横向滚动不撑破版面；切换章节 / 刷新路由后公式仍正常渲染；控制台无 KaTeX 报错
 - [ ] 答题进度刷新不丢；错题自动进错题本；☆ 收藏；结果页能力分析
 - [ ] 代码块高亮与一键复制（知识库 / 数据结构 / 概率统计 / 题目）
 - [ ] AI 助手：四类快捷问题、输入发送、站内链接可点、无法回答时的兜底文案
@@ -126,7 +130,8 @@ AI_Learning_Helper/
 - **加题目**：`questions.js` 的 `quiz[]` 追加 `{q, code?, options, answer, explain, level, cat}`——`level` 必须是 `入门|进阶|挑战`；在 `meta.js.quizCatSubject` 给新 `cat` 归学科；在 `question-notes.js` 补错误选项注释（可缺省，界面自动降级）
 - **加数据结构 / 概率章节**：`ds.js` / `prob.js`；C++ 代码里的 `<` 必须写成 `&lt;`；新章节 id 记得在 `meta.js.dsLevel / probLevel` 补难度
 - **题库题型扩展**：题目对象已预留 `type` 字段（默认选择题）；新增代码阅读 / 计算 / 场景题时在 `pages/quiz.js` 的 `questionCard` 分支渲染
-- **主题**：只改 `assets/css/variables.css`
+- **主题**：只改 `assets/css/variables.css`（公式配色令牌 `--formula-bg` / `--formula-border` 同文件）
+- **数学公式**：概率统计教程正文统一用 KaTeX：行内 `\( ... \)`、独立 `\[ ... \]`；在数据 JS 字符串中反斜杠必须写成双反斜杠（`\\(`、`\\frac`），公式内小于号用 `\lt`、百分号用 `\%`、条件概率竖线用 `\mid`；代码块（`<pre><code>`）内的内容自动跳过渲染
 - **外站接口**：`data/external-links.js`
 
 ## AI 助手边界与真实 API 扩展点
@@ -152,5 +157,4 @@ AI_Learning_Helper/
 ## 安全与协作提醒
 
 - 真实 API Key 必须经自建后端代理，不要写进任何前端文件
-- `index.backup.html` 是拆分前的单文件备份，确认新版本稳定后可删除（并从 sw 缓存列表与部署中排除）
 - 提交前跑 `node scripts/check.mjs`

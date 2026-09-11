@@ -21,6 +21,9 @@
 <link rel="stylesheet" href="./assets/css/layout.css">
 <link rel="stylesheet" href="./assets/css/components.css">
 <link rel="stylesheet" href="./assets/css/responsive.css">
+<!-- KaTeX（本地内置于 assets/vendor/，零外部请求）：公式排版；math.css 最后加载以覆盖默认样式 -->
+<link rel="stylesheet" href="./assets/vendor/katex/katex.min.css">
+<link rel="stylesheet" href="./assets/css/math.css">
 </head>
 <body data-page="home">
 
@@ -231,6 +234,10 @@
 <script src="./assets/js/utils/storage.js"></script>
 <script src="./assets/js/icons.js"></script>
 <script src="./assets/js/utils/highlight.js"></script>
+<!-- 公式渲染：KaTeX 核心 + auto-render 先加载，App.math 封装随后（普通脚本，file:// 可用） -->
+<script src="./assets/vendor/katex/katex.min.js"></script>
+<script src="./assets/vendor/katex/contrib/auto-render.min.js"></script>
+<script src="./assets/js/utils/math.js"></script>
 <script src="./assets/js/state.js"></script>
 <script src="./assets/js/utils/search.js"></script>
 

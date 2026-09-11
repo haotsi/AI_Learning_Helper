@@ -248,8 +248,14 @@
     return h + "</div>";
   }
 
-  /* ---------------- 主渲染 ---------------- */
+  /* ---------------- 主渲染 ----------------
+     内部渲染完成后对题卡重新 typeset 公式（答题/翻页等 innerHTML 更新不走路由） */
   function render() {
+    renderContent();
+    var host = $("#quizApp");
+    if (host && window.App.math) window.App.math.typeset(host);
+  }
+  function renderContent() {
     var host = $("#quizApp");
     if (!host) return;
     var st = window.App.state;

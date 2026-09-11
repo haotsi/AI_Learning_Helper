@@ -323,6 +323,19 @@ async function main() {
   await gotoHash(cdp, "#/prob/p04");
   r = await evalJS(cdp, `({t: document.querySelector('#probArticle h1').textContent, items: document.querySelectorAll('#probList .kb-item').length})`);
   ok(/贝叶斯/.test(r.t) && r.items === 14, "#/prob/p04 直达 + 14 章列表");
+  /* KaTeX 公式渲染：行内 + 独立公式、结构件齐全、无 \( 残留、无错误标红 */
+  r = await evalJS(cdp, `({
+    katex: document.querySelectorAll('#probArticle .katex').length,
+    disp: document.querySelectorAll('#probArticle .katex-display').length,
+    frac: document.querySelectorAll('#probArticle .mfrac').length,
+    supsub: document.querySelectorAll('#probArticle .msupsub').length,
+    rawDelim: (function () { var bs = String.fromCharCode(92); var t = document.querySelector('#probArticle').innerText; return t.split(bs + '(').length - 1 + t.split(bs + '[').length - 1; })(),
+    errColor: (function () { var bad = 0; document.querySelectorAll('#probArticle .katex span[style]').forEach(function (s) { if (/rgb\\(185, 28, 28\\)|#b91c1c/.test(s.getAttribute('style'))) bad++; }); return bad; })()
+  })`);
+  ok(r.katex >= 25 && r.disp >= 2, "概率页公式 KaTeX 渲染（行内+独立）", "katex=" + r.katex + " display=" + r.disp);
+  ok(r.frac >= 2 && r.supsub >= 5, "分数 / 上下标结构件渲染", JSON.stringify({ frac: r.frac, ss: r.supsub }));
+  ok(r.rawDelim === 0, "无未渲染的 \\( \\[ 残留", "left=" + r.rawDelim);
+  ok(r.errColor === 0, "无 KaTeX 解析错误标红", "err=" + r.errColor);
 
   console.log("\n== ⑤ 练习测验 ==");
   await gotoHash(cdp, "#/quiz");

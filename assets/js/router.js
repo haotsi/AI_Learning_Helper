@@ -68,6 +68,9 @@
     /* 记录最近访问路由（首页不记录，供「继续上次学习」使用） */
     App.state.setRoute("#/" + r.name + (r.p1 ? "/" + r.p1 : ""));
 
+    /* 页面切换后重渲染数学公式（KaTeX，见 utils/math.js；无公式时为无害空跑） */
+    if (App.math) App.math.typeset($("#view-" + r.name));
+
     if (r.name !== "chat") window.scrollTo(0, 0);
   }
 

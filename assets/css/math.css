@@ -1,0 +1,62 @@
+/* ============================================================
+   数学公式样式（KaTeX 输出层的统一美化；主题令牌见 variables.css）
+   加载顺序：katex.min.css → 站点各层 → 本文件（最后，可覆盖 KaTeX 默认）
+   约定：
+     .katex           行内公式  —— 字号与正文协调、整体不换行
+     .katex-display   独立公式  —— 浅色卡片 + 上下留白 + 横向滚动
+     .math-error      渲染失败降级（KaTeX throwOnError:false 自动加）
+   ============================================================ */
+
+/* 行内公式：字号与正文协调，禁止在公式内部异常断行 */
+.katex {
+  font-size: 1.06em;
+  white-space: nowrap;
+}
+
+/* 独立公式：卡片化呈现，长公式横向滚动而不撑破版面 */
+.katex-display {
+  margin: 1.4rem 0;
+  padding: 0.9rem 1.2rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  text-align: center;
+  background: var(--formula-bg);
+  border: 1px solid var(--formula-border);
+  border-radius: var(--radius-md);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+/* 滚动条细节（webkit 系） */
+.katex-display::-webkit-scrollbar { height: 6px; }
+.katex-display::-webkit-scrollbar-thumb { background: var(--color-border-strong); border-radius: 3px; }
+
+/* 表格 / 徽章等小字号容器内的公式随容器缩放，不突兀 */
+table .katex, .badge .katex, .meta .katex { font-size: 1.02em; }
+
+/* 深色代码块内如出现 \( \)（auto-render 会跳过 code/pre，此处为保险） */
+pre .katex, code .katex { color: inherit; }
+
+/* 渲染失败的降级原文：红色等宽，保留可复制的 LaTeX 源码 */
+.math-error {
+  color: var(--color-red-deep);
+  background: var(--color-red-light);
+  border-radius: var(--radius-sm);
+  padding: 0 4px;
+  font-family: var(--font-mono);
+}
+
+/* 移动端：收窄留白、公式左对齐便于逐段阅读 */
+@media (max-width: 640px) {
+  .katex { font-size: 1em; }
+  .katex-display {
+    margin: 1rem 0;
+    padding: 0.7rem 0.6rem;
+    text-align: left;
+  }
+}
+
+/* 打印：公式卡片去底色，避免大面积色块 */
+@media print {
+  .katex-display { background: none; border-color: var(--color-border); }
+}

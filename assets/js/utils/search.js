@@ -25,6 +25,8 @@
     var idx = [];
     function add(type, title, sub, route, text) {
       var raw = strip(text).replace(/\s+/g, " ");
+      /* 公式源码转可读纯文本：搜索片段不出现 \( \frac 等记号 */
+      if (window.App.math) raw = window.App.math.plainAll(raw);
       idx.push({ type: type, title: title, sub: sub || "", route: route, raw: raw, text: (title + " " + (sub || "") + " " + raw).toLowerCase() });
     }
     add("页面", "首页 · 站点总览", "三大板块与学习工具", "#/home", "首页 总览 学习助手 学习进度");
