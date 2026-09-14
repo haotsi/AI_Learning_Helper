@@ -6,7 +6,7 @@
      content 内写  \\(P(A\\mid B)\\)  → 运行时为  \(P(A|B)\) → KaTeX 渲染。
    本文件职责：
      1) App.math.typeset(root)   —— 对子树执行 auto-render；页面切换 /
-        动态 innerHTML 注入后由 router.js / quiz.js / modal.js 调用；
+        动态 innerHTML 注入后由 router.js / quiz.js / modal.js / chat.js 调用；
      2) 渲染失败降级：单条公式解析错误仅标红原文（throwOnError:false）；
         KaTeX 脚本整体缺失（如异常离线）时把 \( \) 剥成可读纯文本，
         绝不整页空白；
@@ -24,12 +24,16 @@
 
   /* LaTeX 命令 → 可读纯文本（搜索片段 / KaTeX 缺失时降级用） */
   var SYM = {
-    le: "≤", leq: "≤", ge: "≥", geq: "≥", ne: "≠", neq: "≠", approx: "≈", sim: "∼", cong: "≅",
+    lt: "<", gt: ">", le: "≤", leq: "≤", ge: "≥", geq: "≥", ne: "≠", neq: "≠", approx: "≈", sim: "∼", cong: "≅",
     propto: "∝", equiv: "≡", "mp": "∓", pm: "±", div: "÷", cdot: "·", times: "×",
+    mid: "|", nmid: "∤", parallel: "∥", perp: "⊥",
     sum: "∑", prod: "∏", int: "∫", oint: "∮", iint: "∬", infty: "∞", partial: "∂", nabla: "∇",
     in: "∈", notin: "∉", ni: "∋", subset: "⊂", subseteq: "⊆", supset: "⊃", cup: "∪", cap: "∩",
     emptyset: "∅", varnothing: "∅", setminus: "∖",
     forall: "∀", exists: "∃", neg: "¬", lnot: "¬", land: "∧", lor: "∨",
+    /* 数理逻辑常用（推理 / 可满足性 / 联结词；\therefore 见「推理规则」章节展示公式） */
+    vdash: "⊢", dashv: "⊣", models: "⊨", therefore: "∴", because: "∵",
+    nvdash: "⊬", barwedge: "⊼", oplus: "⊕", odot: "⊙", top: "⊤", bot: "⊥",
     to: "→", rightarrow: "→",longrightarrow: "→", leftarrow: "←", Rightarrow: "⇒",
     Leftrightarrow: "⇔", mapsto: "↦", uparrow: "↑", downarrow: "↓",
     leftrightarrow: "↔",
@@ -71,6 +75,8 @@
     s = s.replace(/\\([a-zA-Z]+)/g, function (m, name) {
       return SYM[name] !== undefined ? SYM[name] : "";
     });
+    /* 剩余转义符号（\{ \} \% \| \& \_ \# 等）还原为字面字符 */
+    s = s.replace(/\\([^a-zA-Z\s])/g, "$1");
     s = s.replace(/\^\{([^{}]*)\}/g, "^$1");
     s = s.replace(/[{}]/g, "");
     return s.replace(/\s+/g, " ").trim();
@@ -102,7 +108,7 @@
     nodes.forEach(function (t) {
       t.nodeValue = t.nodeValue
         .replace(/\\\[([\s\S]+?)\\\]/g, function (m, x) { return plain(x); })
-        .replace(/\\\(([\s\S]+?)\\\]/g, function (m, x) { return plain(x); });
+        .replace(/\\\(([\s\S]+?)\\\)/g, function (m, x) { return plain(x); });
     });
   }
 
@@ -117,7 +123,7 @@
           throwOnError: false,   /* 单条公式出错：原文标红显示，不影响整页 */
           errorColor: "#b91c1c",
           strict: "ignore",      /* 公式内中文等一律放行，不产生 console 噪音 */
-          output: "html",
+          /* 保留 KaTeX 默认的 htmlAndMathml：MathML 供屏幕阅读器朗读，仅 html 会丢无障碍信息 */
           ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code", "option"],
           ignoredClasses: ["katex", "katex-display", "nomath"],
           errorCallback: function () { /* 静默：错误已由 errorColor 可视化 */ }

@@ -56,7 +56,7 @@
         "\n\n点击链接直达；也可以用顶部搜索框（按 / 呼出）搜更多关键词。";
     }
     return (window.APP_DATA.chatNotFound || "我暂时没有找到相关内容，可以试试搜索知识库，或换一种问法。") +
-      "\n\n站内检索更擅长这些词：「哈希表」「贝叶斯」「蒙特卡洛」「提示词」「过拟合」。";
+      "\n\n站内检索更擅长这些词：「哈希表」「贝叶斯」「真值表」「量词」「提示词」「过拟合」。";
   }
 
   /* ---------------- 真实 API 接口（预留骨架） ---------------- */
@@ -100,7 +100,7 @@
       bubble = linkify(bubble);
       var r = firstRoute(m.text);
       actions = '<div class="msg-actions">' +
-        (r && /^#\/(knowledge|ds|prob|courses)/.test(r)
+        (r && /^#\/(knowledge|ds|prob|logic|courses)/.test(r)
           ? '<a class="btn btn-primary btn-xs" href="' + r + '">' + icons.get("play", 12) + " 继续学习</a>" : "") +
         '<a class="btn btn-quiet btn-xs" href="#/quiz">' + icons.get("pencil", 12) + " 查看练习题</a>" +
         "</div>";
@@ -201,7 +201,7 @@
     var saved = window.App.state.chatLoad();
     messages = saved && saved.length ? saved : [{
       role: "ai",
-      text: "你好！我是本站的 AI 答疑助手。\n\n我能做什么：\n· 学习规划：该先学什么、路径怎么走\n· 概念解释：AI / 数据结构 / 概率统计的核心概念\n· 题目讲解：站内题目与易错点\n· 课程推荐：按目标推荐站内课程与资源\n\n产品边界：当前为站内知识问答，暂不支持开放域对话；未命中固定问答库时，我会全文检索站内内容并给出直达链接。\n\n点下方快捷问题，或直接提问。",
+      text: "你好！我是本站的 AI 答疑助手。\n\n我能做什么：\n· 学习规划：该先学什么、路径怎么走\n· 概念解释：AI / 数据结构 / 概率统计 / 数理逻辑的核心概念\n· 题目讲解：站内题目与易错点\n· 课程推荐：按目标推荐站内课程与资源\n\n产品边界：当前为站内知识问答，暂不支持开放域对话；未命中固定问答库时，我会全文检索站内内容并给出直达链接。\n\n点下方快捷问题，或直接提问。",
       ts: Date.now()
     }];
     renderChat();

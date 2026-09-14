@@ -1,6 +1,6 @@
 /* ============================================================
    工具层 · 全站搜索
-   索引：课程 / 知识笔记（AI·数据结构·概率统计）/ 练习题
+   索引：课程 / 知识笔记（AI·数据结构·概率统计·数理逻辑）/ 练习题
    加权评分 + 中文按字模糊匹配（停用字过滤、字频降权）+ 片段高亮。
    由原单文件内联引擎迁移，索引新增「练习题」类型。
    ============================================================ */
@@ -29,7 +29,7 @@
       if (window.App.math) raw = window.App.math.plainAll(raw);
       idx.push({ type: type, title: title, sub: sub || "", route: route, raw: raw, text: (title + " " + (sub || "") + " " + raw).toLowerCase() });
     }
-    add("页面", "首页 · 站点总览", "三大板块与学习工具", "#/home", "首页 总览 学习助手 学习进度");
+    add("页面", "首页 · 站点总览", "四大板块与学习工具", "#/home", "首页 总览 学习助手 学习进度");
     (D.stages || []).forEach(function (s) {
       (s.courses || []).forEach(function (c) {
         add("课程", c.title, s.title, "#/courses/" + c.id,
@@ -44,6 +44,9 @@
     });
     (D.prob || []).forEach(function (c) {
       add("知识笔记", c.title, "概率统计 · " + (c.cat || ""), "#/prob/" + c.id, (c.points || []).join(" ") + " " + c.content);
+    });
+    (D.logic || []).forEach(function (c) {
+      add("知识笔记", c.title, "数理逻辑 · " + (c.cat || ""), "#/logic/" + c.id, (c.points || []).join(" ") + " " + c.content);
     });
     (D.quiz || []).forEach(function (q, qi) {
       add("练习题", q.q, (q.level || "") + " · " + (q.cat || ""), "#/quiz/all/q" + (qi + 1),

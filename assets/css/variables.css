@@ -12,7 +12,7 @@
   --grad-primary: linear-gradient(135deg, #6366f1 0%, #4f46e5 55%, #4338ca 100%);
   --grad-number: linear-gradient(135deg, #4f46e5, #7c3aed);
 
-  /* 三大学科主题色（协调但区分明显） */
+  /* 四大学科主题色（协调但区分明显） */
   --color-ai: #7c3aed;        /* AI 人工智能 · 紫 */
   --color-ai-light: #f5f3ff;
   --color-ai-deep: #5b21b6;
@@ -22,6 +22,9 @@
   --color-prob: #ea580c;      /* 概率论与数理统计 · 橙 */
   --color-prob-light: #fff7ed;
   --color-prob-deep: #c2410c;
+  --color-logic: #2563eb;       /* 数理逻辑 · 宝蓝 */
+  --color-logic-light: #eff6ff;
+  --color-logic-deep: #1d4ed8;
 
   /* 中性色 */
   --color-text: #172033;

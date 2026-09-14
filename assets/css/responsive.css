@@ -7,12 +7,55 @@
   .kb-list { position: sticky; top: calc(var(--header-h) + 16px); max-height: calc(100vh - var(--header-h) - 32px); overflow-y: auto; padding-right: 4px; }
 }
 
-/* 平板 / 窄屏双栏塌缩 */
+/* 平板 / 窄屏双栏塌缩
+   ⚠ 必须用 minmax(0, 1fr) 而非 1fr：grid 子项默认 min-width:auto，
+   会被 230px 的横向章节条与正文宽表格撑破，导致整页横向溢出。 */
 @media (max-width: 900px) {
-  .kb-layout { grid-template-columns: 1fr; }
+  .kb-layout { grid-template-columns: minmax(0, 1fr); }
   .kb-list { flex-direction: row; overflow-x: auto; padding-bottom: 6px; }
   .kb-item { min-width: 230px; flex-shrink: 0; }
   .grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); }
+}
+
+/* ---------- 数理逻辑（第四学科）· 四卡布局 + 导航溢出防护 ----------
+   位置约束：必须写在上面 900px 块之后（.grid-4 与 .grid 特指度相同，靠源码顺序取胜，
+   否则窄屏会被 .grid 的 auto-fit 覆写而出现「3+1」孤卡）；
+   也必须写在下面 720px 块之前（不能让折叠菜单的 .nav-links a { 11px / 16px } 被覆盖）。 */
+
+/* 首页四大板块卡：宽屏一行四张（基础规则在 layout.css）。
+   ≤1240 固定 2×2——用 auto-fit/minmax 会出现 3+1 孤卡，故这里显式指定列数。 */
+@media (max-width: 1240px) {
+  .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* 导航项增至 8 项 + 外站 + GitHub，且 .nav-links a 全部 nowrap：逐级压缩内边距与字号。
+   手算（汉字 advance ≈ 1em，含每个 a 左右内边距、5px 图标间距与 ul 的 2px gap，
+   另加 brand ≈ 110、nav-right ≈ 105、.nav 两个 16px gap）：
+     基线 15px / 8px 13px  → 整条 nav ≈ 1100px，需视口 ≥ 1220（容器 min(1280,94%) = 1148）
+     ≤1220 · 14px / 8px 9px  → ≈ 980px，需视口 ≥ 1045
+     ≤1060 · 13.5px / 8px 7px、gap 0 → ≈ 900px，需视口 ≥ 960
+   960 以下再缩就伤可读性，改由下一条 media 横向拖动兜底（汉堡阈值仍保持 720）。 */
+@media (max-width: 1220px) {
+  .nav-links a { padding: 8px 9px; font-size: 14px; }
+}
+@media (max-width: 1060px) {
+  .nav-links { gap: 0; }
+  .nav-links a { padding: 8px 7px; font-size: var(--fs-sm); }
+}
+
+/* 721–960：nav-links 自身横向可拖（隐藏滚动条，避免顶栏出现第二条滚动条）。
+   min-width:0 是 flex 子项能被压窄的前提；li / nav-right 禁止收缩，保证搜索与汉堡始终可见。
+   注意：不改 720 那个 media 块（里面还打包了 Hero / 表格等规则），故不通过提高阈值解决。 */
+@media (min-width: 721px) and (max-width: 960px) {
+  .nav-links { min-width: 0; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-links li { flex-shrink: 0; }
+  .nav-right { flex-shrink: 0; }
+}
+
+/* 手机：四卡单列（必须晚于上面的 1240 覆写） */
+@media (max-width: 620px) {
+  .grid-4 { grid-template-columns: minmax(0, 1fr); }
 }
 
 @media (max-width: 720px) {
@@ -40,6 +83,10 @@
   .container { width: min(1280px, 94%); }
 
   .kb-article { padding: var(--space-5) var(--space-4); }
+  /* 窄屏表格自适应：定宽布局 + 缩小字号与内边距，让 5 列表格也能换行放下，不出现横向滚动条 */
+  .kb-article table { table-layout: fixed; font-size: 12.5px; }
+  .kb-article th, .kb-article td { padding: 5px 6px; }
+  .kb-article table .katex { font-size: .94em; }
   .q-card { padding: var(--space-5) var(--space-4); }
   .q-card .q-title { font-size: var(--fs-body); }
   .modal-card { padding: var(--space-5) var(--space-4); }

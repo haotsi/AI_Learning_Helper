@@ -62,7 +62,7 @@
       (S.mode === "practice"
         ? '<div class="fgroup" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px">' +
           '<span class="flabel" style="font-size:12px;font-weight:700;color:var(--color-muted)">学科</span>' +
-          chips("subject", [{ v: "all", t: "全部学科" }, { v: "ai", t: M.ai.short }, { v: "ds", t: M.ds.short }, { v: "prob", t: M.prob.short }], S.subject) +
+          chips("subject", [{ v: "all", t: "全部学科" }].concat(Object.keys(M).map(function (k) { return { v: k, t: M[k].short }; })), S.subject) +
           "</div>" +
           '<div class="fgroup" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px">' +
           '<span class="flabel" style="font-size:12px;font-weight:700;color:var(--color-muted)">难度</span>' +
@@ -163,13 +163,15 @@
     var m = /^#\/knowledge\/(.+)$/.exec(route); if (m) { var a = (d.articles || []).filter(function (x) { return x.id === m[1]; })[0]; return a ? a.title : route; }
     m = /^#\/ds\/(.+)$/.exec(route); if (m) { var c = (d.ds || []).filter(function (x) { return x.id === m[1]; })[0]; return c ? c.title : route; }
     m = /^#\/prob\/(.+)$/.exec(route); if (m) { var p = (d.prob || []).filter(function (x) { return x.id === m[1]; })[0]; return p ? p.title : route; }
+    m = /^#\/logic\/(.+)$/.exec(route); if (m) { var l = (d.logic || []).filter(function (x) { return x.id === m[1]; })[0]; return l ? l.title : route; }
     return route;
   }
 
   function resultHTML(ids) {
     var st = window.App.state;
     var answered = 0, correct = 0;
-    var subs = { ai: { c: 0, t: 0 }, ds: { c: 0, t: 0 }, prob: { c: 0, t: 0 } };
+    var subs = {};
+    Object.keys(window.APP_META.subjects).forEach(function (k) { subs[k] = { c: 0, t: 0 }; });
     var wrongCats = {};
     var wrongIdsSet = [];
     ids.forEach(function (id) {
@@ -192,7 +194,7 @@
 
     var weak = Object.keys(wrongCats).sort(function (a, b) { return wrongCats[b] - wrongCats[a]; }).slice(0, 4);
     var M = window.APP_META.subjects;
-    var bd = ["ai", "ds", "prob"].filter(function (k) { return subs[k].t > 0; }).map(function (k) {
+    var bd = Object.keys(M).filter(function (k) { return subs[k].t > 0; }).map(function (k) {
       var r = subs[k].t ? Math.round((subs[k].c / subs[k].t) * 100) : 0;
       return '<div class="bd-row"><span class="bd-name">' + esc(M[k].short) + "</span>" +
         '<div class="bd-track"><div class="bd-fill ' + k + '" style="width:' + r + '%"></div></div>' +
@@ -435,6 +437,8 @@
   /* ---------------- 路由入口 ---------------- */
   function routeEntry(p1, p2) {
     S.browse = false;
+    var subMatch = p1 && /^sub-([a-z]+)$/.exec(p1);
+    var subKey = (subMatch && window.APP_META.subjects[subMatch[1]]) ? subMatch[1] : "";
     if (p1 === "wrong") { S.mode = "wrong"; S.practicingWrong = false; S.showResult = false; }
     else if (p1 && /^q(\d+)$/.test(p2 || "")) {
       S.mode = "practice"; S.subject = "all"; S.level = "all";
@@ -443,8 +447,8 @@
       var n = +/^q(\d+)$/.exec(p2)[1];
       var idx = ids.indexOf(n);
       if (idx !== -1) S.pos = idx;
-    } else if (p1 && /^sub-(ai|ds|prob)$/.test(p1)) {
-      S.mode = "practice"; S.subject = p1.slice(4); S.level = "all"; S.showResult = false;
+    } else if (subKey) {
+      S.mode = "practice"; S.subject = subKey; S.level = "all"; S.showResult = false;
     } else if (p1 && p1 !== "all") {
       S.mode = "practice"; S.level = p1; S.showResult = false;
     } else {

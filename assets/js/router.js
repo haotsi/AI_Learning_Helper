@@ -3,7 +3,7 @@
    #/home
    #/courses[/<课程id 打开详情弹窗>]
    #/knowledge[/<笔记id>]
-   #/ds[/<章节id>]   #/prob[/<章节id>]
+   #/ds[/<章节id>]   #/prob[/<章节id>]   #/logic[/<章节id>]
    #/quiz[/<难度|sub-学科|wrong>[/<q题号>]]
    #/chat
    未知路由回落到 home；每次导航自动收起移动端菜单、记录最近路由。
@@ -14,7 +14,7 @@
   var inited = {};     // 视图只初始化一次
   var lastHash = null;
 
-  var VIEWS = ["home", "courses", "knowledge", "ds", "prob", "quiz", "chat"];
+  var VIEWS = ["home", "courses", "knowledge", "ds", "prob", "logic", "quiz", "chat"];
 
   function parseHash() {
     var h = (location.hash || "").replace(/^#\/?/, "");
@@ -64,6 +64,7 @@
     if (r.name === "knowledge" && r.p1) { App.pages.knowledge.selectArticle(r.p1); App.pages.knowledge.renderList(); }
     if (r.name === "ds" && r.p1) App.pages.ds.selectChapter(r.p1);
     if (r.name === "prob" && r.p1) App.pages.prob.selectChapter(r.p1);
+    if (r.name === "logic" && r.p1) App.pages.logic.selectChapter(r.p1);
 
     /* 记录最近访问路由（首页不记录，供「继续上次学习」使用） */
     App.state.setRoute("#/" + r.name + (r.p1 ? "/" + r.p1 : ""));

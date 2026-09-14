@@ -34,6 +34,7 @@
 .badge.subj-ai { background: var(--color-ai-light); color: var(--color-ai-deep); }
 .badge.subj-ds { background: var(--color-ds-light); color: var(--color-ds-deep); }
 .badge.subj-prob { background: var(--color-prob-light); color: var(--color-prob-deep); }
+.badge.subj-logic { background: var(--color-logic-light); color: var(--color-logic-deep); }
 
 /* ---------- 筛选 chip ---------- */
 .chip { font: inherit; font-size: var(--fs-sm); color: var(--color-text-body); background: var(--color-surface); border: 1px solid var(--color-border-strong); border-radius: var(--radius-pill); padding: 5px 14px; cursor: pointer; transition: all .15s ease; }
@@ -62,6 +63,9 @@
 .subject-card.card-prob::before { background: var(--color-prob); }
 .subject-card.card-prob .icon-xl { background: var(--color-prob-light); color: var(--color-prob); }
 .subject-card.card-prob .go, .subject-card.card-prob .counts b { color: var(--color-prob-deep); }
+.subject-card.card-logic::before { background: var(--color-logic); }
+.subject-card.card-logic .icon-xl { background: var(--color-logic-light); color: var(--color-logic); }
+.subject-card.card-logic .go, .subject-card.card-logic .counts b { color: var(--color-logic-deep); }
 
 /* ---------- 首页 · 学习工具卡（轻量线框风格，强调“怎么学”） ---------- */
 .tool-card { display: block; color: inherit; background: transparent; border: 1.5px dashed var(--color-border-strong); border-radius: var(--radius-card); padding: var(--space-4) var(--space-5); transition: all .18s ease; }
@@ -152,6 +156,7 @@ ul.res-list { margin: 0 0 var(--space-4) !important; padding: 0; }
 .kb-count-line { font-size: var(--fs-xs); color: var(--color-muted); margin: 2px 2px 8px; }
 body[data-page="ds"] .kb-item.active { border-color: var(--color-ds); background: var(--color-ds-light); box-shadow: inset 0 0 0 1px var(--color-ds); }
 body[data-page="prob"] .kb-item.active { border-color: var(--color-prob); background: var(--color-prob-light); box-shadow: inset 0 0 0 1px var(--color-prob); }
+body[data-page="logic"] .kb-item.active { border-color: var(--color-logic); background: var(--color-logic-light); box-shadow: inset 0 0 0 1px var(--color-logic); }
 
 /* 文章底部导航与相关 */
 .art-foot { margin-top: var(--space-7); border-top: 1px solid var(--color-border); padding-top: var(--space-4); }
@@ -215,6 +220,7 @@ body[data-page="prob"] .kb-item.active { border-color: var(--color-prob); backgr
 .bd-fill.ai { background: var(--color-ai); }
 .bd-fill.ds { background: var(--color-ds); }
 .bd-fill.prob { background: var(--color-prob); }
+.bd-fill.logic { background: var(--color-logic); }
 .bd-row .bd-val { font-size: var(--fs-xs); color: var(--color-muted); width: 74px; text-align: right; }
 .weak-chips { display: flex; gap: var(--space-2); flex-wrap: wrap; }
 .review-list { display: flex; flex-direction: column; gap: 6px; }

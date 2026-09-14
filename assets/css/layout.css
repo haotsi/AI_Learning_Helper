@@ -66,6 +66,9 @@ main { flex: 1; }
 .grid { display: grid; gap: var(--gap-card); grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
 .grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
 
+/* 四张学科板块卡：宽屏一行四张；窄屏断点见 responsive.css（必须在那一层覆写，顺序不可颠倒） */
+.grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
 /* ---------- 内页标题条（去大面积渐变：白底 + 学科色点缀） ---------- */
 .page-head { background: var(--color-surface); border-bottom: 1px solid var(--color-border); padding: 34px 0 26px; margin-bottom: var(--space-6); }
 .page-head h1 { font-size: var(--fs-h1); display: flex; align-items: center; gap: 12px; }
@@ -73,6 +76,7 @@ main { flex: 1; }
 .page-head p { color: var(--color-muted); margin-top: var(--space-2); font-size: var(--fs-body); max-width: 900px; }
 .page-head.accent-ds h1 .icon { background: var(--color-ds-light); color: var(--color-ds-deep); }
 .page-head.accent-prob h1 .icon { background: var(--color-prob-light); color: var(--color-prob-deep); }
+.page-head.accent-logic h1 .icon { background: var(--color-logic-light); color: var(--color-logic-deep); }
 .page-head.accent-quiz h1 .icon, .page-head.accent-chat h1 .icon { background: var(--color-primary-light); color: var(--color-primary); }
 
 /* ---------- 学习路径：阶段与课程 ---------- */
@@ -96,6 +100,7 @@ main { flex: 1; }
 
 /* ---------- 知识库 / 教程双栏 ---------- */
 .kb-layout { display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: var(--space-5); align-items: start; }
+.kb-layout > * { min-width: 0; }   /* 允许子项收缩，宽内容由自身滚动容器消化 */
 .kb-list { display: flex; flex-direction: column; gap: 10px; }
 .kb-article { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-card); padding: var(--space-6) var(--space-7); box-shadow: var(--shadow-soft); min-height: 360px; }
 .kb-article h1 { font-size: var(--fs-h1); margin-bottom: 10px; }
@@ -109,10 +114,13 @@ main { flex: 1; }
 .kb-article table { width: 100%; border-collapse: collapse; margin: 14px 0 18px; font-size: 14px; }
 .kb-article th, .kb-article td, .modal-card th, .modal-card td { border: 1px solid var(--color-border); padding: 8px 10px; text-align: left; vertical-align: top; }
 .kb-article th, .modal-card th { background: var(--color-bg-soft); }
+/* 表格自适应（不产生横向滚动条）：单元格内容过长时换行，必要时在词内断行 */
+.kb-article th, .kb-article td, .modal-card th, .modal-card td { overflow-wrap: anywhere; word-break: break-word; }
 .kb-article kbd { border: 1px solid var(--color-border-strong); border-bottom-width: 2px; border-radius: 5px; background: var(--color-bg-soft); padding: 1px 6px; font-family: var(--font-mono); font-size: var(--fs-xs); }
 .kb-placeholder { color: var(--color-muted); text-align: center; padding: 80px 0; }
 body[data-page="ds"] .kb-article h2 { border-left-color: var(--color-ds); }
 body[data-page="prob"] .kb-article h2 { border-left-color: var(--color-prob); }
+body[data-page="logic"] .kb-article h2 { border-left-color: var(--color-logic); }
 
 /* ---------- 测验布局 ---------- */
 .quiz-shell { max-width: 860px; margin: 0 auto; }

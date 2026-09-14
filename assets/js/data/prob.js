@@ -392,8 +392,8 @@ print('E(X) = np =', n * p, '  D(X) = np(1-p) =', round(n * p * (1 - p), 3))</co
 <tr><th>分布</th><th>\\(P(X=k)\\)</th><th>\\(E(X)\\)</th><th>\\(D(X)\\)</th></tr>
 <tr><td>0-1</td><td>\\(p^{k}(1-p)^{1-k}\\)</td><td>\\(p\\)</td><td>\\(p(1-p)\\)</td></tr>
 <tr><td>二项</td><td>\\(\\binom{n}{k}p^{k}(1-p)^{n-k}\\)</td><td>\\(np\\)</td><td>\\(np(1-p)\\)</td></tr>
-<tr><td>泊松</td><td>\\(\\dfrac{\\lambda^{k}e^{-\\lambda}}{k!}\\)</td><td>\\(\\lambda\\)</td><td>\\(\\lambda\\)</td></tr>
-<tr><td>超几何</td><td>\\(\\dfrac{\\binom{K}{k}\\binom{N-K}{n-k}}{\\binom{N}{n}}\\)</td><td>\\(\\dfrac{nK}{N}\\)</td><td>\\(\\dfrac{nK}{N}\\left(1-\\dfrac{K}{N}\\right)\\dfrac{N-n}{N-1}\\)</td></tr>
+<tr><td>泊松</td><td>\\(\\frac{\\lambda^{k}e^{-\\lambda}}{k!}\\)</td><td>\\(\\lambda\\)</td><td>\\(\\lambda\\)</td></tr>
+<tr><td>超几何</td><td>\\(\\frac{\\binom{K}{k}\\binom{N-K}{n-k}}{\\binom{N}{n}}\\)</td><td>\\(\\frac{nK}{N}\\)</td><td>\\(\\frac{nK}{N}(1-\\frac{K}{N})\\frac{N-n}{N-1}\\)</td></tr>
 </table>
 <p>超几何刻画 \\(N\\) 件产品含 \\(K\\) 件次品、不放回抽 \\(n\\) 件时的次品数，是「不放回」版本；批量很大时趋近二项。</p>
 <div class="kb-points"><div class="pt-title">💡 直观理解</div><ul>

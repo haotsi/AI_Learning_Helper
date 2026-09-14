@@ -1,6 +1,6 @@
 /* ============================================================
    页面 · 首页
-   层级：Hero（静态）→ 我的学习进度 → 三大学科板块 → 学习工具
+   层级：Hero（静态）→ 我的学习进度 → 四大学科板块 → 学习工具
         → 新手推荐 → 延伸阅读
    首屏只保留：主标题 / 说明 / 主按钮 / 次按钮 / 3 个统计。
    ============================================================ */
@@ -61,16 +61,18 @@
   function renderHeads() {
     var sh = window.App.sectionHeader;
     var h1 = $("#subjectHead");
-    if (h1) h1.innerHTML = sh.html("grid", "三大学科板块", "「学什么」：三大基础学科并列推进，各自成体系、彼此相连；按兴趣自由进入，不必从 AI 开始。");
+    if (h1) h1.innerHTML = sh.html("grid", "四大学科板块", "「学什么」：AI 人工智能、数据结构与算法、概率论与数理统计、数理逻辑四大板块并列开放，各自成体系、彼此相连；按兴趣自由进入，不必从 AI 开始。");
     var h2 = $("#toolHead");
     if (h2) h2.innerHTML = sh.html("compass", "学习工具", "「怎么学」：路径 → 知识库 → 测验 → 错题本 → 助手 → 搜索，六个动作串起学习闭环。");
   }
 
-  /* ---------------- 三大学科板块（主题色卡：学什么） ---------------- */
+  /* ---------------- 四大学科板块（主题色卡：学什么） ---------------- */
   function renderSubjects() {
     var host = $("#subjectGrid");
     if (!host) return;
     var d = D();
+    var logicCats = [];
+    (d.logic || []).forEach(function (c) { if (c.cat && logicCats.indexOf(c.cat) === -1) logicCats.push(c.cat); });
     var cards = [
       {
         cls: "card-ai", icon: "cpu", name: "AI 人工智能",
@@ -90,6 +92,12 @@
         desc: "贝叶斯、常见分布、CLT、MLE 与蒙特卡洛：直觉 + 公式速查 + Python 模拟。",
         counts: [(d.prob || []).length + " 个章节", quizCountOf("prob") + " 道练习"],
         route: "#/prob", go: "进入系列教程"
+      },
+      {
+        cls: "card-logic", icon: "brain", name: "数理逻辑",
+        desc: "从命题逻辑、谓词逻辑到推理与证明，学习如何用符号精确表达命题，并理解计算机科学背后的逻辑基础。",
+        counts: [logicCats.length + " 个阶段", (d.logic || []).length + " 个章节", quizCountOf("logic") + " 道练习"],
+        route: "#/logic", go: "进入板块"
       }
     ];
     host.innerHTML = cards.map(function (c) {

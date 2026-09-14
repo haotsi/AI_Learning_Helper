@@ -12,8 +12,8 @@
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
 <link rel="icon" href="./icons/icon-192.png" type="image/png">
-<title>学习助手 · AI · 数据结构 · 概率统计</title>
-<meta name="description" content="多学科学习助手：AI 人工智能、数据结构与算法、概率论与数理统计并列推进，含学习路径、知识库、练习测验（即时解析 + 错题本）与站内 AI 答疑助手，另附南京大学「智科全家桶」外站接口；零依赖纯静态，GitHub Pages 直接部署。">
+<title>学习助手 · AI · 数据结构 · 概率统计 · 数理逻辑</title>
+<meta name="description" content="多学科学习助手：AI 人工智能、数据结构与算法、概率论与数理统计、数理逻辑并列推进，含学习路径、知识库、练习测验（即时解析 + 错题本）与站内 AI 答疑助手，另附南京大学「智科全家桶」外站接口；零依赖纯静态，GitHub Pages 直接部署。">
 
 <!-- 样式分层：变量 → 重置 → 布局 → 组件 → 响应式（顺序不可调换） -->
 <link rel="stylesheet" href="./assets/css/variables.css">
@@ -38,6 +38,7 @@
       <li><a href="#/knowledge" data-route="knowledge">知识库</a></li>
       <li><a href="#/ds" data-route="ds">数据结构</a></li>
       <li><a href="#/prob" data-route="prob">概率统计</a></li>
+      <li><a href="#/logic" data-route="logic">数理逻辑</a></li>
       <li><a href="#/quiz" data-route="quiz">练习测验</a></li>
       <li><a href="#/chat" data-route="chat">AI 助手</a></li>
       <!-- 外站入口与 GitHub 链接由 assets/js/components/header.js 按 APP_DATA.externalLinks 注入 -->
@@ -57,8 +58,8 @@
   <section class="view active" id="view-home">
     <div class="hero">
       <div class="container">
-        <h1>从基础概念到 AI 实战，<span class="hl">按路径学会三门核心能力</span></h1>
-        <p class="sub">AI 人工智能、数据结构与算法、概率论与数理统计：学习路径带你入门，知识库随手可查，练习测验即时批改，AI 助手随问随答。</p>
+        <h1>从基础概念到 AI 实战，<span class="hl">按路径学会四门核心能力</span></h1>
+        <p class="sub">AI 人工智能、数据结构与算法、概率论与数理统计、数理逻辑：学习路径带你入门，知识库随手可查，练习测验即时批改，AI 助手随问随答。</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="#/courses"><span class="icon" data-icon="play" data-size="15" aria-hidden="true"></span>开始我的学习</a>
           <a class="btn btn-outline" href="#/knowledge"><span class="icon" data-icon="library" data-size="15" aria-hidden="true"></span>浏览知识库</a>
@@ -76,7 +77,7 @@
     <section class="section">
       <div class="container">
         <div id="subjectHead"></div>
-        <div class="grid grid-3" id="subjectGrid"></div>
+        <div class="grid grid-4" id="subjectGrid"></div>
       </div>
     </section>
     <section class="section">
@@ -120,7 +121,7 @@
     <div class="page-head">
       <div class="container">
         <h1><span class="icon" data-icon="library" data-size="20" aria-hidden="true"></span>知识库</h1>
-        <p>AI 笔记、数据结构章节、概率统计章节统一收录：按学科 / 难度 / 标签筛选，搜索标题与正文，结果按课程、知识笔记、练习题分组呈现。</p>
+        <p>AI 笔记、数据结构章节、概率统计章节、数理逻辑章节统一收录：按学科 / 难度 / 标签筛选，搜索标题与正文，结果按课程、知识笔记、练习题分组呈现。</p>
       </div>
     </div>
     <div class="container">
@@ -163,6 +164,25 @@
       <article class="kb-article" id="probArticle">
         <div class="kb-placeholder">← 从左侧选择章节开始</div>
       </article>
+    </div>
+  </section>
+
+  <!-- ============ 视图：数理逻辑 ============ -->
+  <section class="view" id="view-logic">
+    <div class="page-head accent-logic">
+      <div class="container">
+        <h1><span class="icon" data-icon="brain" data-size="20" aria-hidden="true"></span>数理逻辑</h1>
+        <p>系列教程：从命题逻辑、谓词逻辑到推理与证明，先建立直觉再进入形式化。每篇含概念 / 直觉 / 定义 / 示例 / 常见错误 / 小结，章末可直达配套练习题。</p>
+      </div>
+    </div>
+    <div class="container">
+      <div id="logicRoadmap"></div>
+      <div class="kb-layout">
+        <aside class="kb-list" id="logicList" aria-label="章节列表"></aside>
+        <article class="kb-article" id="logicArticle">
+          <div class="kb-placeholder">← 从左侧选择章节开始</div>
+        </article>
+      </div>
     </div>
   </section>
 
@@ -220,8 +240,10 @@
 <script src="./assets/js/data/knowledge.js"></script>
 <script src="./assets/js/data/ds.js"></script>
 <script src="./assets/js/data/prob.js"></script>
+<script src="./assets/js/data/logic.js"></script>
 <script src="./assets/js/data/questions.js"></script>
 <script src="./assets/js/data/question-notes.js"></script>
+<script src="./assets/js/data/logic-quiz.js"></script>
 <script src="./assets/js/data/external-links.js"></script>
 <script src="./assets/js/data/meta.js"></script>
 <script src="./assets/js/data/chat-rules.js"></script>
@@ -261,6 +283,7 @@
 <script src="./assets/js/pages/knowledge.js"></script>
 <script src="./assets/js/pages/data-structures.js"></script>
 <script src="./assets/js/pages/probability.js"></script>
+<script src="./assets/js/pages/logic.js"></script>
 <script src="./assets/js/pages/quiz.js"></script>
 <script src="./assets/js/pages/chat.js"></script>
 

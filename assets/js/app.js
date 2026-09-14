@@ -41,7 +41,7 @@
       if (!box) return;
       q = (q || "").trim();
       if (!q) {
-        box.innerHTML = '<div class="search-hint">试试：「哈希表」「贝叶斯」「蒲丰」「链表」「提示词」「蒙特卡洛」「语法速览」…</div>';
+        box.innerHTML = '<div class="search-hint">试试：「哈希表」「贝叶斯」「蒲丰」「链表」「真值表」「提示词」「蒙特卡洛」「德摩根律」…</div>';
         return;
       }
       var hits = App.search.search(q, 12);

@@ -5,11 +5,12 @@
    ============================================================ */
 window.APP_META = window.APP_META || {};
 
-/* ---------------- 三大学科定义（主题色在 CSS 变量中） ---------------- */
+/* ---------------- 四大学科定义（主题色在 CSS 变量中） ---------------- */
 window.APP_META.subjects = {
-  ai:   { key: 'ai',   name: 'AI 人工智能',        short: 'AI',     route: '#/courses',   icon: 'cpu',    cls: 'subj-ai' },
-  ds:   { key: 'ds',   name: '数据结构与算法',      short: '数据结构', route: '#/ds',      icon: 'layers', cls: 'subj-ds' },
-  prob: { key: 'prob', name: '概率论与数理统计',    short: '概率统计', route: '#/prob',    icon: 'dice',   cls: 'subj-prob' }
+  ai:    { key: 'ai',    name: 'AI 人工智能',     short: 'AI',     route: '#/courses', icon: 'cpu',    cls: 'subj-ai' },
+  ds:    { key: 'ds',    name: '数据结构与算法',   short: '数据结构', route: '#/ds',    icon: 'layers', cls: 'subj-ds' },
+  prob:  { key: 'prob',  name: '概率论与数理统计', short: '概率统计', route: '#/prob',  icon: 'dice',   cls: 'subj-prob' },
+  logic: { key: 'logic', name: '数理逻辑',        short: '数理逻辑', route: '#/logic', icon: 'brain',  cls: 'subj-logic' }
 };
 
 /* ---------------- 测验题细分分类 → 学科 ---------------- */
@@ -21,7 +22,12 @@ window.APP_META.quizCatSubject = {
   '线性结构': 'ds', '链表': 'ds', '栈与队列': 'ds', '查找与排序': 'ds', '哈希表': 'ds',
   '树与BST': 'ds', '堆与优先队列': 'ds', '图': 'ds', '递归与分治': 'ds', '回溯': 'ds',
   '随机事件': 'prob', '贝叶斯': 'prob', '常见分布': 'prob', '数字特征': 'prob',
-  '极限定理': 'prob', '信息论': 'prob', '蒙特卡洛': 'prob', '假设检验': 'prob', '极大似然': 'prob'
+  '极限定理': 'prob', '信息论': 'prob', '蒙特卡洛': 'prob', '假设检验': 'prob', '极大似然': 'prob',
+  /* 数理逻辑 */
+  '命题与真值': 'logic', '逻辑联结词': 'logic', '真值表': 'logic', '逻辑等价': 'logic',
+  '德摩根律': 'logic', '蕴含与逆否': 'logic', '范式': 'logic', '推理规则': 'logic',
+  '谓词': 'logic', '量词': 'logic', '量词否定': 'logic', '多重量词': 'logic',
+  '证明方法': 'logic', '数学归纳法': 'logic', '逻辑与计算机': 'logic'
 };
 
 /* ---------------- 测验题细分分类 → 相关知识点直达路由 ---------------- */
@@ -37,7 +43,13 @@ window.APP_META.quizCatRoute = {
   '堆与优先队列': '#/ds/ds13', '图': '#/ds/ds15', '递归与分治': '#/ds/ds18', '回溯': '#/ds/ds19',
   '随机事件': '#/prob/p02', '贝叶斯': '#/prob/p04', '常见分布': '#/prob/p06',
   '数字特征': '#/prob/p08', '极限定理': '#/prob/p10', '信息论': '#/prob/p14',
-  '蒙特卡洛': '#/prob/p13', '假设检验': '#/prob/p12', '极大似然': '#/prob/p11'
+  '蒙特卡洛': '#/prob/p13', '假设检验': '#/prob/p12', '极大似然': '#/prob/p11',
+  /* 数理逻辑 */
+  '命题与真值': '#/logic/l02', '逻辑联结词': '#/logic/l03', '真值表': '#/logic/l04',
+  '逻辑等价': '#/logic/l05', '德摩根律': '#/logic/l05', '蕴含与逆否': '#/logic/l06',
+  '范式': '#/logic/l07', '推理规则': '#/logic/l08', '谓词': '#/logic/l09',
+  '量词': '#/logic/l10', '量词否定': '#/logic/l11', '多重量词': '#/logic/l12',
+  '证明方法': '#/logic/l13', '数学归纳法': '#/logic/l16', '逻辑与计算机': '#/logic/l17'
 };
 
 /* ---------------- 课程引导：前置知识 / 学完能做到什么 ---------------- */
@@ -86,7 +98,7 @@ window.APP_META.articles = {
   a15: { level: '进阶', prereq: 'a4 / a11',      course: 'c202' }
 };
 
-/* ---------------- 数据结构 / 概率统计章节难度（用于知识库统一筛选） ---------------- */
+/* ---------------- 数据结构 / 概率统计 / 数理逻辑章节难度（用于知识库统一筛选） ---------------- */
 window.APP_META.dsLevel = {
   ds01: '入门', ds02: '入门', ds02b: '入门', ds02c: '进阶', ds02d: '入门', ds03: '入门', ds04: '入门',
   ds05: '入门', ds06: '入门', ds07: '进阶', ds08: '入门', ds09: '进阶', ds10: '入门',
@@ -96,6 +108,11 @@ window.APP_META.dsLevel = {
 window.APP_META.probLevel = {
   p01: '入门', p02: '入门', p03: '入门', p04: '进阶', p05: '入门', p06: '入门', p07: '入门',
   p08: '进阶', p09: '进阶', p10: '进阶', p11: '挑战', p12: '挑战', p13: '进阶', p14: '挑战'
+};
+window.APP_META.logicLevel = {
+  l01: '入门', l02: '入门', l03: '入门', l04: '入门', l05: '进阶', l06: '进阶', l07: '进阶', l08: '进阶',
+  l09: '入门', l10: '进阶', l11: '进阶', l12: '挑战', l13: '进阶', l14: '挑战', l15: '进阶', l16: '挑战',
+  l17: '进阶'
 };
 
 /* ---------------- 学习主线推荐（跨阶段的关键路径） ---------------- */

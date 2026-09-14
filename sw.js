@@ -5,12 +5,13 @@
    - 读取采用「缓存优先，未命中回源并回填」
    - 离线导航兜底返回缓存的 index.html
    升级版本：内容或结构变更后把 CACHE 版本号 +1，即可让旧缓存全部失效。
-   ⚠ 版本号是唯一的升级手段：sw.js 自身也在 ASSETS 缓存列表中，浏览器对 sw.js
-     的更新检查可能命中旧缓存而拿不到新版本；结构级改动（如新增/改名大量资源）
-     时必须 +1，否则老用户会长期停留在旧缓存页面。
+   ⚠ 改动了 assets 下任何文件（含 CSS / JS / 数据）或 index.html 引用后必须 +1：
+     旧副本会被下面的「缓存优先」策略持续命中，不升版本用户看不到新内容。
+   ⚠ sw.js 自身不在 ASSETS 列表中（避免自缓存干扰浏览器对脚本的更新检查）；
+     它的更新取决于浏览器脚本更新检查与 GitHub Pages 的 HTTP 缓存（max-age=600）。
    ⚠ 新增 / 改名 assets 下的文件时，请同步维护下方 ASSETS 列表。
    ============================================================ */
-var CACHE = "learning-helper-v5";
+var CACHE = "learning-helper-v7";
 var ASSETS = [
   "./",
   "./index.html",
@@ -54,8 +55,10 @@ var ASSETS = [
   "./assets/js/data/knowledge.js",
   "./assets/js/data/ds.js",
   "./assets/js/data/prob.js",
+  "./assets/js/data/logic.js",
   "./assets/js/data/questions.js",
   "./assets/js/data/question-notes.js",
+  "./assets/js/data/logic-quiz.js",
   "./assets/js/data/external-links.js",
   "./assets/js/data/meta.js",
   "./assets/js/data/chat-rules.js",
@@ -84,6 +87,7 @@ var ASSETS = [
   "./assets/js/pages/knowledge.js",
   "./assets/js/pages/data-structures.js",
   "./assets/js/pages/probability.js",
+  "./assets/js/pages/logic.js",
   "./assets/js/pages/quiz.js",
   "./assets/js/pages/chat.js",
 
@@ -94,7 +98,13 @@ var ASSETS = [
 self.addEventListener("install", function (e) {
   e.waitUntil(
     caches.open(CACHE)
-      .then(function (c) { return c.addAll(ASSETS); })
+      .then(function (c) {
+        /* 逐个缓存：单个资源失败（改名漏列 / 临时 404）不会让整次安装失败，
+           否则新 SW 永远装不上，用户会一直停留在旧缓存版本。 */
+        return Promise.all(ASSETS.map(function (u) {
+          return c.add(u).catch(function () { /* 忽略单个失败，其余照常预缓存 */ });
+        }));
+      })
       .then(function () { return self.skipWaiting(); })
   );
 });

@@ -2,7 +2,7 @@
    页面 · 知识库（跨学科统一检索）
    筛选：学科 / 难度 / 标签；搜索：标题 + 正文，结果分「课程 / 知识笔记 / 练习题」。
    文章底部：上一条 / 下一条 / 前置知识 / 关联课程 / 配套练习。
-   数据结构与概率统计章节点击后跳到各自的教程路由（#/ds、#/prob），原路由不变。
+   数据结构、概率统计与数理逻辑章节点击后跳到各自的教程路由（#/ds、#/prob、#/logic），原路由不变。
    ============================================================ */
 (function () {
   "use strict";
@@ -46,6 +46,14 @@
         route: "#/prob/" + c.id, data: c
       });
     });
+    (d.logic || []).forEach(function (c) {
+      out.push({
+        key: "logic:" + c.id, corpus: "logic", subject: "logic", id: c.id,
+        title: c.title, cat: c.cat, level: (m.logicLevel || {})[c.id] || "入门",
+        tags: [], readTime: c.readTime,
+        route: "#/logic/" + c.id, data: c
+      });
+    });
     ITEMS = out;
     return out;
   }
@@ -75,7 +83,10 @@
     var host = $("#kbToolbar");
     if (!host) return;
     var m = M();
-    var subjectOpts = [{ v: "all", t: "全部学科" }, { v: "ai", t: "AI 笔记" }, { v: "ds", t: "数据结构" }, { v: "prob", t: "概率统计" }];
+    var SUBJECT_LABEL = { ai: "AI 笔记", ds: "数据结构", prob: "概率统计", logic: "数理逻辑" };
+    var subjectOpts = [{ v: "all", t: "全部学科" }].concat(Object.keys(m.subjects).map(function (k) {
+      return { v: k, t: SUBJECT_LABEL[k] || m.subjects[k].short };
+    }));
     var levelOpts = [{ v: "all", t: "全部难度" }, { v: "入门", t: "入门" }, { v: "进阶", t: "进阶" }, { v: "挑战", t: "挑战" }];
     var tags = ["all"];
     items().forEach(function (it) { (it.tags || []).forEach(function (t) { if (tags.indexOf(t) === -1) tags.push(t); }); });
@@ -149,7 +160,7 @@
     }
     var html = '<div class="kb-count-line">共 ' + shown.length + " 篇 · 按学科分组</div>";
     var lastSubject = null;
-    var order = ["ai", "ds", "prob"];
+    var order = Object.keys(M().subjects);
     shown = order.reduce(function (acc, sj) {
       return acc.concat(shown.filter(function (it) { return it.subject === sj; }));
     }, []);
