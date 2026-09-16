@@ -212,7 +212,7 @@ async function main() {
   })`);
   ok(r.title, "标题含「学习助手」");
   ok(r.brand, "品牌图标 SVG 注入");
-  ok(r.stats[0] === "4" && r.stats[1] === "12" && r.stats[2] === "84", "首屏三统计 4/12/84", JSON.stringify(r.stats));
+  ok(r.stats[0] === "4" && r.stats[1] === "12" && r.stats[2] === "96", "首屏三统计 4/12/96", JSON.stringify(r.stats));
   ok(r.subjects === 4, "学科板块 4 张主题卡");
   ok(r.subjectHead === "四大学科板块", "首页学科区标题为「四大学科板块」");
   ok(r.logicCard, "首页含数理逻辑板块卡（简介 + 进入板块）");
@@ -296,7 +296,7 @@ async function main() {
     foot: document.querySelectorAll('#kbArticle .art-foot .af-link').length,
     related: /配套练习/.test(document.querySelector('#kbArticle').textContent)
   })`);
-  ok(r.items === 69, "统一收录 69 篇（15+23+14+17）", String(r.items));
+  ok(r.items === 76, "统一收录 76 篇（17+24+16+19）", String(r.items));
   ok(r.groups >= 10, "学科/难度/标签筛选条");
   ok(/什么是人工智能/.test(r.art), "默认打开第一篇");
   ok(r.foot >= 1 && r.related, "底部导航与配套练习");
@@ -304,7 +304,7 @@ async function main() {
   await evalJS(cdp, `document.querySelector('#kbToolbar .chip[data-f="subject"][data-v="ds"]').click()`);
   await sleep(200);
   r = await evalJS(cdp, `document.querySelectorAll('#kbList .kb-item').length`);
-  ok(r === 23, "学科筛选=数据结构 → 23 章", String(r));
+  ok(r === 24, "学科筛选=数据结构 → 24 章", String(r));
   /* 数理逻辑也收录进知识库并可筛选 */
   await evalJS(cdp, `document.querySelector('#kbToolbar .chip[data-f="subject"][data-v="logic"]').click()`);
   await sleep(200);
@@ -312,7 +312,7 @@ async function main() {
     n: document.querySelectorAll('#kbList .kb-item').length,
     titles: Array.from(document.querySelectorAll('#kbList .kb-item .t')).map(function (x) { return x.textContent; })
   })`);
-  ok(r.n === 17, "学科筛选=数理逻辑 → 17 章", String(r.n));
+  ok(r.n === 19, "学科筛选=数理逻辑 → 19 章", String(r.n));
   ok(r.titles.some((t) => /真值表/.test(t)) && r.titles.some((t) => /数学归纳法/.test(t)), "知识库列表含数理逻辑章节", JSON.stringify(r.titles.slice(0, 3)));
   /* 还原上一行的 ds 筛选，后面的「叠加难度筛选」断言依赖它 */
   await evalJS(cdp, `document.querySelector('#kbToolbar .chip[data-f="subject"][data-v="ds"]').click(); true`);
@@ -321,7 +321,7 @@ async function main() {
   await evalJS(cdp, `document.querySelector('#kbToolbar .chip[data-f="level"][data-v="进阶"]').click()`);
   await sleep(200);
   r = await evalJS(cdp, `document.querySelectorAll('#kbList .kb-item').length`);
-  ok(r > 0 && r < 23, "叠加难度筛选（进阶 ds 章节）", String(r));
+  ok(r > 0 && r < 24, "叠加难度筛选（进阶 ds 章节）", String(r));
   /* 搜索分组 */
   await evalJS(cdp, `var el=document.querySelector('#kbSearch'); el.value='贝叶斯'; el.dispatchEvent(new Event('input',{bubbles:true})); true`);
   await sleep(400);
@@ -356,7 +356,7 @@ async function main() {
   ok(r.foot, "章末配套练习入口");
   await gotoHash(cdp, "#/prob/p04");
   r = await evalJS(cdp, `({t: document.querySelector('#probArticle h1').textContent, items: document.querySelectorAll('#probList .kb-item').length})`);
-  ok(/贝叶斯/.test(r.t) && r.items === 14, "#/prob/p04 直达 + 14 章列表");
+  ok(/贝叶斯/.test(r.t) && r.items === 16, "#/prob/p04 直达 + 16 章列表");
   /* KaTeX 公式渲染：行内 + 独立公式、结构件齐全、无 \( 残留、无错误标红 */
   r = await evalJS(cdp, `({
     katex: document.querySelectorAll('#probArticle .katex').length,
@@ -424,7 +424,7 @@ async function main() {
     stray: /\\\\(?:eg |ot |eq )/.test(document.querySelector('#logicArticle').innerText)
   })`);
   ok(/逻辑联结词/.test(r.t), "#/logic/l03 直达章节", r.t);
-  ok(r.items === 17, "数理逻辑 17 章目录", String(r.items));
+  ok(r.items === 19, "数理逻辑 19 章目录", String(r.items));
   ok(r.subj === 1 && r.active === 1, "章节学科徽章 + 当前项高亮", JSON.stringify({ s: r.subj, a: r.active }));
   ok(r.foot >= 2 && r.quiz, "章末上一条/下一条与配套练习入口", JSON.stringify({ f: r.foot, q: r.quiz }));
   ok(r.roadmap === 5, "五阶段学习路线渲染", String(r.roadmap));
@@ -468,7 +468,7 @@ async function main() {
     opts: document.querySelectorAll('#quizApp .opt').length
   })`);
   ok(r.one === 1 && r.opts === 4, "默认一次一题（4 选项）");
-  ok(/第\s*1\s*\/\s*84/.test(r.count.replace(/\s+/g, " ")), "顶部进度「第 1 / 84 题」", r.count);
+  ok(/第\s*1\s*\/\s*96/.test(r.count.replace(/\s+/g, " ")), "顶部进度「第 1 / 96 题」", r.count);
   /* 答错：错项注释 + 进错题本 */
   await evalJS(cdp, `document.querySelector('#quizApp .opt[data-o="0"]').click()`);
   await sleep(250);
@@ -498,7 +498,7 @@ async function main() {
   await evalJS(cdp, `document.querySelector('#quizApp .chip[data-s="subject"][data-v="ds"]').click()`);
   await sleep(200);
   r = await evalJS(cdp, `({count: document.querySelector('.quiz-count').textContent, badge: document.querySelectorAll('#quizApp .badge.subj-ds').length})`);
-  ok(/15/.test(r.count), "数据结构学科 15 题", r.count);
+  ok(/18/.test(r.count), "数据结构学科 18 题", r.count);
   ok(r.badge >= 1, "题目卡学科徽章");
   await evalJS(cdp, `document.querySelector('#quizApp .chip[data-s="subject"][data-v="all"]').click()`);
   await sleep(150);
@@ -511,7 +511,7 @@ async function main() {
     cat: (document.querySelector('#quizApp .q-badges .badge.gray') || {}).textContent,
     q: document.querySelector('#quizApp .q-title').textContent
   })`);
-  ok(/24/.test(r.count), "数理逻辑学科 24 题", r.count);
+  ok(/27/.test(r.count), "数理逻辑学科 27 题", r.count);
   ok(r.badge === 1, "逻辑题学科徽章 subj-logic");
   /* 按正确答案作答：仍应渲染 3 条「为什么不选」（验证逻辑题注释的题号偏移合并生效） */
   var lq = await evalJS(cdp, `(function () {
@@ -537,7 +537,7 @@ async function main() {
   /* 直达题号 */
   await gotoHash(cdp, "#/quiz/all/q44");
   r = await evalJS(cdp, `document.querySelector('.quiz-count').textContent`);
-  ok(/第 44 \/ 84/.test(r), "#/quiz/all/q44 直达第 44 题", r);
+  ok(/第 44 \/ 96/.test(r), "#/quiz/all/q44 直达第 44 题", r);
   /* 全部答对 → 能力分析 */
   await evalJS(cdp, `for (var i = 1; i <= APP_DATA.quiz.length; i++) App.state.recordQuiz(i, APP_DATA.quiz[i-1].answer); App.pages.quiz.render(); true`);
   await sleep(400);

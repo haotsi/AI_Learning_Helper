@@ -22,14 +22,15 @@ AI_Learning_Helper/
 │   └── js/
 │       ├── data/               # ① 数据层（内容增改只动这里）
 │       │   ├── courses.js      #   APP_DATA.stages   学习路径 4 阶段 12 门课
-│       │   ├── knowledge.js    #   APP_DATA.articles AI 知识笔记 15 篇
-│       │   ├── ds.js           #   APP_DATA.ds / dsEx  数据结构 23 章 + 典型例题
-│       │   ├── prob.js         #   APP_DATA.prob     概率统计 14 章
-│       │   ├── logic.js        #   APP_DATA.logic    数理逻辑 17 章（按五大阶段分组）
+│       │   ├── knowledge.js    #   APP_DATA.articles AI 基础知识笔记 15 篇
+│       │   ├── ds.js           #   APP_DATA.ds / dsEx  数据结构基础 23 章 + 典型例题
+│       │   ├── prob.js         #   APP_DATA.prob     概率统计基础 14 章
+│       │   ├── logic.js        #   APP_DATA.logic    数理逻辑基础 17 章（按五大阶段分组）
 │       │   ├── questions.js    #   APP_DATA.quiz     基础题库 60 题
 │       │   ├── logic-quiz.js   #   数理逻辑 24 题（追加为 61–84）+ 注释按偏移自动合并
 │       │   ├── question-notes.js # APP_DATA.quizOptNotes 每题错误选项的「为什么不选」
 │       │   ├── meta.js         #   APP_META 学科归属 / 前置知识 / 学习成果等引导元数据
+│       │   ├── courseware-upgrade.js # 智科课件对照补充：7 篇/章 + 12 题（总计 76 篇/章、96 题）
 │       │   ├── external-links.js # APP_DATA.externalLinks 外站接口（智科全家桶 / GitHub）
 │       │   ├── chat-rules.js   #   APP_DATA.chatRules AI 助手问答规则库
 │       │   └── chat-quick.js   #   APP_DATA.chatQuick AI 助手快捷问题（四类）
@@ -74,7 +75,7 @@ AI_Learning_Helper/
 | `#/knowledge` `#/knowledge/<笔记id>` | 知识库（学科 / 难度 / 标签筛选 + 分组搜索） |
 | `#/ds` `#/ds/ds02b` | 数据结构与算法分章教程 |
 | `#/prob` `#/prob/p04` | 概率论与数理统计分章教程（公式由内置 KaTeX 渲染） |
-| `#/logic` `#/logic/l03` | 数理逻辑分章教程（17 章 / 五大阶段路线，公式由内置 KaTeX 渲染） |
+| `#/logic` `#/logic/l03` | 数理逻辑分章教程（19 章 / 五大阶段路线，公式由内置 KaTeX 渲染） |
 | `#/quiz` `#/quiz/入门` `#/quiz/sub-ds` `#/quiz/sub-logic` `#/quiz/wrong` `#/quiz/all/q12` | 练习测验（难度 / 学科筛选 / 错题本 / 题目直达） |
 | `#/chat` | AI 助手（站内知识问答） |
 
@@ -114,7 +115,7 @@ AI_Learning_Helper/
 - [ ] 文章底部：上一条 / 下一条 / 相关课程 / 配套练习
 - [ ] 测验：单题流与每页 5 题；即时批改 + 解析 + 为什么不选 + 相关知识点直达；学科筛选含「数理逻辑」（24 题）、结果页四学科能力分析
 - [ ] 概率统计页：公式以 KaTeX 渲染（分数/根号/求和/积分/上下标）；长公式在手机上横向滚动不撑破版面；切换章节 / 刷新路由后公式仍正常渲染；控制台无 KaTeX 报错
-- [ ] 数理逻辑页：17 章目录与五阶段路线可点；真值表 / 等价律表格正常渲染；`\neg \forall \exists \to \equiv \therefore` 等逻辑符号无残留 `\( `、无红色解析错误；章末「上一条 / 下一条 / 配套练习」可用
+- [ ] 数理逻辑页：19 章目录与五阶段路线可点；真值表 / 等价律表格正常渲染；`\neg \forall \exists \to \equiv \therefore` 等逻辑符号无残留 `\( `、无红色解析错误；章末「上一条 / 下一条 / 配套练习」可用
 - [ ] 答题进度刷新不丢；错题自动进错题本；☆ 收藏；结果页能力分析
 - [ ] 代码块高亮与一键复制（知识库 / 数据结构 / 概率统计 / 题目）
 - [ ] AI 助手：四类快捷问题、输入发送、站内链接可点、无法回答时的兜底文案
@@ -131,6 +132,8 @@ AI_Learning_Helper/
 ## 扩充内容（只动数据层）
 
 全部内容数据在 `assets/js/data/`：
+
+- **智科课件对照补充**：`courseware-upgrade.js` 只追加本站原有四学科的内容与练习，不改旧 id；新增 AI 2 篇、数据结构 1 章、概率统计 2 章、数理逻辑 2 章及四学科各 3 题。内容依据智科课程攻略与公开资料目录重新编写，只链接原资料，不复制或再分发 PPT / PDF
 
 - **加课程**：`courses.js` 的 `stages[].courses[]` 追加对象；同步在 `meta.js` 的 `APP_META.courses` 补 `prereq` / `outcome`（缺失也能运行，只是卡片不显示引导行）
 - **加文章**：`knowledge.js` 的 `articles[]`；`content` 支持 HTML（`<pre><code>` 自动获得高亮与复制按钮）；同步 `meta.js.articles` 补难度与前置

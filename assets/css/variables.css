@@ -4,13 +4,13 @@
    ============================================================ */
 :root {
   /* 品牌色：蓝紫主色（渐变仅用于主按钮与重点数字等少量强调） */
-  --color-primary: #4f46e5;
-  --color-primary-strong: #4338ca;
-  --color-primary-deep: #3730a3;
-  --color-primary-light: #eef2ff;
-  --color-primary-ring: rgba(79, 70, 229, .18);
-  --grad-primary: linear-gradient(135deg, #6366f1 0%, #4f46e5 55%, #4338ca 100%);
-  --grad-number: linear-gradient(135deg, #4f46e5, #7c3aed);
+  --color-primary: #5b5ce2;
+  --color-primary-strong: #4647c9;
+  --color-primary-deep: #302f8f;
+  --color-primary-light: #eff0ff;
+  --color-primary-ring: rgba(91, 92, 226, .20);
+  --grad-primary: linear-gradient(135deg, #7c78f6 0%, #5b5ce2 52%, #4141bd 100%);
+  --grad-number: linear-gradient(120deg, #4d4fda 0%, #8b5cf6 100%);
 
   /* 四大学科主题色（协调但区分明显） */
   --color-ai: #7c3aed;        /* AI 人工智能 · 紫 */
@@ -27,18 +27,20 @@
   --color-logic-deep: #1d4ed8;
 
   /* 中性色 */
-  --color-text: #172033;
-  --color-text-body: #334155;
-  --color-muted: #64748b;
-  --color-border: #e2e8f0;
-  --color-border-strong: #cbd5e1;
+  --color-text: #17213a;
+  --color-text-body: #3d4a62;
+  --color-muted: #71809a;
+  --color-border: #e6eaf2;
+  --color-border-strong: #d3dae7;
   --color-surface: #ffffff;
-  --color-bg: #f6f8fc;
-  --color-bg-soft: #f1f5f9;
+  --color-bg: #f7f8fc;
+  --color-bg-soft: #f1f3f9;
+  --color-surface-raised: rgba(255, 255, 255, .82);
+  --color-hero-tint: #f2f2ff;
 
   /* 数学公式（KaTeX，样式见 css/math.css） */
-  --formula-bg: #f8faff;
-  --formula-border: #e4e8f5;
+  --formula-bg: #f7f8ff;
+  --formula-border: #e2e5fb;
 
   /* 语义色 */
   --color-green: #16a34a;
@@ -54,7 +56,7 @@
   /* 字体与层级 */
   --font-sans: "PingFang SC", "Microsoft YaHei", "Segoe UI", system-ui, -apple-system, sans-serif;
   --font-mono: Consolas, "JetBrains Mono", "Courier New", monospace;
-  --fs-display: clamp(26px, 4.6vw, 38px);
+  --fs-display: clamp(28px, 4.2vw, 44px);
   --fs-h1: 26px;
   --fs-h2: 21px;
   --fs-h3: 16.5px;
@@ -63,13 +65,13 @@
   --fs-xs: 12px;
 
   /* 圆角 / 阴影（整体收敛，阴影更轻） */
-  --radius-card: 18px;
-  --radius-md: 12px;
-  --radius-sm: 8px;
+  --radius-card: 20px;
+  --radius-md: 14px;
+  --radius-sm: 9px;
   --radius-pill: 999px;
-  --shadow-card: 0 8px 24px rgba(15, 23, 42, .06);
-  --shadow-soft: 0 1px 2px rgba(15, 23, 42, .05);
-  --shadow-pop: 0 16px 40px rgba(15, 23, 42, .16);
+  --shadow-card: 0 16px 36px rgba(35, 43, 76, .09), 0 2px 6px rgba(35, 43, 76, .03);
+  --shadow-soft: 0 2px 6px rgba(35, 43, 76, .045);
+  --shadow-pop: 0 24px 60px rgba(35, 43, 76, .18);
 
   /* 间距节奏 */
   --space-1: 4px;

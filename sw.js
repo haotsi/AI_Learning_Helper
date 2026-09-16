@@ -11,7 +11,7 @@
      它的更新取决于浏览器脚本更新检查与 GitHub Pages 的 HTTP 缓存（max-age=600）。
    ⚠ 新增 / 改名 assets 下的文件时，请同步维护下方 ASSETS 列表。
    ============================================================ */
-var CACHE = "learning-helper-v7";
+var CACHE = "learning-helper-v10";
 var ASSETS = [
   "./",
   "./index.html",
@@ -61,6 +61,7 @@ var ASSETS = [
   "./assets/js/data/logic-quiz.js",
   "./assets/js/data/external-links.js",
   "./assets/js/data/meta.js",
+  "./assets/js/data/courseware-upgrade.js",
   "./assets/js/data/chat-rules.js",
   "./assets/js/data/chat-quick.js",
 

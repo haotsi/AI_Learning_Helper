@@ -8,7 +8,7 @@ html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
   font-family: var(--font-sans);
   color: var(--color-text);
-  background: var(--color-bg);
+  background: linear-gradient(180deg, #fafbff 0, var(--color-bg) 460px);
   font-size: var(--fs-body);
   line-height: 1.7;
   min-height: 100vh;
@@ -16,6 +16,8 @@ body {
   flex-direction: column;
   -webkit-font-smoothing: antialiased;
 }
+
+::selection { background: #dfe1ff; color: var(--color-primary-deep); }
 
 a { color: var(--color-primary); text-decoration: none; }
 a:hover { text-decoration: underline; }
