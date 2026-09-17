@@ -57,17 +57,33 @@
   <!-- ============ 视图：首页 ============ -->
   <section class="view active" id="view-home">
     <div class="hero">
-      <div class="container">
-        <h1>从基础概念到 AI 实战，<span class="hl">按路径学会四门核心能力</span></h1>
-        <p class="sub">AI 人工智能、数据结构与算法、概率论与数理统计、数理逻辑：学习路径带你入门，知识库随手可查，练习测验即时批改，AI 助手随问随答。</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#/courses"><span class="icon" data-icon="play" data-size="15" aria-hidden="true"></span>开始我的学习</a>
-          <a class="btn btn-outline" href="#/knowledge"><span class="icon" data-icon="library" data-size="15" aria-hidden="true"></span>浏览知识库</a>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="hero-kicker"><span></span>系统学习 · 即学即练</div>
+          <h1>从基础概念到 AI 实战，<span class="hl">按路径学会四门核心能力</span></h1>
+          <p class="sub">AI 人工智能、数据结构与算法、概率论与数理统计、数理逻辑：学习路径带你入门，知识库随手可查，练习测验即时批改，AI 助手随问随答。</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#/courses"><span class="icon" data-icon="play" data-size="15" aria-hidden="true"></span>开始我的学习</a>
+            <a class="btn btn-outline" href="#/knowledge"><span class="icon" data-icon="library" data-size="15" aria-hidden="true"></span>浏览知识库</a>
+          </div>
         </div>
-        <div class="stats-row">
-          <div class="stat"><div class="num" id="statSubjects">–</div><div class="label">个学科板块</div></div>
-          <div class="stat"><div class="num" id="statCourses">–</div><div class="label">门课程</div></div>
-          <div class="stat"><div class="num" id="statQuiz">–</div><div class="label">道练习题</div></div>
+        <aside class="hero-dashboard" aria-label="学习内容概览">
+          <div class="dashboard-top">
+            <div>
+              <span class="dashboard-label">学习工作台</span>
+              <strong>一条清晰的学习闭环</strong>
+            </div>
+            <span class="dashboard-mark" data-icon="route" data-size="20" aria-hidden="true"></span>
+          </div>
+          <div class="learning-loop" aria-hidden="true">
+            <span class="loop-step active">路径</span><i></i><span class="loop-step">学习</span><i></i><span class="loop-step">测验</span><i></i><span class="loop-step">复盘</span>
+          </div>
+          <div class="stats-row">
+            <div class="stat"><div class="num" id="statSubjects">–</div><div class="label">个学科板块</div></div>
+            <div class="stat"><div class="num" id="statCourses">–</div><div class="label">门课程</div></div>
+            <div class="stat"><div class="num" id="statQuiz">–</div><div class="label">道练习题</div></div>
+          </div>
+          <div class="dashboard-note"><span aria-hidden="true">✓</span>进度自动保存在当前设备</div>
         </div>
       </div>
     </div>

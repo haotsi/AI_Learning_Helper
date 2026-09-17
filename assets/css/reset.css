@@ -8,13 +8,22 @@ html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
   font-family: var(--font-sans);
   color: var(--color-text);
-  background: linear-gradient(180deg, #fafbff 0, var(--color-bg) 460px);
+  background: var(--color-bg);
   font-size: var(--fs-body);
   line-height: 1.7;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(circle at 8% 15%, rgba(99, 102, 241, .045), transparent 24%), radial-gradient(circle at 92% 62%, rgba(13, 148, 136, .035), transparent 28%);
 }
 
 ::selection { background: #dfe1ff; color: var(--color-primary-deep); }

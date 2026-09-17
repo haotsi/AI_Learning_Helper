@@ -11,9 +11,13 @@
    ⚠ 必须用 minmax(0, 1fr) 而非 1fr：grid 子项默认 min-width:auto，
    会被 230px 的横向章节条与正文宽表格撑破，导致整页横向溢出。 */
 @media (max-width: 900px) {
+  .hero-grid { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+  .hero-copy { max-width: 760px; }
+  .hero-dashboard { max-width: 660px; }
   .kb-layout { grid-template-columns: minmax(0, 1fr); }
-  .kb-list { flex-direction: row; overflow-x: auto; padding-bottom: 6px; }
+  .kb-list { flex-direction: row; align-items: stretch; overflow-x: auto; padding-bottom: 6px; scrollbar-color: var(--color-border-strong) transparent; scrollbar-width: thin; }
   .kb-item { min-width: 230px; flex-shrink: 0; }
+  #kbList .kb-group-title, #kbList .kb-count-line { display: none; }
   .grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); }
 }
 
@@ -70,22 +74,37 @@
   .nav-links a { padding: 11px 12px; font-size: 16px; }
 
   /* Hero：短高度内完成标题、说明与主行动 */
-  .hero { padding: 42px 0 30px; }
-  .hero::before { width: 175px; height: 175px; right: -72px; top: -68px; box-shadow: 0 0 0 14px rgba(91, 92, 226, .045); }
-  .hero::after { width: 90px; height: 90px; right: -14px; top: 2px; box-shadow: 0 0 0 12px rgba(91, 92, 226, .04); }
+  .hero { padding: 44px 0 36px; }
+  .hero::before { width: 250px; height: 250px; right: -120px; top: -120px; box-shadow: 0 0 0 34px rgba(79, 70, 229, .025); }
+  .hero::after { display: none; }
+  .hero-grid { gap: 30px; }
+  .hero h1 { font-size: clamp(31px, 9.5vw, 42px); }
+  .hero-kicker { margin-bottom: 12px; }
   .hero p.sub { margin: 10px 0 var(--space-4); font-size: var(--fs-body); }
   .hero-actions .btn { flex: 1; justify-content: center; min-width: 138px; }
-  .stats-row { gap: 4px; margin-top: 28px; }
-  .stat { min-width: 0; padding: 8px 16px; }
+  .hero-dashboard { padding: 22px 18px 18px; border-radius: 22px; }
+  .dashboard-top strong { font-size: 16px; }
+  .learning-loop { margin: 20px 0 18px; }
+  .loop-step { width: 42px; height: 42px; }
+  .stats-row { gap: 4px; }
+  .stat { min-width: 0; padding: 6px 8px; }
   .stat .num { font-size: 24px; }
+  .stat .label { font-size: 12px; }
 
-  .section { padding: var(--space-6) 0 4px; }
-  .section-title { font-size: var(--fs-h3); }
+  .section { padding: 42px 0 0; }
+  .section + .section { padding-top: 50px; }
+  .section-title { font-size: 20px; }
   .page-head { padding: var(--space-5) 0 var(--space-4); margin-bottom: var(--space-4); }
   .page-head h1 { font-size: var(--fs-h2); }
-  .container { width: min(1280px, 92%); }
+  .container { width: min(1280px, calc(100% - 32px)); }
 
   .kb-article { padding: var(--space-5) var(--space-4); box-shadow: var(--shadow-soft); }
+  .kb-toolbar { padding: 12px 0; overflow: hidden; }
+  .kb-toolbar .fgroup { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding: 0 var(--space-4); margin-bottom: 8px; }
+  .kb-toolbar .fgroup::-webkit-scrollbar { display: none; }
+  .kb-toolbar .flabel { position: sticky; left: 0; z-index: 1; min-width: 46px; padding: 5px 8px 5px 0; background: linear-gradient(90deg, var(--color-surface) 80%, rgba(255,255,255,0)); }
+  .kb-toolbar .chip { flex-shrink: 0; }
+  .kb-toolbar .kb-searchbar { min-width: calc(100% - 46px); overflow: visible; }
   /* 窄屏表格自适应：定宽布局 + 缩小字号与内边距，让 5 列表格也能换行放下，不出现横向滚动条 */
   .kb-article table { table-layout: fixed; font-size: 12.5px; }
   .kb-article th, .kb-article td { padding: 5px 6px; }
@@ -112,5 +131,5 @@
 @media (max-width: 380px) {
   .hero-actions { flex-direction: column; }
   .hero-actions .btn { width: 100%; }
-  .stats-row { gap: var(--space-4); }
+  .learning-loop i { min-width: 8px; }
 }

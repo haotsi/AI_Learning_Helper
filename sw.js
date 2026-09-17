@@ -11,7 +11,7 @@
      它的更新取决于浏览器脚本更新检查与 GitHub Pages 的 HTTP 缓存（max-age=600）。
    ⚠ 新增 / 改名 assets 下的文件时，请同步维护下方 ASSETS 列表。
    ============================================================ */
-var CACHE = "learning-helper-v10";
+var CACHE = "learning-helper-v11";
 var ASSETS = [
   "./",
   "./index.html",

@@ -9,7 +9,7 @@
 .icon-xl { width: 34px; height: 34px; }
 
 /* ---------- 按钮（hover / focus / active 状态明确） ---------- */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 10px 22px; border-radius: var(--radius-md); font-size: var(--fs-body); font-weight: 650; cursor: pointer; border: 1px solid transparent; transition: background .18s ease, box-shadow .18s ease, transform .18s ease, color .18s ease, border-color .18s ease; text-decoration: none !important; line-height: 1.4; user-select: none; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 44px; padding: 10px 22px; border-radius: var(--radius-md); font-size: var(--fs-body); font-weight: 650; cursor: pointer; border: 1px solid transparent; transition: background .18s ease, box-shadow .18s ease, transform .18s ease, color .18s ease, border-color .18s ease; text-decoration: none !important; line-height: 1.4; user-select: none; }
 .btn:active { transform: translateY(1px) scale(.99); }
 .btn-primary { background: var(--grad-primary); color: #fff; box-shadow: 0 8px 18px rgba(91, 92, 226, .27); }
 .btn-primary:hover { filter: brightness(1.04); transform: translateY(-1px); box-shadow: 0 12px 24px rgba(91, 92, 226, .34); }
@@ -20,7 +20,7 @@
 .btn-ghost:hover { color: var(--color-text); background: var(--color-bg-soft); border-color: var(--color-border-strong); }
 .btn-quiet { background: var(--color-bg-soft); color: var(--color-text-body); border-color: transparent; }
 .btn-quiet:hover { background: var(--color-border); }
-.btn-sm { padding: 6px 14px; font-size: var(--fs-sm); border-radius: var(--radius-sm); }
+.btn-sm { min-height: 34px; padding: 6px 14px; font-size: var(--fs-sm); border-radius: var(--radius-sm); }
 .btn-xs { padding: 3px 10px; font-size: var(--fs-xs); border-radius: var(--radius-sm); }
 .btn[disabled] { opacity: .5; cursor: not-allowed; filter: none; }
 
@@ -42,17 +42,17 @@
 .chip.active { background: var(--color-primary); color: #fff; border-color: var(--color-primary); }
 
 /* ---------- 基础卡片 ---------- */
-.card { background: var(--color-surface-raised); border: 1px solid var(--color-border); border-radius: var(--radius-card); padding: var(--space-5) var(--space-6); box-shadow: var(--shadow-soft); transition: box-shadow .22s ease, transform .22s ease, border-color .22s ease; }
+.card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-card); padding: 26px; box-shadow: var(--shadow-soft); transition: box-shadow .22s ease, transform .22s ease, border-color .22s ease; }
 .card:hover { box-shadow: var(--shadow-card); transform: translateY(-2px); border-color: #dbe0ef; }
 
 /* ---------- 首页 · 学科板块卡（主题色实底风格，强调“学什么”） ---------- */
-.subject-card { display: block; color: inherit; border-radius: var(--radius-card); padding: 26px var(--space-6) 24px; border: 1px solid var(--color-border); position: relative; overflow: hidden; background: linear-gradient(145deg, #fff, #fafbff); box-shadow: var(--shadow-soft); transition: all .22s ease; }
+.subject-card { display: flex; flex-direction: column; color: inherit; border-radius: var(--radius-card); min-height: 280px; padding: 28px 26px 24px; border: 1px solid var(--color-border); position: relative; overflow: hidden; background: var(--color-surface); box-shadow: var(--shadow-soft); transition: all .22s ease; }
 .subject-card::after { content: ""; position: absolute; width: 110px; height: 110px; right: -48px; top: -50px; border-radius: 50%; background: currentColor; opacity: .035; pointer-events: none; }
 .subject-card::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 5px; }
 .subject-card:hover { text-decoration: none; transform: translateY(-5px); box-shadow: var(--shadow-card); }
 .subject-card .icon-xl { width: 42px; height: 42px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-3); }
 .subject-card h3 { font-size: var(--fs-h3); margin-bottom: 4px; }
-.subject-card p { color: var(--color-muted); font-size: var(--fs-sm); }
+.subject-card p { color: var(--color-muted); font-size: var(--fs-sm); flex: 1; }
 .subject-card .counts { display: flex; gap: var(--space-3); margin-top: var(--space-3); font-size: var(--fs-xs); flex-wrap: wrap; }
 .subject-card .go { margin-top: var(--space-4); font-size: var(--fs-sm); font-weight: 700; display: inline-flex; align-items: center; gap: 5px; }
 .subject-card.card-ai::before { background: var(--color-ai); }
@@ -69,16 +69,16 @@
 .subject-card.card-logic .go, .subject-card.card-logic .counts b { color: var(--color-logic-deep); }
 
 /* ---------- 首页 · 学习工具卡（轻量线框风格，强调“怎么学”） ---------- */
-.tool-card { display: block; color: inherit; background: rgba(255,255,255,.62); border: 1px solid var(--color-border); border-radius: var(--radius-card); padding: 20px var(--space-5); box-shadow: 0 1px 2px rgba(35,43,76,.025); transition: all .22s ease; }
+.tool-card { display: flex; flex-direction: column; color: inherit; min-height: 178px; background: rgba(255,255,255,.82); border: 1px solid var(--color-border); border-radius: var(--radius-card); padding: 22px; box-shadow: var(--shadow-soft); transition: all .22s ease; }
 .tool-card:hover { text-decoration: none; border-color: rgba(91,92,226,.34); background: linear-gradient(145deg, #fff, var(--color-primary-light)); transform: translateY(-3px); box-shadow: var(--shadow-card); }
 .tool-card .tool-top { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
 .tool-card .icon { width: 22px; height: 22px; color: var(--color-primary); }
 .tool-card h3 { font-size: var(--fs-body); }
-.tool-card p { color: var(--color-muted); font-size: var(--fs-sm); }
+.tool-card p { color: var(--color-muted); font-size: var(--fs-sm); flex: 1; }
 .tool-card .go { margin-top: var(--space-3); font-size: var(--fs-sm); font-weight: 700; color: var(--color-primary); display: inline-flex; align-items: center; gap: 5px; }
 
 /* ---------- 首页 · 我的学习进度卡 ---------- */
-.progress-card { display: flex; align-items: center; gap: var(--space-5); flex-wrap: wrap; background: linear-gradient(105deg, #fff, #f8f8ff); border: 1px solid #e2e5fa; border-radius: var(--radius-card); padding: 20px 24px; margin-top: var(--space-5); box-shadow: var(--shadow-card); }
+.progress-card { display: flex; align-items: center; gap: var(--space-5); flex-wrap: wrap; background: linear-gradient(105deg, #fff, #f7f8ff); border: 1px solid #dde2f5; border-radius: var(--radius-card); padding: 22px 24px; box-shadow: var(--shadow-soft); }
 .progress-card .pc-icon { width: 42px; height: 42px; border-radius: 50%; background: var(--color-primary-light); color: var(--color-primary); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .progress-card .pc-main { flex: 1; min-width: 240px; }
 .progress-card .pc-title { font-weight: 700; font-size: var(--fs-body); }
@@ -147,7 +147,7 @@ ul.res-list { margin: 0 0 var(--space-4) !important; padding: 0; }
 .kb-searchbar { display: flex; gap: 10px; align-items: center; flex: 1; min-width: 220px; }
 .kb-searchbar input { flex: 1; font: inherit; font-size: var(--fs-sm); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 8px 14px; outline: none; background: var(--color-bg); color: var(--color-text); min-width: 120px; }
 .kb-searchbar input:focus { border-color: var(--color-primary); box-shadow: 0 0 0 3px var(--color-primary-ring); background: var(--color-surface); }
-.kb-item { width: 100%; text-align: left; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 13px 16px; cursor: pointer; font: inherit; color: inherit; transition: all .15s ease; display: block; }
+.kb-item { width: 100%; text-align: left; background: rgba(255,255,255,.8); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 14px 16px; cursor: pointer; font: inherit; color: inherit; transition: all .15s ease; display: block; }
 .kb-item:hover { border-color: var(--color-primary); }
 .kb-item.active { border-color: var(--color-primary); background: var(--color-primary-light); box-shadow: inset 0 0 0 1px var(--color-primary); }
 .kb-item .cat { font-size: var(--fs-xs); color: var(--color-muted); font-weight: 600; display: flex; align-items: center; gap: 6px; }
